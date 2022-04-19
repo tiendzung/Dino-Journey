@@ -8,16 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		CB6C6D99280DC11100AADFBA /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB6C6D98280DC11100AADFBA /* main.cpp */; };
+		CB6C6DA2280DC37200AADFBA /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CB6C6DA0280DC2DB00AADFBA /* libSDL2-2.0.0.dylib */; };
+		CBF06CAF280DCC92003DAD7D /* libSDL2_image-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CBF06CAE280DCC92003DAD7D /* libSDL2_image-2.0.0.dylib */; };
+		CBF06CC1280DD365003DAD7D /* libSDL2_mixer-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CBF06CC0280DD365003DAD7D /* libSDL2_mixer-2.0.0.dylib */; };
+		CBF06CC3280DD37A003DAD7D /* libSDL2_ttf-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CBF06CC2280DD37A003DAD7D /* libSDL2_ttf-2.0.0.dylib */; };
+		CBF06D02280DEA1C003DAD7D /* anhdep.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CBF06D01280DEA1C003DAD7D /* anhdep.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		CB6C6D93280DC11100AADFBA /* CopyFiles */ = {
+		CB6C6D93280DC11100AADFBA /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
+			dstPath = /usr/share/man/man1;
 			dstSubfolderSpec = 0;
 			files = (
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -25,6 +31,11 @@
 /* Begin PBXFileReference section */
 		CB6C6D95280DC11100AADFBA /* Project Game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Project Game"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB6C6D98280DC11100AADFBA /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		CB6C6DA0280DC2DB00AADFBA /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2/2.0.20/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
+		CBF06CAE280DCC92003DAD7D /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_image-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_image/2.0.5/lib/libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
+		CBF06CC0280DD365003DAD7D /* libSDL2_mixer-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_mixer-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_mixer/2.0.4_3/lib/libSDL2_mixer-2.0.0.dylib"; sourceTree = "<group>"; };
+		CBF06CC2280DD37A003DAD7D /* libSDL2_ttf-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_ttf-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_ttf/2.0.18_1/lib/libSDL2_ttf-2.0.0.dylib"; sourceTree = "<group>"; };
+		CBF06D01280DEA1C003DAD7D /* anhdep.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = anhdep.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +43,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBF06CC3280DD37A003DAD7D /* libSDL2_ttf-2.0.0.dylib in Frameworks */,
+				CBF06CC1280DD365003DAD7D /* libSDL2_mixer-2.0.0.dylib in Frameworks */,
+				CBF06CAF280DCC92003DAD7D /* libSDL2_image-2.0.0.dylib in Frameworks */,
+				CB6C6DA2280DC37200AADFBA /* libSDL2-2.0.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +58,7 @@
 			children = (
 				CB6C6D97280DC11100AADFBA /* Project Game */,
 				CB6C6D96280DC11100AADFBA /* Products */,
+				CB6C6D9F280DC2DA00AADFBA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,9 +73,21 @@
 		CB6C6D97280DC11100AADFBA /* Project Game */ = {
 			isa = PBXGroup;
 			children = (
+				CBF06D01280DEA1C003DAD7D /* anhdep.jpeg */,
 				CB6C6D98280DC11100AADFBA /* main.cpp */,
 			);
 			path = "Project Game";
+			sourceTree = "<group>";
+		};
+		CB6C6D9F280DC2DA00AADFBA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CBF06CC2280DD37A003DAD7D /* libSDL2_ttf-2.0.0.dylib */,
+				CBF06CC0280DD365003DAD7D /* libSDL2_mixer-2.0.0.dylib */,
+				CBF06CAE280DCC92003DAD7D /* libSDL2_image-2.0.0.dylib */,
+				CB6C6DA0280DC2DB00AADFBA /* libSDL2-2.0.0.dylib */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,7 +99,8 @@
 			buildPhases = (
 				CB6C6D91280DC11100AADFBA /* Sources */,
 				CB6C6D92280DC11100AADFBA /* Frameworks */,
-				CB6C6D93280DC11100AADFBA /* CopyFiles */,
+				CB6C6D93280DC11100AADFBA /* Copy Files */,
+				CBF06CCB280DD6B4003DAD7D /* Resources */,
 			);
 			buildRules = (
 			);
@@ -112,6 +141,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CBF06CCB280DD6B4003DAD7D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CBF06D02280DEA1C003DAD7D /* anhdep.jpeg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CB6C6D91280DC11100AADFBA /* Sources */ = {
@@ -240,6 +280,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include/SDL2,
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/sdl2/2.0.20/lib,
+					/usr/local/Cellar/sdl2_image/2.0.5/lib,
+					/usr/local/Cellar/sdl2_mixer/2.0.4_3/lib,
+					/usr/local/Cellar/sdl2_ttf/2.0.18_1/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -248,6 +300,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include/SDL2,
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/sdl2/2.0.20/lib,
+					/usr/local/Cellar/sdl2_image/2.0.5/lib,
+					/usr/local/Cellar/sdl2_mixer/2.0.4_3/lib,
+					/usr/local/Cellar/sdl2_ttf/2.0.18_1/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
