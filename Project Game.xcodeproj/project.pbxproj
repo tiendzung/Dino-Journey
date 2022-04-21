@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CB2D32FF281136610058FB3B /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = CB2D32FE281136610058FB3B /* test.png */; };
-		CB2D3308281138AD0058FB3B /* Dis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB2D3307281138AD0058FB3B /* Dis.cpp */; };
+		CB2D330D28113A460058FB3B /* Dis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB2D330B28113A460058FB3B /* Dis.cpp */; };
 		CB6C6DA2280DC37200AADFBA /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CB6C6DA0280DC2DB00AADFBA /* libSDL2-2.0.0.dylib */; };
 		CB6D5681280EE68C0025197E /* left.bmp in Resources */ = {isa = PBXBuildFile; fileRef = CB6D5679280EE68C0025197E /* left.bmp */; };
 		CB6D5682280EE68C0025197E /* anhdep.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CB6D567A280EE68C0025197E /* anhdep.jpeg */; };
@@ -37,8 +37,8 @@
 
 /* Begin PBXFileReference section */
 		CB2D32FE281136610058FB3B /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = test.png; path = ../../test.png; sourceTree = "<group>"; };
-		CB2D3306281138A50058FB3B /* Dis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dis.h; sourceTree = "<group>"; };
-		CB2D3307281138AD0058FB3B /* Dis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dis.cpp; sourceTree = "<group>"; };
+		CB2D330B28113A460058FB3B /* Dis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Dis.cpp; path = Header/Dis.cpp; sourceTree = SOURCE_ROOT; };
+		CB2D330C28113A460058FB3B /* Dis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dis.h; path = Header/Dis.h; sourceTree = SOURCE_ROOT; };
 		CB6C6D95280DC11100AADFBA /* Project Game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Project Game"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB6C6DA0280DC2DB00AADFBA /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2/2.0.20/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		CB6D5677280EE68C0025197E /* anhdep.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = anhdep.jpeg; sourceTree = "<group>"; };
@@ -72,8 +72,8 @@
 		CB2D32F0281135720058FB3B /* Header */ = {
 			isa = PBXGroup;
 			children = (
-				CB2D3307281138AD0058FB3B /* Dis.cpp */,
-				CB2D3306281138A50058FB3B /* Dis.h */,
+				CB2D330B28113A460058FB3B /* Dis.cpp */,
+				CB2D330C28113A460058FB3B /* Dis.h */,
 			);
 			name = Header;
 			path = ../Header;
@@ -206,7 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB2D3308281138AD0058FB3B /* Dis.cpp in Sources */,
+				CB2D330D28113A460058FB3B /* Dis.cpp in Sources */,
 				CB6D5687280EE68C0025197E /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
