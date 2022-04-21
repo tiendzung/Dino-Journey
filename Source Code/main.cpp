@@ -6,6 +6,7 @@
 #include <SDL_mixer.h>
 #include <thread>
 #include <chrono>
+#include "Dis.h"
 using namespace std;
 SDL_Window* g_windows = NULL;
 SDL_Surface* gScreenSurface = NULL;
@@ -14,7 +15,7 @@ SDL_Surface* g_background = NULL;
 bool loadMedia()
 {
     bool success = true;
-    g_background = IMG_Load("Source Code/anhdep.jpeg");
+    g_background = IMG_Load("anhdep.jpeg");
     if( g_background == NULL )
     {
         success = false;
