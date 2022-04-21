@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CB2D331328113ABE0058FB3B /* Dis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB2D331128113ABE0058FB3B /* Dis.cpp */; };
+		CB2D331328113ABE0058FB3B /* Display.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB2D331128113ABE0058FB3B /* Display.cpp */; };
 		CB6C6DA2280DC37200AADFBA /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CB6C6DA0280DC2DB00AADFBA /* libSDL2-2.0.0.dylib */; };
 		CB6D5687280EE68C0025197E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB6D567F280EE68C0025197E /* main.cpp */; };
 		CBF06CAF280DCC92003DAD7D /* libSDL2_image-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CBF06CAE280DCC92003DAD7D /* libSDL2_image-2.0.0.dylib */; };
@@ -32,8 +32,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CB2D331128113ABE0058FB3B /* Dis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Dis.cpp; path = Source/Dis.cpp; sourceTree = SOURCE_ROOT; };
-		CB2D331228113ABE0058FB3B /* Dis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dis.h; path = "../Project Game/Header/Dis.h"; sourceTree = "<group>"; };
+		CB2D331128113ABE0058FB3B /* Display.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Display.cpp; path = Source/Display.cpp; sourceTree = SOURCE_ROOT; };
+		CB2D331228113ABE0058FB3B /* Display.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Display.h; path = "../Project Game/Header/Display.h"; sourceTree = "<group>"; };
 		CB6C6D95280DC11100AADFBA /* Project Game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Project Game"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB6C6DA0280DC2DB00AADFBA /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2/2.0.20/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		CB6D567F280EE68C0025197E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; usesTabs = 0; };
@@ -41,10 +41,10 @@
 		CBF06CC0280DD365003DAD7D /* libSDL2_mixer-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_mixer-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_mixer/2.0.4_3/lib/libSDL2_mixer-2.0.0.dylib"; sourceTree = "<group>"; };
 		CBF06CC2280DD37A003DAD7D /* libSDL2_ttf-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_ttf-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_ttf/2.0.18_1/lib/libSDL2_ttf-2.0.0.dylib"; sourceTree = "<group>"; };
 		CBF415892811B5D10069A86E /* SDL_InitWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SDL_InitWindow.cpp; sourceTree = "<group>"; };
-		CBF4158C2811B6050069A86E /* SDL_InitWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDL_InitWindow.h; sourceTree = "<group>"; };
 		CBF4158D2811D62D0069A86E /* Resource */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resource; sourceTree = "<group>"; };
-		CBF4158F2811DAFD0069A86E /* GameStatus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameStatus.h; sourceTree = "<group>"; };
 		CBF415902811DB7B0069A86E /* GameStatus.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameStatus.cpp; sourceTree = "<group>"; };
+		CBF415942811DC820069A86E /* SDL_InitWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_InitWindow.h; path = "../Project Game/Header/SDL_InitWindow.h"; sourceTree = "<group>"; };
+		CBF415952811DC820069A86E /* GameStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameStatus.h; path = Header/GameStatus.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,9 +65,9 @@
 		CB2D32F0281135720058FB3B /* Header */ = {
 			isa = PBXGroup;
 			children = (
-				CB2D331228113ABE0058FB3B /* Dis.h */,
-				CBF4158C2811B6050069A86E /* SDL_InitWindow.h */,
-				CBF4158F2811DAFD0069A86E /* GameStatus.h */,
+				CBF415952811DC820069A86E /* GameStatus.h */,
+				CBF415942811DC820069A86E /* SDL_InitWindow.h */,
+				CB2D331228113ABE0058FB3B /* Display.h */,
 			);
 			name = Header;
 			path = ../Header;
@@ -106,7 +106,7 @@
 		CB6D5676280EE68C0025197E /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				CB2D331128113ABE0058FB3B /* Dis.cpp */,
+				CB2D331128113ABE0058FB3B /* Display.cpp */,
 				CB6D567F280EE68C0025197E /* main.cpp */,
 				CBF415892811B5D10069A86E /* SDL_InitWindow.cpp */,
 				CBF415902811DB7B0069A86E /* GameStatus.cpp */,
@@ -184,7 +184,7 @@
 			files = (
 				CBF4158B2811B5D10069A86E /* SDL_InitWindow.cpp in Sources */,
 				CBF415912811DB7B0069A86E /* GameStatus.cpp in Sources */,
-				CB2D331328113ABE0058FB3B /* Dis.cpp in Sources */,
+				CB2D331328113ABE0058FB3B /* Display.cpp in Sources */,
 				CB6D5687280EE68C0025197E /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

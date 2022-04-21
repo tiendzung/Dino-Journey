@@ -6,7 +6,7 @@
 #include <thread>
 #include <chrono>
 using namespace std;
-#include "Dis.h"
+#include "Display.h"
 #include "SDL_InitWindow.h"
 
 SDL_Window* g_window = NULL;
