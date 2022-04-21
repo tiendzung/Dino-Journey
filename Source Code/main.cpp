@@ -15,7 +15,7 @@ SDL_Surface* g_background = NULL;
 bool loadMedia()
 {
     bool success = true;
-    g_background = IMG_Load("test.png");
+    g_background = IMG_Load("anhdep1.jpeg");
     if( g_background == NULL )
     {
         success = false;
