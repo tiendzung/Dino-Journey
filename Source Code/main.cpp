@@ -73,6 +73,7 @@ int main()
                     if (event.type == SDL_QUIT) {
                         is_running = false;
                     }
+                    //Game Event
                 }
                 //                                SDL_Delay(16);
             }
