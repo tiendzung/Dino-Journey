@@ -6,8 +6,8 @@
 #include <SDL_mixer.h>
 #include <thread>
 #include <chrono>
-#include "Dis.h"
 using namespace std;
+#include "Dis.h"
 SDL_Window* g_windows = NULL;
 SDL_Surface* gScreenSurface = NULL;
 SDL_Surface* g_background = NULL;
@@ -15,7 +15,7 @@ SDL_Surface* g_background = NULL;
 bool loadMedia()
 {
     bool success = true;
-    g_background = IMG_Load("anhdep.jpeg");
+    g_background = IMG_Load("test.png");
     if( g_background == NULL )
     {
         success = false;
@@ -60,6 +60,7 @@ void waitUntilKeyPressed()
 
 int main()
 {
+    dp();
     if(init() == true)
     {
         if(loadMedia())
