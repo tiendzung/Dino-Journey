@@ -1,13 +1,14 @@
 #include <bits/stdc++.h>
+using namespace std;
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 #include <thread>
 #include <chrono>
-using namespace std;
-#include "Display.h"
 #include "SDL_InitWindow.h"
+#include "GameStatus.h"
+#include "Display.h"
 
 SDL_Window* g_window = NULL;
 SDL_Surface* g_ScreenSurface = NULL;

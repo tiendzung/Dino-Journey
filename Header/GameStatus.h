@@ -8,6 +8,12 @@
 
 #ifndef GameStatus_h
 #define GameStatus_h
-
+enum GameStatus
+{
+    GAME_RUNNING,
+    GAME_STOP,
+    GAME_OVER,
+    GAME_TOTAL
+};
 
 #endif /* GameStatus_h */
