@@ -22,7 +22,7 @@ const int SCREEN_HEIGHT = 600;
 const int RSIZE = 25;
 int x = SCREEN_WIDTH/2;
 int y = SCREEN_HEIGHT/2;
-const int step = 16;
+const int step = 26;
 
 SDL_Texture* loadTexture(string path )
 {
@@ -47,8 +47,10 @@ void draw(SDL_Renderer* g_renderer, int x,int y)
     rect.y = y;
     rect.w = RSIZE;
     rect.h = RSIZE;
-    SDL_SetRenderDrawColor(g_renderer, 0, 0 , 0, 0);
-    SDL_RenderClear(g_renderer);
+    SDL_Texture* newTexture =  loadTexture( "Resource/background.png" );
+    SDL_RenderCopy(g_renderer, newTexture, NULL, NULL);
+//    SDL_SetRenderDrawColor(g_renderer, 0, 0 , 0, 0);
+//    SDL_RenderClear(g_renderer);
     SDL_SetRenderDrawColor(g_renderer, 255, 0 , 0, 0);
     SDL_RenderDrawRect(g_renderer,&rect);
     SDL_RenderPresent(g_renderer);
@@ -89,7 +91,6 @@ void process(SDL_Event e)
 int main()
 {
     initSDL(g_window, g_renderer, WINDOW_TITLE, SCREEN_WIDTH, SCREEN_HEIGHT);
-    loadTexture("Resource/anhdep.jpeg");
     
     bool is_running = true;
     SDL_Event event;
