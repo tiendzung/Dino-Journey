@@ -14,7 +14,7 @@ class Map Map_data;
 
 bool loadBackGround()
 {
-    return Map_data.loadBackGround(g_renderer);
+    return (Map_data.loadGround("Resource/BackGround/ground.png", g_renderer)&&Map_data.loadBackGround(g_renderer, BACKGROUND_LAYER_1));
 //    return g_background.loadIMG("Resource/BackGround.png", g_renderer);
 }
 void draw(SDL_Renderer* g_renderer, int x,int y)
@@ -71,9 +71,8 @@ int main()
             {
                 is_running = false;
             }
-//            g_background.setDesRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-//            g_background.Render(g_renderer);
-            Map_data.renderScrollingBackground(g_renderer);
+            Map_data.renderScrollingBackground(g_renderer, BACKGROUND_LAYER_1);
+            Map_data.renderScrollingGround(/*speed, acceleration,*/g_renderer);
             // process game logic
             process(event);
             // (nothing to process)

@@ -15,18 +15,18 @@
 class Map
 {
 private:
-    BaseObject backGround[BACKGROUND_LAYER];
+    BaseObject backGround[BACKGROUND_LAYER_1];
     BaseObject Ground;
     
 public:
     Map(){};
     ~Map(){};
     
-    bool loadBackGround(SDL_Renderer* renderer);
+    bool loadBackGround(SDL_Renderer* renderer, int TOTAL);
     bool loadGround(string path, SDL_Renderer* renderer);
     
-    void renderScrollingBackground(/*vector <double> &offSetSpeed,*/ SDL_Renderer* renderer);
-    void renderScrolingGround(int &speed, int& acceleration, SDL_Renderer* screen);
+    void renderScrollingBackground(/*vector <double> &offSetSpeed,*/ SDL_Renderer* renderer, int TOTAL);
+    void renderScrollingGround(/*int &speed, int& acceleration,*/ SDL_Renderer* screen);
     
     void Free();
 };
