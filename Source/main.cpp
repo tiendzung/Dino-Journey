@@ -4,15 +4,18 @@
 #include "SDL_InitWindow.h"
 #include "GameStatus.h"
 #include "Object.h"
-
+#include "Map.h"
 int x = SCREEN_WIDTH/2;
 int y = SCREEN_HEIGHT/2;
 const int RSIZE = 25;
 class BaseObject ball;
 class BaseObject g_background;
+class Map Map_data;
+
 bool loadBackGround()
 {
-    return g_background.loadIMG("Resource/BackGround.png", g_renderer);
+    return Map_data.loadBackGround(g_renderer);
+//    return g_background.loadIMG("Resource/BackGround.png", g_renderer);
 }
 void draw(SDL_Renderer* g_renderer, int x,int y)
 {
@@ -68,8 +71,9 @@ int main()
             {
                 is_running = false;
             }
-            g_background.setDesRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            g_background.Render(g_renderer);
+//            g_background.setDesRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+//            g_background.Render(g_renderer);
+            Map_data.renderScrollingBackground(g_renderer);
             // process game logic
             process(event);
             // (nothing to process)

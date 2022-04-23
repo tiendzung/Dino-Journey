@@ -32,6 +32,9 @@ public:
     SDL_Texture* getObject() const { return p_object; }
     SDL_Rect getRect() const { return r_object; }
     
+    int getWidth() { return d_object.w; }
+    int getHeight() { return d_object.h; }
+    
     bool loadIMG(string, SDL_Renderer* renderer);
     void Render(SDL_Renderer* renderer);
     

@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/main.cpp"
-            timestampString = "672414499.249006"
+            timestampString = "672424974.0862859"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
-            landmarkName = "draw(SDL_Renderer* g_renderer, int x,int y)"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "loadBackGround()"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
