@@ -1,5 +1,5 @@
 //
-//  SDL_InitWindow.hpp
+//  SDL_InitWindow.h
 //  Project Game
 //
 //  Created by Nguyễn Tiến Dũng on 4/21/22.

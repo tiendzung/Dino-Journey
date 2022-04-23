@@ -1,12 +1,21 @@
+//
+//  SDL_InitWindow.cpp
+//  Project Game
+//
+//  Created by Nguyễn Tiến Dũng on 4/21/22.
+//  Copyright © 2022 Nguyễn Tiến Dũng. All rights reserved.
+//
+
 #include <iostream>
 #include <SDL.h>
+#include "CommonFunction.h"
 #include "SDL_InitWindow.h"
 
 using namespace std;
 
 void logSDLError(const std::string &msg, bool fatal)
 {
-    cout << msg << " Error: " << SDL_GetError() << std::endl;
+    cout << msg << " Error: " << SDL_GetError() << "\n";
     if (fatal)
     {
         SDL_Quit();

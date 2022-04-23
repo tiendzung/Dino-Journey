@@ -8,6 +8,7 @@
 
 #ifndef GameStatus_h
 #define GameStatus_h
+
 enum GameStatus
 {
     GAME_RUNNING,
@@ -15,5 +16,9 @@ enum GameStatus
     GAME_OVER,
     GAME_TOTAL
 };
-
+class Opp
+{
+    int a,b,c;
+};
+//SDL_Window* g_window = NULL;
 #endif /* GameStatus_h */

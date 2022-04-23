@@ -1,58 +1,24 @@
-#include <bits/stdc++.h>
-using namespace std;
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
-#include <SDL_mixer.h>
-#include <thread>
-#include <chrono>
+
+#include "CommonFunction.h"
+#include "Display.h"
 #include "SDL_InitWindow.h"
 #include "GameStatus.h"
-#include "Display.h"
+#include "Object.h"
 
-SDL_Window* g_window = NULL;
-SDL_Surface* g_ScreenSurface = NULL;
-SDL_Surface* g_background = NULL;
-SDL_Renderer* g_renderer = NULL;
-SDL_Texture* g_texture = NULL;
-
-const string WINDOW_TITLE = "DINOUSAUR TRAVEL";
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
-const int RSIZE = 25;
 int x = SCREEN_WIDTH/2;
 int y = SCREEN_HEIGHT/2;
-const int step = 26;
-
-SDL_Texture* loadTexture(string path )
+const int RSIZE = 25;
+class BaseObject ball;
+class BaseObject g_background;
+bool loadBackGround()
 {
-    SDL_Texture* newTexture = NULL;
-    SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
-    if ( loadedSurface == NULL )
-        logSDLError("Unable to load image " + path + " SDL_image Error: ", IMG_GetError());
-    else
-    {
-        newTexture = SDL_CreateTextureFromSurface( g_renderer, loadedSurface );
-        if( newTexture == NULL )
-            logSDLError("Unable to create texture from " + path + " SDL Error: ", SDL_GetError());
-        SDL_FreeSurface( loadedSurface );
-    }
-    return newTexture;
+    return g_background.loadIMG("Resource/BackGround.png", g_renderer);
 }
-
 void draw(SDL_Renderer* g_renderer, int x,int y)
 {
-    SDL_Rect rect;
-    rect.x = x;
-    rect.y = y;
-    rect.w = RSIZE;
-    rect.h = RSIZE;
-    SDL_Texture* newTexture =  loadTexture( "Resource/background.png" );
-    SDL_RenderCopy(g_renderer, newTexture, NULL, NULL);
-//    SDL_SetRenderDrawColor(g_renderer, 0, 0 , 0, 0);
-//    SDL_RenderClear(g_renderer);
-    SDL_SetRenderDrawColor(g_renderer, 255, 0 , 0, 0);
-    SDL_RenderDrawRect(g_renderer,&rect);
+    ball.setDesRect(x, y, -1, -1);
+    ball.loadIMG("Resource/Ball.png", g_renderer);
+    ball.Render(g_renderer);
     SDL_RenderPresent(g_renderer);
 }
 void process(SDL_Event e)
@@ -67,41 +33,46 @@ void process(SDL_Event e)
             case SDLK_DOWN:
             {
                 if(y + step <= SCREEN_HEIGHT - RSIZE) y+=step;
-                    break;
+                break;
             }
             case SDLK_UP:
             {
                 if(y - step >= 0) y-=step;
-                    break;
+                break;
             }
             case SDLK_LEFT:
             {
                 if(x - step >= 0) x-=step;
-                    break;
+                break;
             }
             case SDLK_RIGHT:
             {
                 if(x + step <= SCREEN_WIDTH - RSIZE) x+=step;
-                    break;
+                break;
             }
         }
-        draw(g_renderer,x,y);
     }
 }
 int main()
 {
     initSDL(g_window, g_renderer, WINDOW_TITLE, SCREEN_WIDTH, SCREEN_HEIGHT);
-    
+    if(loadBackGround() == false) { cout<<"Can't not load Background!!!"; return 0; }
+    g_background.setDesRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     bool is_running = true;
     SDL_Event event;
-    while (is_running) {
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
+    while (is_running)
+    {
+        while (SDL_PollEvent(&event))
+        {
+            if (event.type == SDL_QUIT)
+            {
                 is_running = false;
             }
+            g_background.setDesRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            g_background.Render(g_renderer);
             // process game logic
-            // (nothing to process)
             process(event);
+            // (nothing to process)
             // draw & display
         }
     }
