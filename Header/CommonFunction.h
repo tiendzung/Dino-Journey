@@ -45,8 +45,8 @@ const double ENEMY_SPEED = 8.64 ;
 const int IN_AIR_ENEMY = 1;
 const int ON_GROUND_ENEMY = 2;
 const int ENEMY_RANGE = 240;
-const int MIN_HEIGHT = 360;
-const int MAX_HEIGHT = 330;
+const int MIN_HEIGHT = 330;
+const int MAX_HEIGHT = 100;
 const int GRASS_HEIGHT = 8;
 const int JUMP = 64;
 const int FALL = 150;
@@ -54,7 +54,7 @@ const int MAX_JUMP = 240;
 
 const int BASE_OFFSET_SPEED = 0;
 const int JUMP_POW = 18;
-const int GRAVITY_FALL = 19.8;
+const double GRAVITY_FALL = 0.41;
 const int MAX_ACCELERATION = 9;
 
 const int BACKGROUND_LAYER[2] = { 9, 6 };

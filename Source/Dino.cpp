@@ -32,10 +32,12 @@ void Dino::HandleEvent(SDL_Event& e)
             case SDLK_SPACE:
             case SDLK_UP:
             {
-                if (onGround() == true&&e.key.repeat == 0)
+                if (onGround() == true/*&&e.key.repeat == 0*/)
                 {
                     //                    Mix_PlayChannel(MIX_CHANNEL, gJump, NOT_REPEATITIVE);
                     status = JUMP;
+                    vJump = 8;
+                    vFail = 0;
                 }
             }
         }
@@ -46,15 +48,19 @@ void Dino::move()
 {
     if (status == JUMP && d_object.y >= MAX_HEIGHT)
     {
-        d_object.y += -JUMP_SPEED;
+        vJump -= GRAVITY_FALL;
+        d_object.y += -vJump;
+        d_object.y = min(GROUND, d_object.y);
     }
     if (d_object.y <= MAX_HEIGHT)
     {
         status = FALL;
+        vJump = 8;
     }
     if (status == FALL && d_object.y < GROUND)
     {
-        d_object.y += FALL_SPEED;
+        vFail += GRAVITY_FALL;
+        d_object.y += vFail;
         d_object.y = min(GROUND, d_object.y);
     }
 }

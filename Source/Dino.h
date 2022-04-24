@@ -19,8 +19,10 @@
 class Dino
 {
 protected:
-    static const int JUMP_SPEED = 6;
-    static const int FALL_SPEED = 7;
+//    const double JUMP_SPEED = 8;
+//    const double FALL_SPEED = 8;
+    double vJump = 11;
+    double vFail = 0;
     const string dino_type[4] =
     {
         "Resource/MainDino/DinoBlue.png",
