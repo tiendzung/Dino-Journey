@@ -7,21 +7,27 @@
 //
 
 #include "Map.h"
+#include "CommonFunction.h"
 
-bool Map::loadBackGround(SDL_Renderer* renderer, int TOTAL)
+
+bool Map::loadBackGround(SDL_Renderer* renderer, int TOTAL, int type)
 {
     bool success = true;
     for(int i = 0; i < TOTAL; i++)
     {
-        success = backGround[i].loadIMG(bg_2_layer[i].c_str(), renderer);
-        if(success == false) return false ;
+        success = backGround[i].loadIMG(bg_layer[type][i].c_str(), renderer);
+        if(success == false)
+        {
+//            cout<<"Here!";
+            return false;
+        }
     }
     return true;
 }
 
-bool Map::loadGround(string path, SDL_Renderer* renderer)
+bool Map::loadGround(SDL_Renderer* renderer, int type)
 {
-    return Ground.loadIMG(path.c_str(), renderer);
+    return Ground.loadIMG(bg_ground[type], renderer);
 }
 
 void Map::renderScrollingBackground(SDL_Renderer *renderer, int TOTAL)
@@ -39,9 +45,9 @@ void Map::renderScrollingGround(/*int &speed, int& acceleration,*/ SDL_Renderer*
     Ground.Render(renderer);
 }
 
-void Map::Free()
+void Map::Free(int type)
 {
     Ground.Free();
-    for(int i = 0; i < BACKGROUND_LAYER_1; i++) backGround[i].Free();
+    for(int i = 0; i < BACKGROUND_LAYER[type]; i++) backGround[i].Free();
 }
 

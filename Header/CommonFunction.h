@@ -17,7 +17,7 @@ using namespace std;
 #include <SDL_mixer.h>
 #include <thread>
 #include <chrono>
-
+#include <ctime>
 
 static SDL_Window* g_window = NULL;
 //static SDL_Surface* g_ScreenSurface = NULL;
@@ -55,8 +55,7 @@ const int JUMP_POW = 18;
 const int GRAVITY_FALL = 19.8;
 const int MAX_ACCELERATION = 9;
 
-const int BACKGROUND_LAYER_1 = 9;
-const int BACKGROUND_LAYER_2 = 6;
+const int BACKGROUND_LAYER[2] = { 9, 6 };
 const double LAYER_1_SPEED = 0;
 const double LAYER_2_SPEED = 0.25;
 const double LAYER_3_SPEED = 0.5;
@@ -100,26 +99,7 @@ static SDL_Rect dino_frame[RUNNING_FRAMES];
 //dino_frame[5].w = 57;
 //dino_frame[5].h = 57;
 
-const string bg_1_layer[BACKGROUND_LAYER_1] = {
-    "Resource/BackGround/layer01.png",
-    "Resource/BackGround/layer02.png",
-    "Resource/BackGround/layer03.png",
-    "Resource/BackGround/layer04.png",
-    "Resource/BackGround/layer05.png",
-    "Resource/BackGround/layer06.png",
-    "Resource/BackGround/layer07.png",
-    "Resource/BackGround/layer08.png",
-    "Resource/BackGround/layer09.png",
-};
 
-const string bg_2_layer[BACKGROUND_LAYER_2] = {
-    "Resource/BackGround2/Hills Layer 01.png",
-    "Resource/BackGround2/Hills Layer 02.png",
-    "Resource/BackGround2/Hills Layer 03.png",
-    "Resource/BackGround2/Hills Layer 04.png",
-    "Resource/BackGround2/Hills Layer 05.png",
-    "Resource/BackGround2/Hills Layer 06.png",
-};
 const int CHARACTER_SPRITES = 6;
 
 #endif /* CommonFunction_h */
