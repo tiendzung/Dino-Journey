@@ -13,7 +13,7 @@ bool Map::loadBackGround(SDL_Renderer* renderer, int TOTAL)
     bool success = true;
     for(int i = 0; i < TOTAL; i++)
     {
-        success = backGround[i].loadIMG(bg_1_layer[i].c_str(), renderer);
+        success = backGround[i].loadIMG(bg_2_layer[i].c_str(), renderer);
         if(success == false) return false ;
     }
     return true;

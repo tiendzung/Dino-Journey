@@ -12,31 +12,26 @@ int y = SCREEN_HEIGHT/2;
 class BaseObject g_background;
 class Map Map_data;
 class Dino dino;
+int id_frame = 0;
 bool loadBackGround()
 {
-    return (Map_data.loadGround("Resource/BackGround/ground.png", g_renderer)&&Map_data.loadBackGround(g_renderer, BACKGROUND_LAYER_1));
+    return (Map_data.loadGround("Resource/BackGround2/ground.png", g_renderer)&&Map_data.loadBackGround(g_renderer, BACKGROUND_LAYER_2));
 //    return g_background.loadIMG("Resource/BackGround.png", g_renderer);
 }
-void draw(SDL_Renderer* g_renderer, int x,int y)
-{
-//    ball.setDesRect(SCREEN_WIDTH - 700, GROUND, -1, -1);
-    dino.loadIMG("Resource/DinoRed.png", g_renderer);
-    dino.Render(g_renderer);
-//    SDL_RenderPresent(g_renderer);
-}
+
 void process(SDL_Event &e)
 {
-    dino.loadIMG("Resource/DinoRed.png", g_renderer);
     dino.move();
-    dino.Render(g_renderer);
+    dino.Render(g_renderer, id_frame++);
+    id_frame %= RUNNING_FRAMES;
 //    SDL_RenderPresent(g_renderer);
 }
 int main()
 {
-    int g_count = 0;
     initSDL(g_window, g_renderer, WINDOW_TITLE, SCREEN_WIDTH, SCREEN_HEIGHT);
     if(loadBackGround() == false) { cout<<"Can't not load Background!!!"; return 0; }
     g_background.setDesRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    dino.loadIMG("Resource/DinoRed.png", g_renderer);
     bool is_running = true;
     SDL_Event event;
     while (is_running)
@@ -51,7 +46,7 @@ int main()
         }
 //        process(event);
 //        dino.HandleEvent(event);
-        Map_data.renderScrollingBackground(g_renderer, BACKGROUND_LAYER_1);
+        Map_data.renderScrollingBackground(g_renderer, BACKGROUND_LAYER_2);
         Map_data.renderScrollingGround(/*speed, acceleration,*/g_renderer);
         // process game logic
         // draw(g_renderer,x,y);
@@ -59,6 +54,7 @@ int main()
         // draw & display
         process(event);
         SDL_RenderPresent(g_renderer);
+//        SDL_Delay(16);
     }
     
     quitSDL(g_window, g_renderer);

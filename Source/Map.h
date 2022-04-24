@@ -15,7 +15,7 @@
 class Map
 {
 private:
-    BaseObject backGround[BACKGROUND_LAYER_1];
+    BaseObject backGround[BACKGROUND_LAYER_2];
     BaseObject Ground;
     
 public:

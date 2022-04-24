@@ -47,7 +47,7 @@ const int MIN_HEIGHT = 360;
 const int MAX_HEIGHT = 330;
 const int GRASS_HEIGHT = 8;
 const int JUMP = 64;
-const int FALL = 204;
+const int FALL = 124;
 const int MAX_JUMP = 240;
 
 const int BASE_OFFSET_SPEED = 0;
@@ -66,6 +66,39 @@ const double LAYER_6_SPEED = 1.25;
 const double LAYER_7_SPEED = 1.5;
 const double LAYER_8_SPEED = 1.75;
 const double LAYER_9_SPEED = 2.0;
+
+const int RUNNING_FRAMES = 6;
+static SDL_Rect dino_frame[RUNNING_FRAMES];
+
+//dino_frame[0].x = 57 * 0;
+//dino_frame[0].y = 0;
+//dino_frame[0].w = 57;
+//dino_frame[0].h = 57;
+//
+//dino_frame[1].x = 57 * 1;
+//dino_frame[1].y = 0;
+//dino_frame[1].w = 57;
+//dino_frame[1].h = 57;
+//
+//dino_frame[2].x = 57 * 2;
+//dino_frame[2].y = 0;
+//dino_frame[2].w = 57;
+//dino_frame[2].h = 57;
+//
+//dino_frame[3].x = 57 * 3;
+//dino_frame[3].y = 0;
+//dino_frame[3].w = 57;
+//dino_frame[3].h = 57;
+//
+//dino_frame[4].x = 57 * 4;
+//dino_frame[4].y = 0;
+//dino_frame[4].w = 57;
+//dino_frame[4].h = 57;
+//
+//dino_frame[5].x = 57 * 5;
+//dino_frame[5].y = 0;
+//dino_frame[5].w = 57;
+//dino_frame[5].h = 57;
 
 const string bg_1_layer[BACKGROUND_LAYER_1] = {
     "Resource/BackGround/layer01.png",

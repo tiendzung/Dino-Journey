@@ -23,6 +23,7 @@ protected:
     
     SDL_Texture* p_object;
     SDL_Rect r_object, d_object;
+    SDL_Rect frame_clip[RUNNING_FRAMES];
     int status;
     
 public:
@@ -34,8 +35,8 @@ public:
     
     bool loadIMG(string, SDL_Renderer* renderer);
 
-    void Render(SDL_Renderer* renderer);
-    
+    void Render(SDL_Renderer* renderer, int id_frame);
+//    void Show(SDL_Renderer* renderer);
     int getPosX();
     int getPosY();
 };
