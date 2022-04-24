@@ -27,6 +27,7 @@ static SDL_Renderer* g_renderer = NULL;
 static SDL_Event g_event;
 
 const string WINDOW_TITLE = "DINOUSAUR TRAVEL";
+const int step = 16;
 
 const int SCREEN_WIDTH = 928;
 const int SCREEN_HEIGHT = 522;
