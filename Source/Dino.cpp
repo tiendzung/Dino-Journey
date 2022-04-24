@@ -108,7 +108,7 @@ void Dino::Render(SDL_Renderer *renderer)
     SDL_RenderCopy(renderer, p_object, &frame_clip[id_frame], &d_object);
     
     int real_dino_time = Dino_Timer.get_Ticks();
-    if(real_dino_time >= 1000/DINO_FPS)
+    if(real_dino_time >= 1000/DINO_FPS && this->onGround())
     {
         id_frame++;
         if(id_frame == 6) id_frame = 0;

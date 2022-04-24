@@ -52,7 +52,7 @@ public:
     bool loadGround(SDL_Renderer* renderer, int type);
     
     void renderScrollingBackground(/*vector <double> &offSetSpeed,*/ SDL_Renderer* renderer, int TOTAL);
-    void renderScrollingGround(/*int &speed, int& acceleration,*/ SDL_Renderer* screen);
+    void renderScrollingGround(int &speed, int& acceleration, SDL_Renderer* screen);
     
     void Free(int type);
 };

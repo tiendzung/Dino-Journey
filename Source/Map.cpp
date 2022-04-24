@@ -38,10 +38,17 @@ void Map::renderScrollingBackground(SDL_Renderer *renderer, int TOTAL)
     }
 }
 
-void Map::renderScrollingGround(/*int &speed, int& acceleration,*/ SDL_Renderer* renderer)
+void Map::renderScrollingGround(int &speed, int& acceleration, SDL_Renderer* renderer)
 {
-    Ground.setDesRect(0, SCREEN_HEIGHT - Ground.getHeight(), Ground.getWidth(), Ground.getHeight());
-    Ground.Render(renderer);
+//    Ground.setDesRect(0, SCREEN_HEIGHT - Ground.getHeight(), Ground.getWidth(), Ground.getHeight());
+//
+//    Ground.Render(renderer);
+    speed = speed - (GROUND_SPEED + acceleration);
+    if(speed < - Ground.getWidth())
+        speed = 0;
+
+    Ground.RenderXY(speed, SCREEN_HEIGHT - Ground.getHeight(), renderer);
+    Ground.RenderXY(speed + Ground.getWidth(), SCREEN_HEIGHT - Ground.getHeight(), renderer);
 }
 
 void Map::Free(int type)

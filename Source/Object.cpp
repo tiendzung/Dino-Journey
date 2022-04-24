@@ -53,6 +53,11 @@ void BaseObject::Render(SDL_Renderer* renderer)
     SDL_RenderCopy(renderer, p_object, &r_object, &d_object);
 }
 
+void BaseObject::RenderXY(int x, int y, SDL_Renderer* renderer)
+{
+    SDL_Rect desR = {x, y, d_object.w, d_object.h};
+    SDL_RenderCopy(renderer, p_object, &r_object, &desR);
+}
 void BaseObject::Free()
 {
     if(p_object != NULL)

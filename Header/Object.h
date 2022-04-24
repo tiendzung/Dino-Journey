@@ -38,6 +38,8 @@ public:
     bool loadIMG(string, SDL_Renderer* renderer);
     void Render(SDL_Renderer* renderer);
     
+    void RenderXY(int x,int y, SDL_Renderer* renderer);
+    
     void Free();
 };
 

@@ -42,6 +42,7 @@ void process()
 }
 int main()
 {
+    
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
     
     srand((unsigned int)time(0));
@@ -53,8 +54,11 @@ int main()
     Mix_PlayMusic(gBackgroundMusic, -1);
     
     dino.loadIMG(type_dino, g_renderer);
+    
     bool is_running = true;
     SDL_Event event;
+    int acceleration = 0, speed = GROUND_SPEED;
+    
     while (is_running)
     {
         timer.start();
@@ -67,7 +71,7 @@ int main()
             dino.HandleEvent(event, gJumpMusic);
         }
         Map_data.renderScrollingBackground(g_renderer, TOTAL_BACKGROUND_LAYER[type_map]);
-        Map_data.renderScrollingGround(/*speed, acceleration,*/g_renderer);
+        Map_data.renderScrollingGround(speed, acceleration, g_renderer);
         // process game logic
         // (nothing to process)
         // draw & display

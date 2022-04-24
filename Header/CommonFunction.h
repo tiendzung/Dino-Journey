@@ -41,8 +41,8 @@ const int COLOR_KEY_B = 180;
 
 const int GROUND = 430;
 const int SCREEN_BPP = 64;
-const double GROUND_SPEED = 8.64;
-const double ENEMY_SPEED = 8.64 ;
+const double GROUND_SPEED = 8; /*8.64*/
+const double ENEMY_SPEED = 8 ; /*8.64*/
 const int IN_AIR_ENEMY = 1;
 const int ON_GROUND_ENEMY = 2;
 const int ENEMY_RANGE = 240;
