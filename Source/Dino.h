@@ -19,10 +19,14 @@
 class Dino
 {
 protected:
-//    const double JUMP_SPEED = 8;
-//    const double FALL_SPEED = 8;
-    double vJump = 11;
-    double vFail = 0;
+    const int DINO_FPS = 15;
+    const int DINO_SPRITES = 6;
+    
+    int id_frame = 0;
+    class ImpTimer Dino_Timer;
+    
+    double vJump = 0;
+//    double vFail = 0;
     const string dino_type[4] =
     {
         "Resource/MainDino/DinoBlue.png",
@@ -33,21 +37,23 @@ protected:
     SDL_Texture* p_object;
     SDL_Rect r_object, d_object;
     SDL_Rect frame_clip[RUNNING_FRAMES];
-    int status;
+//    int status = FALL;
     
 public:
     Dino();
     ~Dino() {};
     bool onGround();
-    void HandleEvent(SDL_Event& e);
+    void HandleEvent(SDL_Event& e, Mix_Chunk* gJumpMusic);
     void move();
     
     bool loadIMG(int type_dino, SDL_Renderer* renderer);
 
-    void Render(SDL_Renderer* renderer, ImpTimer& Dino_Timer,int &id_frame);
+    void Render(SDL_Renderer* renderer);
 //    void Show(SDL_Renderer* renderer);
     int getPosX();
     int getPosY();
+    
+    void Free();
 };
 
 #endif /* Dino_h */

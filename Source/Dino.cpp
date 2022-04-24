@@ -15,7 +15,7 @@ Dino::Dino()
     d_object.y = GROUND;
     d_object.w = d_object.h = 57;
     
-    status = 0;
+//    status = 0;
 }
 
 bool Dino::onGround()
@@ -23,7 +23,7 @@ bool Dino::onGround()
     return d_object.y == GROUND;
 }
 
-void Dino::HandleEvent(SDL_Event& e)
+void Dino::HandleEvent(SDL_Event& e, Mix_Chunk* gJumpMusic)
 {
     if (e.type == SDL_KEYDOWN)
     {
@@ -34,10 +34,10 @@ void Dino::HandleEvent(SDL_Event& e)
             {
                 if (onGround() == true/*&&e.key.repeat == 0*/)
                 {
-                    //                    Mix_PlayChannel(MIX_CHANNEL, gJump, NOT_REPEATITIVE);
-                    status = JUMP;
+                    Mix_PlayChannel(-1, gJumpMusic, 0);
+//                    status = JUMP;
                     vJump = 8;
-                    vFail = 0;
+//                    vFail = 0;
                 }
             }
         }
@@ -46,27 +46,28 @@ void Dino::HandleEvent(SDL_Event& e)
 
 void Dino::move()
 {
-    if (status == JUMP && d_object.y >= MAX_HEIGHT)
-    {
+//    if (status == JUMP && d_object.y >= MAX_HEIGHT)
+//    {
         vJump -= GRAVITY_FALL;
         d_object.y += -vJump;
         d_object.y = min(GROUND, d_object.y);
-    }
-    if (d_object.y <= MAX_HEIGHT)
-    {
-        status = FALL;
-        vJump = 8;
-    }
-    if (status == FALL && d_object.y < GROUND)
-    {
-        vFail += GRAVITY_FALL;
-        d_object.y += vFail;
-        d_object.y = min(GROUND, d_object.y);
-    }
+//    }
+//    if (d_object.y <= MAX_HEIGHT)
+//    {
+//        status = FALL;
+//        vJump = 8;
+//    }
+//    if (status == FALL && d_object.y < GROUND)
+//    {
+//        vFail += GRAVITY_FALL;
+//        d_object.y += vFail;
+//        d_object.y = min(GROUND, d_object.y);
+//    }
 }
 
 bool Dino::loadIMG(int type_dino, SDL_Renderer* renderer)
 {
+    Dino_Timer.start();
     string path = dino_type[type_dino];
     SDL_Texture* new_texture = NULL;
     SDL_Surface* load_surface = IMG_Load( path.c_str() );
@@ -81,12 +82,12 @@ bool Dino::loadIMG(int type_dino, SDL_Renderer* renderer)
             r_object.h = load_surface -> h;
             p_object = new_texture;
             
-            for(int i = 0; i < RUNNING_FRAMES; i++)
+            for(int i = 0; i < DINO_SPRITES; i++)
             {
-                frame_clip[i].x = r_object.w/RUNNING_FRAMES * i;
+                frame_clip[i].x = r_object.w/DINO_SPRITES * i;
                 frame_clip[i].y = 0;
-                frame_clip[i].w = r_object.w/RUNNING_FRAMES;
-                frame_clip[i].h = r_object.w/RUNNING_FRAMES;
+                frame_clip[i].w = r_object.w/DINO_SPRITES;
+                frame_clip[i].h = r_object.w/DINO_SPRITES;
             }
             
             SDL_FreeSurface(load_surface);
@@ -99,7 +100,7 @@ bool Dino::loadIMG(int type_dino, SDL_Renderer* renderer)
     return false;
 }
 
-void Dino::Render(SDL_Renderer *renderer, ImpTimer& Dino_Timer,int &id_frame)
+void Dino::Render(SDL_Renderer *renderer)
 {
     d_object.w = frame_clip[id_frame].w;
     d_object.h = frame_clip[id_frame].h;
@@ -110,6 +111,7 @@ void Dino::Render(SDL_Renderer *renderer, ImpTimer& Dino_Timer,int &id_frame)
     if(real_dino_time >= 1000/DINO_FPS)
     {
         id_frame++;
+        if(id_frame == 6) id_frame = 0;
         Dino_Timer.start();
     }
 }
@@ -122,4 +124,9 @@ int Dino::getPosX()
 int Dino::getPosY()
 {
     return d_object.y;
+}
+
+void Dino::Free()
+{
+    SDL_DestroyTexture(p_object);
 }

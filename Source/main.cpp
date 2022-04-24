@@ -7,40 +7,51 @@
 #include "Object.h"
 #include "Map.h"
 #include "Dino.h"
-int x = SCREEN_WIDTH/2;
-int y = SCREEN_HEIGHT/2;
-//class BaseObject ball;
+
+Mix_Music* gBackgroundMusic = NULL;
+Mix_Music* gMenuMusic = NULL;
+Mix_Chunk* gClickMusic = NULL;
+Mix_Chunk* gJumpMusic = NULL;
+Mix_Chunk* gLoseMusic = NULL;
+
 class BaseObject g_background;
 class Map Map_data;
 class Dino dino;
 
-ImpTimer timer, Dino_Timer;
-int id_frame = 0;
+ImpTimer timer;
 bool loadBackGround(int type)
 {
-//    if(Map_data.loadBackGround(g_renderer, BACKGROUND_LAYER_1, 0) == false) cout<< "CC!";
+
+    gJumpMusic = Mix_LoadWAV("Resource/Sound/jump_sound.wav");
+    
+    if(gBackgroundMusic == NULL) cout<<Mix_GetError();
+
+    gBackgroundMusic =  Mix_LoadMUS("Resource/Sound/background_sound.wav");
+    
+    if(gBackgroundMusic == NULL) cout<<Mix_GetError();
+
     return (Map_data.loadGround(g_renderer, type)
-            &&Map_data.loadBackGround(g_renderer, BACKGROUND_LAYER[type], type)
+            &&Map_data.loadBackGround(g_renderer, TOTAL_BACKGROUND_LAYER[type], type)
             );
-//    return g_background.loadIMG("Resource/BackGround.png", g_renderer);
 }
 
 void process()
 {
     dino.move();
-    if(id_frame == 6) id_frame = 0;
-    dino.Render(g_renderer, Dino_Timer, id_frame);
-//    id_frame %= RUNNING_FRAMES;
-//    SDL_RenderPresent(g_renderer);
+    dino.Render(g_renderer);
 }
 int main()
 {
-    Dino_Timer.start();
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+    
     srand((unsigned int)time(0));
     int type_map = rand()%2, type_dino = rand()%4;
     initSDL(g_window, g_renderer, WINDOW_TITLE, SCREEN_WIDTH, SCREEN_HEIGHT);
+
     if(loadBackGround(type_map) == false) { cout<<"Can't not load Background!!!"; return 0; }
-    g_background.setDesRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    
+    Mix_PlayMusic(gBackgroundMusic, -1);
+    
     dino.loadIMG(type_dino, g_renderer);
     bool is_running = true;
     SDL_Event event;
@@ -53,16 +64,13 @@ int main()
             {
                 is_running = false;
             }
-            dino.HandleEvent(event);
+            dino.HandleEvent(event, gJumpMusic);
         }
-//        process(event);
-//        dino.HandleEvent(event);
-        Map_data.renderScrollingBackground(g_renderer, BACKGROUND_LAYER[type_map]);
+        Map_data.renderScrollingBackground(g_renderer, TOTAL_BACKGROUND_LAYER[type_map]);
         Map_data.renderScrollingGround(/*speed, acceleration,*/g_renderer);
         // process game logic
         // (nothing to process)
         // draw & display
-//        id_frame++;
         
         process();
         SDL_RenderPresent(g_renderer);
@@ -77,7 +85,23 @@ int main()
 //        SDL_Delay(16);
     }
     
-    quitSDL(g_window, g_renderer);
+    dino.Free();
+    Map_data.Free(type_map);
     
+    Mix_FreeMusic(gBackgroundMusic);
+    gBackgroundMusic = NULL;
+
+    Mix_FreeMusic(gMenuMusic);
+    gMenuMusic = NULL ;
+    
+    Mix_FreeChunk(gClickMusic);
+    gClickMusic = NULL ;
+    
+    Mix_FreeChunk(gJumpMusic);
+    gJumpMusic = NULL ;
+    
+    Mix_FreeChunk(gLoseMusic);
+    gLoseMusic = NULL;
+    quitSDL(g_window, g_renderer);
     return 0;
 }

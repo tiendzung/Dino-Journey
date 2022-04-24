@@ -29,8 +29,9 @@ static SDL_Event g_event;
 const string WINDOW_TITLE = "DINOUSAUR TRAVEL";
 const int step = 16;
 
+const int MIX_CHANNEL = -1;
+
 const int FRAME_PER_SECOND = 60;
-const int DINO_FPS = 15;
 const int SCREEN_WIDTH = 928;
 const int SCREEN_HEIGHT = 522;
 
@@ -57,7 +58,7 @@ const int JUMP_POW = 18;
 const double GRAVITY_FALL = 0.41;
 const int MAX_ACCELERATION = 9;
 
-const int BACKGROUND_LAYER[2] = { 9, 6 };
+const int TOTAL_BACKGROUND_LAYER[2] = { 9, 6 };
 const double LAYER_1_SPEED = 0;
 const double LAYER_2_SPEED = 0.25;
 const double LAYER_3_SPEED = 0.5;
@@ -71,37 +72,5 @@ const double LAYER_9_SPEED = 2.0;
 const int RUNNING_FRAMES = 6;
 static SDL_Rect dino_frame[RUNNING_FRAMES];
 
-//dino_frame[0].x = 57 * 0;
-//dino_frame[0].y = 0;
-//dino_frame[0].w = 57;
-//dino_frame[0].h = 57;
-//
-//dino_frame[1].x = 57 * 1;
-//dino_frame[1].y = 0;
-//dino_frame[1].w = 57;
-//dino_frame[1].h = 57;
-//
-//dino_frame[2].x = 57 * 2;
-//dino_frame[2].y = 0;
-//dino_frame[2].w = 57;
-//dino_frame[2].h = 57;
-//
-//dino_frame[3].x = 57 * 3;
-//dino_frame[3].y = 0;
-//dino_frame[3].w = 57;
-//dino_frame[3].h = 57;
-//
-//dino_frame[4].x = 57 * 4;
-//dino_frame[4].y = 0;
-//dino_frame[4].w = 57;
-//dino_frame[4].h = 57;
-//
-//dino_frame[5].x = 57 * 5;
-//dino_frame[5].y = 0;
-//dino_frame[5].w = 57;
-//dino_frame[5].h = 57;
-
-
-const int CHARACTER_SPRITES = 6;
 
 #endif /* CommonFunction_h */

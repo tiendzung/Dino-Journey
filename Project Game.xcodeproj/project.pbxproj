@@ -15,6 +15,7 @@
 		CB3AC0632814538E004A674E /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB3AC0622814538E004A674E /* Map.cpp */; };
 		CB3AC06628148324004A674E /* Dino.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB3AC06528148324004A674E /* Dino.cpp */; };
 		CB3AC06928156624004A674E /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB3AC06828156624004A674E /* Timer.cpp */; };
+		CB3AC06D2815B6B3004A674E /* Enermy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB3AC06B2815B6B3004A674E /* Enermy.cpp */; };
 		CB6C6DA2280DC37200AADFBA /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CB6C6DA0280DC2DB00AADFBA /* libSDL2-2.0.0.dylib */; };
 		CB6D5687280EE68C0025197E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB6D567F280EE68C0025197E /* main.cpp */; };
 		CBF06CAF280DCC92003DAD7D /* libSDL2_image-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CBF06CAE280DCC92003DAD7D /* libSDL2_image-2.0.0.dylib */; };
@@ -49,6 +50,8 @@
 		CB3AC06528148324004A674E /* Dino.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Dino.cpp; sourceTree = "<group>"; };
 		CB3AC06728156614004A674E /* Timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Timer.h; path = Source/Timer.h; sourceTree = SOURCE_ROOT; };
 		CB3AC06828156624004A674E /* Timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
+		CB3AC06A2815B6A4004A674E /* Enermy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Enermy.h; path = Source/Enermy.h; sourceTree = SOURCE_ROOT; };
+		CB3AC06B2815B6B3004A674E /* Enermy.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Enermy.cpp; sourceTree = "<group>"; };
 		CB6C6D95280DC11100AADFBA /* Project Game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Project Game"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB6C6DA0280DC2DB00AADFBA /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2/2.0.20/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		CB6D567F280EE68C0025197E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; usesTabs = 0; };
@@ -88,6 +91,7 @@
 				CB3AC0612814537C004A674E /* Map.h */,
 				CB3AC06428148313004A674E /* Dino.h */,
 				CB3AC06728156614004A674E /* Timer.h */,
+				CB3AC06A2815B6A4004A674E /* Enermy.h */,
 			);
 			name = Header;
 			path = ../Header;
@@ -135,6 +139,7 @@
 				CB3AC0622814538E004A674E /* Map.cpp */,
 				CB3AC06528148324004A674E /* Dino.cpp */,
 				CB3AC06828156624004A674E /* Timer.cpp */,
+				CB3AC06B2815B6B3004A674E /* Enermy.cpp */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -216,6 +221,7 @@
 				CB3AC06928156624004A674E /* Timer.cpp in Sources */,
 				CB3AC0632814538E004A674E /* Map.cpp in Sources */,
 				CB3AC05A28131CFA004A674E /* Display.cpp in Sources */,
+				CB3AC06D2815B6B3004A674E /* Enermy.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

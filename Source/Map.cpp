@@ -18,7 +18,6 @@ bool Map::loadBackGround(SDL_Renderer* renderer, int TOTAL, int type)
         success = backGround[i].loadIMG(bg_layer[type][i].c_str(), renderer);
         if(success == false)
         {
-//            cout<<"Here!";
             return false;
         }
     }
@@ -48,6 +47,6 @@ void Map::renderScrollingGround(/*int &speed, int& acceleration,*/ SDL_Renderer*
 void Map::Free(int type)
 {
     Ground.Free();
-    for(int i = 0; i < BACKGROUND_LAYER[type]; i++) backGround[i].Free();
+    for(int i = 0; i < TOTAL_BACKGROUND_LAYER[type]; i++) backGround[i].Free();
 }
 

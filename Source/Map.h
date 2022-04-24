@@ -15,9 +15,13 @@
 class Map
 {
 private:
-    string bg_layer[2][9];
-    string bg_ground[2];
-    BaseObject backGround[9];
+    const static int TOTAL_TYPE_OF_BACKGOUND = 2;
+    const static int BACKGROUND_TOTAL_LAYERS = 9;
+    
+    string bg_layer[TOTAL_TYPE_OF_BACKGOUND][BACKGROUND_TOTAL_LAYERS];
+    string bg_ground[TOTAL_TYPE_OF_BACKGOUND];
+    
+    BaseObject backGround[BACKGROUND_TOTAL_LAYERS];
     BaseObject Ground;
     
 public:
