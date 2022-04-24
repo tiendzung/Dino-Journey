@@ -32,7 +32,8 @@ void initSDL(SDL_Window* &window, SDL_Renderer* &renderer, string WINDOW_TITLE, 
     // SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_FULLSCREEN_DESKTOP);
     if (window == nullptr) logSDLError("CreateWindow", true);
     
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+//    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     //renderer = SDL_CreateSoftwareRenderer(SDL_GetWindowSurface(window));
     
     if (renderer == nullptr) logSDLError("CreateRenderer", true);

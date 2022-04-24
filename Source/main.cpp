@@ -1,5 +1,6 @@
 
 #include "CommonFunction.h"
+#include "Timer.h"
 #include "Display.h"
 #include "SDL_InitWindow.h"
 #include "GameStatus.h"
@@ -12,6 +13,8 @@ int y = SCREEN_HEIGHT/2;
 class BaseObject g_background;
 class Map Map_data;
 class Dino dino;
+
+ImpTimer timer, Dino_Timer;
 int id_frame = 0;
 bool loadBackGround(int type)
 {
@@ -22,25 +25,28 @@ bool loadBackGround(int type)
 //    return g_background.loadIMG("Resource/BackGround.png", g_renderer);
 }
 
-void process(SDL_Event &e)
+void process()
 {
     dino.move();
-    dino.Render(g_renderer, id_frame++);
-    id_frame %= RUNNING_FRAMES;
+    if(id_frame == 6) id_frame = 0;
+    dino.Render(g_renderer, Dino_Timer, id_frame);
+//    id_frame %= RUNNING_FRAMES;
 //    SDL_RenderPresent(g_renderer);
 }
 int main()
 {
-    srand(time(0));
-    int type = rand()%2;
+    Dino_Timer.start();
+    srand((unsigned int)time(0));
+    int type_map = rand()%2, type_dino = rand()%4;
     initSDL(g_window, g_renderer, WINDOW_TITLE, SCREEN_WIDTH, SCREEN_HEIGHT);
-    if(loadBackGround(type) == false) { cout<<"Can't not load Background!!!"; return 0; }
+    if(loadBackGround(type_map) == false) { cout<<"Can't not load Background!!!"; return 0; }
     g_background.setDesRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    dino.loadIMG("Resource/DinoRed.png", g_renderer);
+    dino.loadIMG(type_dino, g_renderer);
     bool is_running = true;
     SDL_Event event;
     while (is_running)
     {
+        timer.start();
         while (SDL_PollEvent(&event))
         {
             if (event.type == SDL_QUIT)
@@ -51,14 +57,23 @@ int main()
         }
 //        process(event);
 //        dino.HandleEvent(event);
-        Map_data.renderScrollingBackground(g_renderer, BACKGROUND_LAYER[type]);
+        Map_data.renderScrollingBackground(g_renderer, BACKGROUND_LAYER[type_map]);
         Map_data.renderScrollingGround(/*speed, acceleration,*/g_renderer);
         // process game logic
-        // draw(g_renderer,x,y);
         // (nothing to process)
         // draw & display
-        process(event);
+//        id_frame++;
+        
+        process();
         SDL_RenderPresent(g_renderer);
+        
+        int real_imp_time = timer.get_Ticks();
+        int time_one_frame = 1000/FRAME_PER_SECOND;
+        if (real_imp_time < time_one_frame)
+        {
+            int delay_time = time_one_frame - real_imp_time;
+            SDL_Delay(delay_time);
+        }
 //        SDL_Delay(16);
     }
     

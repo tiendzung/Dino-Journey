@@ -55,11 +55,13 @@ void Dino::move()
     if (status == FALL && d_object.y < GROUND)
     {
         d_object.y += FALL_SPEED;
+        d_object.y = min(GROUND, d_object.y);
     }
 }
 
-bool Dino::loadIMG(string path, SDL_Renderer* renderer)
+bool Dino::loadIMG(int type_dino, SDL_Renderer* renderer)
 {
+    string path = dino_type[type_dino];
     SDL_Texture* new_texture = NULL;
     SDL_Surface* load_surface = IMG_Load( path.c_str() );
     
@@ -91,11 +93,19 @@ bool Dino::loadIMG(string path, SDL_Renderer* renderer)
     return false;
 }
 
-void Dino::Render(SDL_Renderer *renderer, int id_frame)
+void Dino::Render(SDL_Renderer *renderer, ImpTimer& Dino_Timer,int &id_frame)
 {
     d_object.w = frame_clip[id_frame].w;
     d_object.h = frame_clip[id_frame].h;
+    
     SDL_RenderCopy(renderer, p_object, &frame_clip[id_frame], &d_object);
+    
+    int real_dino_time = Dino_Timer.get_Ticks();
+    if(real_dino_time >= 1000/DINO_FPS)
+    {
+        id_frame++;
+        Dino_Timer.start();
+    }
 }
 
 

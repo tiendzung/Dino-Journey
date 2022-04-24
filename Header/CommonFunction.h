@@ -29,6 +29,8 @@ static SDL_Event g_event;
 const string WINDOW_TITLE = "DINOUSAUR TRAVEL";
 const int step = 16;
 
+const int FRAME_PER_SECOND = 60;
+const int DINO_FPS = 15;
 const int SCREEN_WIDTH = 928;
 const int SCREEN_HEIGHT = 522;
 
@@ -47,7 +49,7 @@ const int MIN_HEIGHT = 360;
 const int MAX_HEIGHT = 330;
 const int GRASS_HEIGHT = 8;
 const int JUMP = 64;
-const int FALL = 124;
+const int FALL = 150;
 const int MAX_JUMP = 240;
 
 const int BASE_OFFSET_SPEED = 0;
