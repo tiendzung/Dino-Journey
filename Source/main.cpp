@@ -51,7 +51,7 @@ int main()
     srand((unsigned int)time(0));
     int type_map = rand()%2, type_dino = rand()%4;
     
-    type_map = 1;
+    type_map = 0;
     
     Map_data.update_id(type_map);
     initSDL(g_window, g_renderer, WINDOW_TITLE, SCREEN_WIDTH, SCREEN_HEIGHT);
