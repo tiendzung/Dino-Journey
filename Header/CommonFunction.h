@@ -60,10 +60,10 @@ const int BASE_OFFSET_SPEED = 0;
 const double GRAVITY_FALL = 0.41;
 const int MAX_ACCELERATION = 9;
 
-const int TOTAL_BACKGROUND_LAYER[3] = { 9, 6, 7 };
-const double LAYER_SPEED[9] =
+const int TOTAL_BACKGROUND_LAYER[6] = { 9, 6, 7, 3, 11, 6};
+const double LAYER_SPEED[11] =
 {
-    0.15, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2.0
+    0.15, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5
 };
 //const double LAYER_1_SPEED = 0;
 //const double LAYER_2_SPEED = 0.25;

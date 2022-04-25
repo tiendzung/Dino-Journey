@@ -55,6 +55,7 @@ void Map::renderScrollingGround(int &speed, int& acceleration, SDL_Renderer* ren
 //    Ground.setDesRect(0, SCREEN_HEIGHT - Ground.getHeight(), Ground.getWidth(), Ground.getHeight());
 //
 //    Ground.Render(renderer);
+    int GROUND_SPEED = 4; /* 4 -> 15*/
     speed = speed - (GROUND_SPEED + acceleration);
     if(speed + Ground.getWidth() < 0) speed = 0;
 

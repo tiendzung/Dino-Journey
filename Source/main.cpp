@@ -49,9 +49,9 @@ int main()
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
     
     srand((unsigned int)time(0));
-    int type_map = rand()%2, type_dino = rand()%4;
+    int type_map = rand()%6, type_dino = rand()%4;
     
-    type_map = 2;
+    type_map = 5;
     
     Map_data.update_id(type_map);
     initSDL(g_window, g_renderer, WINDOW_TITLE, SCREEN_WIDTH, SCREEN_HEIGHT);

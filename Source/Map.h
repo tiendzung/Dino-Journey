@@ -15,8 +15,8 @@
 class Map
 {
 private:
-    const static int TOTAL_TYPE_OF_BACKGOUND = 3;
-    const static int BACKGROUND_TOTAL_LAYERS = 9;
+    const static int TOTAL_TYPE_OF_BACKGOUND = 6;
+    const static int BACKGROUND_TOTAL_LAYERS = 11;
     int type_id;
     string bg_layer[TOTAL_TYPE_OF_BACKGOUND][BACKGROUND_TOTAL_LAYERS];
     string bg_ground[TOTAL_TYPE_OF_BACKGOUND];
@@ -61,7 +61,35 @@ public:
         bg_layer[2][4] = "Resource/BackGround3/clouds_mg_1.png";
         bg_layer[2][5] = "Resource/BackGround3/clouds_mg_2.png";
         bg_layer[2][6] = "Resource/BackGround3/clouds_mg_3.png";
+        
+        grass_ground[3] = "Resource/BackGround4/grass_ground.png";
+        bg_ground[3] = "Resource/BackGround4/ground.png";
+        bg_layer[3][0] = "Resource/BackGround4/layer1.png";
+        bg_layer[3][1] = "Resource/BackGround4/layer2.png";
+        bg_layer[3][2] = "Resource/BackGround4/layer3.png";
 
+        grass_ground[4] = "Resource/BackGround5/grass_ground.png";
+        bg_ground[4] = "Resource/BackGround5/1 Layer1.png";
+        bg_layer[4][0] = "Resource/BackGround5/9 Background.png";
+        bg_layer[4][1] = "Resource/BackGround5/8 Stars2.png";
+        bg_layer[4][2] = "Resource/BackGround5/8 Stars.png";
+        bg_layer[4][3] = "Resource/BackGround5/7 Clouds.png";
+        bg_layer[4][4] = "Resource/BackGround5/7 Clouds.png";
+        bg_layer[4][5] = "Resource/BackGround5/6 Sun.png";
+        bg_layer[4][6] = "Resource/BackGround5/5 Mountains.png";
+        bg_layer[4][7] = "Resource/BackGround5/4 Layer4.png";
+        bg_layer[4][8] = "Resource/BackGround5/3 Layer3.png";
+        bg_layer[4][9] = "Resource/BackGround5/2 Layer2.png";
+        bg_layer[4][10] = "Resource/BackGround5/ground.png";
+        
+        grass_ground[5] = "Resource/BackGround6/grass_ground.png";
+        bg_ground[5] = "Resource/BackGround6/ground.png";
+        bg_layer[5][0] = "Resource/BackGround6/-6.png";
+        bg_layer[5][1] = "Resource/BackGround6/-5.png";
+        bg_layer[5][2] = "Resource/BackGround6/-4.png";
+        bg_layer[5][3] = "Resource/BackGround6/-3.png";
+        bg_layer[5][4] = "Resource/BackGround6/-2.png";
+        bg_layer[5][5] = "Resource/BackGround6/-1.png";
     };
     ~Map(){};
     
