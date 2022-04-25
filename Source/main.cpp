@@ -19,6 +19,9 @@ class Map Map_data;
 class Dino dino;
 
 ImpTimer timer;
+vector <double> bg_speed(TOTAL_BACKGROUND_LAYER[0] , BASE_OFFSET_SPEED);
+
+//vector<double> bg_speed (TOTAL_BACKGROUND_LAYER, 0);
 bool loadBackGround(int type)
 {
 
@@ -31,7 +34,7 @@ bool loadBackGround(int type)
     if(gBackgroundMusic == NULL) cout<<Mix_GetError();
 
     return (Map_data.loadGround(g_renderer, type)
-            &&Map_data.loadBackGround(g_renderer, TOTAL_BACKGROUND_LAYER[type], type)
+            &&Map_data.loadBackGround(g_renderer, TOTAL_BACKGROUND_LAYER[type], type)&&(Map_data.loadGrassGround(g_renderer))
             );
 }
 
@@ -47,6 +50,10 @@ int main()
     
     srand((unsigned int)time(0));
     int type_map = rand()%2, type_dino = rand()%4;
+    
+    type_map = 1;
+    
+    Map_data.update_id(type_map);
     initSDL(g_window, g_renderer, WINDOW_TITLE, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     if(loadBackGround(type_map) == false) { cout<<"Can't not load Background!!!"; return 0; }
@@ -57,7 +64,7 @@ int main()
     
     bool is_running = true;
     SDL_Event event;
-    int acceleration = 0, speed = GROUND_SPEED;
+    int acceleration = 0, speedG = GROUND_SPEED, speedGG = GRASS_GROUND_SPEED;
     
     while (is_running)
     {
@@ -70,13 +77,13 @@ int main()
             }
             dino.HandleEvent(event, gJumpMusic);
         }
-        Map_data.renderScrollingBackground(g_renderer, TOTAL_BACKGROUND_LAYER[type_map]);
-        Map_data.renderScrollingGround(speed, acceleration, g_renderer);
+        Map_data.renderScrollingBackground(g_renderer, TOTAL_BACKGROUND_LAYER[type_map], bg_speed);
+        Map_data.renderScrollingGround(speedG, acceleration, g_renderer);
         // process game logic
         // (nothing to process)
         // draw & display
-        
         process();
+        Map_data.renderScrollingGrass(speedGG, acceleration, g_renderer);
         SDL_RenderPresent(g_renderer);
         
         int real_imp_time = timer.get_Ticks();

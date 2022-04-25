@@ -17,14 +17,18 @@ class Map
 private:
     const static int TOTAL_TYPE_OF_BACKGOUND = 2;
     const static int BACKGROUND_TOTAL_LAYERS = 9;
-    
+    int type_id;
     string bg_layer[TOTAL_TYPE_OF_BACKGOUND][BACKGROUND_TOTAL_LAYERS];
     string bg_ground[TOTAL_TYPE_OF_BACKGOUND];
     
     BaseObject backGround[BACKGROUND_TOTAL_LAYERS];
     BaseObject Ground;
-    
+    BaseObject GrassGround;
 public:
+    void update_id(int type_id)
+    {
+        this->type_id = type_id;
+    }
     Map()
     {
         bg_ground[0] = "Resource/BackGround/ground.png";
@@ -50,10 +54,11 @@ public:
     
     bool loadBackGround(SDL_Renderer* renderer, int TOTAL, int type);
     bool loadGround(SDL_Renderer* renderer, int type);
+    bool loadGrassGround(SDL_Renderer* renderer);
     
-    void renderScrollingBackground(/*vector <double> &offSetSpeed,*/ SDL_Renderer* renderer, int TOTAL);
-    void renderScrollingGround(int &speed, int& acceleration, SDL_Renderer* screen);
-    
+    void renderScrollingBackground(/*vector <double> &offSetSpeed,*/ SDL_Renderer* renderer, int TOTAL, vector <double> & bg_speed);
+    void renderScrollingGround(int &speed, int& acceleration, SDL_Renderer* renderer);
+    void renderScrollingGrass(int &speed, int& acceleration, SDL_Renderer* renderer);
     void Free(int type);
 };
 
