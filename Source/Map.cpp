@@ -28,9 +28,9 @@ bool Map::loadGround(SDL_Renderer* renderer, int type)
 {
     return Ground.loadIMG(bg_ground[type], renderer);
 }
-bool Map::loadGrassGround(SDL_Renderer *renderer)
+bool Map::loadGrassGround(SDL_Renderer *renderer, int type)
 {
-    return GrassGround.loadIMG("Resource/GrassGround.png", renderer);
+    return GrassGround.loadIMG(grass_ground[type], renderer);
 }
 void Map::renderScrollingBackground(SDL_Renderer *renderer, int TOTAL, vector <double> &bg_speed)
 {

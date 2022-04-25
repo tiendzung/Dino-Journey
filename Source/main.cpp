@@ -34,7 +34,7 @@ bool loadBackGround(int type)
     if(gBackgroundMusic == NULL) cout<<Mix_GetError();
 
     return (Map_data.loadGround(g_renderer, type)
-            &&Map_data.loadBackGround(g_renderer, TOTAL_BACKGROUND_LAYER[type], type)&&(Map_data.loadGrassGround(g_renderer))
+            &&Map_data.loadBackGround(g_renderer, TOTAL_BACKGROUND_LAYER[type], type)&&(Map_data.loadGrassGround(g_renderer, type))
             );
 }
 
@@ -51,7 +51,7 @@ int main()
     srand((unsigned int)time(0));
     int type_map = rand()%2, type_dino = rand()%4;
     
-    type_map = 0;
+    type_map = 2;
     
     Map_data.update_id(type_map);
     initSDL(g_window, g_renderer, WINDOW_TITLE, SCREEN_WIDTH, SCREEN_HEIGHT);
