@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CB6C6D94280DC11100AADFBA"
-               BuildableName = "Project Game"
-               BlueprintName = "Project Game"
-               ReferencedContainer = "container:Project Game.xcodeproj">
+               BuildableName = "Dino Journey"
+               BlueprintName = "Dino Journey"
+               ReferencedContainer = "container:Dino Journey.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CB6C6D94280DC11100AADFBA"
-            BuildableName = "Project Game"
-            BlueprintName = "Project Game"
-            ReferencedContainer = "container:Project Game.xcodeproj">
+            BuildableName = "Dino Journey"
+            BlueprintName = "Dino Journey"
+            ReferencedContainer = "container:Dino Journey.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CB6C6D94280DC11100AADFBA"
-            BuildableName = "Project Game"
-            BlueprintName = "Project Game"
-            ReferencedContainer = "container:Project Game.xcodeproj">
+            BuildableName = "Dino Journey"
+            BlueprintName = "Dino Journey"
+            ReferencedContainer = "container:Dino Journey.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CB6C6D94280DC11100AADFBA"
-            BuildableName = "Project Game"
-            BlueprintName = "Project Game"
-            ReferencedContainer = "container:Project Game.xcodeproj">
+            BuildableName = "Dino Journey"
+            BlueprintName = "Dino Journey"
+            ReferencedContainer = "container:Dino Journey.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

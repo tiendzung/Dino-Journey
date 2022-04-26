@@ -52,7 +52,7 @@
 		CB3AC06828156624004A674E /* Timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
 		CB3AC06A2815B6A4004A674E /* Enermy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Enermy.h; path = Source/Enermy.h; sourceTree = SOURCE_ROOT; };
 		CB3AC06B2815B6B3004A674E /* Enermy.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Enermy.cpp; sourceTree = "<group>"; };
-		CB6C6D95280DC11100AADFBA /* Project Game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Project Game"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB6C6D95280DC11100AADFBA /* Dino Journey */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Dino Journey"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB6C6DA0280DC2DB00AADFBA /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2/2.0.20/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		CB6D567F280EE68C0025197E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; usesTabs = 0; };
 		CBF06CAE280DCC92003DAD7D /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_image-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_image/2.0.5/lib/libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 		CB6C6D96280DC11100AADFBA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CB6C6D95280DC11100AADFBA /* Project Game */,
+				CB6C6D95280DC11100AADFBA /* Dino Journey */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -147,9 +147,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CB6C6D94280DC11100AADFBA /* Project Game */ = {
+		CB6C6D94280DC11100AADFBA /* Dino Journey */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CB6C6D9C280DC11100AADFBA /* Build configuration list for PBXNativeTarget "Project Game" */;
+			buildConfigurationList = CB6C6D9C280DC11100AADFBA /* Build configuration list for PBXNativeTarget "Dino Journey" */;
 			buildPhases = (
 				CB6C6D91280DC11100AADFBA /* Sources */,
 				CB6C6D92280DC11100AADFBA /* Frameworks */,
@@ -160,9 +160,9 @@
 			);
 			dependencies = (
 			);
-			name = "Project Game";
+			name = "Dino Journey";
 			productName = "Project Game";
-			productReference = CB6C6D95280DC11100AADFBA /* Project Game */;
+			productReference = CB6C6D95280DC11100AADFBA /* Dino Journey */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -179,7 +179,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CB6C6D90280DC11100AADFBA /* Build configuration list for PBXProject "Project Game" */;
+			buildConfigurationList = CB6C6D90280DC11100AADFBA /* Build configuration list for PBXProject "Dino Journey" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -191,7 +191,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CB6C6D94280DC11100AADFBA /* Project Game */,
+				CB6C6D94280DC11100AADFBA /* Dino Journey */,
 			);
 		};
 /* End PBXProject section */
@@ -382,7 +382,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CB6C6D90280DC11100AADFBA /* Build configuration list for PBXProject "Project Game" */ = {
+		CB6C6D90280DC11100AADFBA /* Build configuration list for PBXProject "Dino Journey" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CB6C6D9A280DC11100AADFBA /* Debug */,
@@ -391,7 +391,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CB6C6D9C280DC11100AADFBA /* Build configuration list for PBXNativeTarget "Project Game" */ = {
+		CB6C6D9C280DC11100AADFBA /* Build configuration list for PBXNativeTarget "Dino Journey" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CB6C6D9D280DC11100AADFBA /* Debug */,
