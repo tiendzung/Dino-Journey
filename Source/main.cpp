@@ -28,6 +28,8 @@ void randomMap (int map_time)
 {
     if(map_time > 3000)
     {
+        Map_data.Free(type_map);
+        dino.Free();
         program_timer.start();
         type_map = rand()%6; type_dino = rand()%4;
         
@@ -61,19 +63,17 @@ void process()
 }
 int main()
 {
-    
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
     
     srand((unsigned int)time(0));
-////    type_map = 1;
-//
+//    type_map = 1;
     Map_data.update_id(type_map);
     initSDL(g_window, g_renderer, WINDOW_TITLE, SCREEN_WIDTH, SCREEN_HEIGHT);
-//
+    
     if(loadBackGround(type_map) == false) { cout<<"Can't not load Background!!!"; return 0; }
-//
+    
     Mix_PlayMusic(gBackgroundMusic, -1);
-//
+    
     dino.loadIMG(type_dino, g_renderer);
     program_timer.start();
     bool is_running = true;

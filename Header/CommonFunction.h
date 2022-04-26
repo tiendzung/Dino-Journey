@@ -20,10 +20,7 @@ using namespace std;
 #include <ctime>
 
 static SDL_Window* g_window = NULL;
-//static SDL_Surface* g_ScreenSurface = NULL;
-//static SDL_Surface* g_background = NULL;
 static SDL_Renderer* g_renderer = NULL;
-//static SDL_Texture* g_texture = NULL;
 static SDL_Event g_event;
 
 const string WINDOW_TITLE = "DINO JOURNEY";
@@ -40,20 +37,16 @@ const int COLOR_KEY_G = 175;
 const int COLOR_KEY_B = 180;
 
 const int GROUND = 430;
-const int SCREEN_BPP = 64;
 const double BACK_GROUND_SPEED = 4;
 const double GROUND_SPEED = 4; /*8.64*/
 const double GRASS_GROUND_SPEED = 5;
-const double ENEMY_SPEED = 7 ; /*8.64*/
+const double ENEMY_SPEED = 4 ; /*8.64*/
 const int IN_AIR_ENEMY = 1;
 const int ON_GROUND_ENEMY = 2;
 const int ENEMY_RANGE = 240;
-const int MIN_HEIGHT = 330;
-const int MAX_HEIGHT = 100;
+const int MIN_HEIGHT = 360;
+const int MAX_HEIGHT = 330;
 const int GRASS_HEIGHT = 8; /*57*/
-//const int JUMP = 64;
-//const int FALL = 150;
-//const int MAX_JUMP = 240;
 
 const int BASE_OFFSET_SPEED = 0;
 //const int JUMP_POW = 18;
