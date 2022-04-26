@@ -8,6 +8,8 @@
 #include "Map.h"
 #include "Dino.h"
 
+int type_map = rand()%TOTAL_TYPE_OF_BACKGOUND, type_dino = rand()%TOTAL_TYPE_OF_DINO;
+
 Mix_Music* gBackgroundMusic = NULL;
 Mix_Music* gMenuMusic = NULL;
 Mix_Chunk* gClickMusic = NULL;
@@ -18,10 +20,24 @@ class BaseObject g_background;
 class Map Map_data;
 class Dino dino;
 
-ImpTimer timer;
+ImpTimer Event_Timer, program_timer;
 vector <double> bg_speed(TOTAL_BACKGROUND_LAYER[0] , BASE_OFFSET_SPEED);
+bool loadBackGround (int type);
 
-//vector<double> bg_speed (TOTAL_BACKGROUND_LAYER, 0);
+void randomMap (int map_time)
+{
+    if(map_time > 3000)
+    {
+        program_timer.start();
+        type_map = rand()%6; type_dino = rand()%4;
+        
+        Map_data.update_id(type_map);
+        
+        if(loadBackGround(type_map) == false) { cout<<"Can't not load Background!!!"; return; }
+        
+        dino.loadIMG(type_dino, g_renderer);
+    }
+}
 bool loadBackGround(int type)
 {
 
@@ -49,26 +65,28 @@ int main()
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
     
     srand((unsigned int)time(0));
-    int type_map = rand()%6, type_dino = rand()%4;
-    
-    type_map = 5;
-    
+////    type_map = 1;
+//
     Map_data.update_id(type_map);
     initSDL(g_window, g_renderer, WINDOW_TITLE, SCREEN_WIDTH, SCREEN_HEIGHT);
-
+//
     if(loadBackGround(type_map) == false) { cout<<"Can't not load Background!!!"; return 0; }
-    
+//
     Mix_PlayMusic(gBackgroundMusic, -1);
-    
+//
     dino.loadIMG(type_dino, g_renderer);
-    
+    program_timer.start();
     bool is_running = true;
     SDL_Event event;
     int acceleration = 0, speedG = GROUND_SPEED, speedGG = GRASS_GROUND_SPEED;
     
     while (is_running)
     {
-        timer.start();
+        int map_time = program_timer.get_Ticks();
+        randomMap(map_time);
+        
+        Event_Timer.start();
+
         while (SDL_PollEvent(&event))
         {
             if (event.type == SDL_QUIT)
@@ -86,7 +104,7 @@ int main()
         Map_data.renderScrollingGrass(speedGG, acceleration, g_renderer);
         SDL_RenderPresent(g_renderer);
         
-        int real_imp_time = timer.get_Ticks();
+        int real_imp_time = Event_Timer.get_Ticks();
         int time_one_frame = 1000/FRAME_PER_SECOND;
         if (real_imp_time < time_one_frame)
         {

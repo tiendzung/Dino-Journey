@@ -12,11 +12,12 @@
 #include "CommonFunction.h"
 #include "Object.h"
 
+const static int TOTAL_TYPE_OF_BACKGOUND = 6;
+const static int BACKGROUND_TOTAL_LAYERS = 11;
+
 class Map
 {
 private:
-    const static int TOTAL_TYPE_OF_BACKGOUND = 6;
-    const static int BACKGROUND_TOTAL_LAYERS = 11;
     int type_id;
     string bg_layer[TOTAL_TYPE_OF_BACKGOUND][BACKGROUND_TOTAL_LAYERS];
     string bg_ground[TOTAL_TYPE_OF_BACKGOUND];
@@ -31,17 +32,17 @@ public:
     }
     Map()
     {
-        grass_ground[0] = "Resource/BackGround/grass_ground.png";
-        bg_ground[0] = "Resource/BackGround/ground.png";
-        bg_layer[0][0] = "Resource/BackGround/layer01.png";
-        bg_layer[0][1] = "Resource/BackGround/layer02.png";
-        bg_layer[0][2] = "Resource/BackGround/layer03.png";
-        bg_layer[0][3] = "Resource/BackGround/layer04.png";
-        bg_layer[0][4] = "Resource/BackGround/layer05.png";
-        bg_layer[0][5] = "Resource/BackGround/layer06.png";
-        bg_layer[0][6] = "Resource/BackGround/layer07.png";
-        bg_layer[0][7] = "Resource/BackGround/layer08.png";
-        bg_layer[0][8] = "Resource/BackGround/layer09.png";
+        grass_ground[0] = "Resource/BackGround1/grass_ground.png";
+        bg_ground[0] = "Resource/BackGround1/ground.png";
+        bg_layer[0][0] = "Resource/BackGround1/layer01.png";
+        bg_layer[0][1] = "Resource/BackGround1/layer02.png";
+        bg_layer[0][2] = "Resource/BackGround1/layer03.png";
+        bg_layer[0][3] = "Resource/BackGround1/layer04.png";
+        bg_layer[0][4] = "Resource/BackGround1/layer05.png";
+        bg_layer[0][5] = "Resource/BackGround1/layer06.png";
+        bg_layer[0][6] = "Resource/BackGround1/layer07.png";
+        bg_layer[0][7] = "Resource/BackGround1/layer08.png";
+        bg_layer[0][8] = "Resource/BackGround1/layer09.png";
         
         grass_ground[1] = "Resource/BackGround2/grass_ground.png";
         bg_ground[1] = "Resource/BackGround2/ground.png";

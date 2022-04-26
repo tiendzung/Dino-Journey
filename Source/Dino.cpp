@@ -36,7 +36,7 @@ void Dino::HandleEvent(SDL_Event& e, Mix_Chunk* gJumpMusic)
                 {
                     Mix_PlayChannel(-1, gJumpMusic, 0);
 //                    status = JUMP;
-                    vJump = 8;
+                    vJump = 8.5;
 //                    vFail = 0;
                 }
             }
@@ -82,12 +82,12 @@ bool Dino::loadIMG(int type_dino, SDL_Renderer* renderer)
             r_object.h = load_surface -> h;
             p_object = new_texture;
             
-            for(int i = 0; i < DINO_SPRITES; i++)
+            for(int i = 0; i < TOTAL_TYPE_OF_DINO; i++)
             {
-                frame_clip[i].x = r_object.w/DINO_SPRITES * i;
+                frame_clip[i].x = r_object.w/TOTAL_TYPE_OF_DINO * i;
                 frame_clip[i].y = 0;
-                frame_clip[i].w = r_object.w/DINO_SPRITES;
-                frame_clip[i].h = r_object.w/DINO_SPRITES;
+                frame_clip[i].w = r_object.w/TOTAL_TYPE_OF_DINO;
+                frame_clip[i].h = r_object.w/TOTAL_TYPE_OF_DINO;
             }
             
             SDL_FreeSurface(load_surface);

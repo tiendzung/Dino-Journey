@@ -16,11 +16,12 @@
 #define FALL 2
 #define RUN  0
 
+const int DINO_FPS = 15;
+const int TOTAL_TYPE_OF_DINO = 6;
+
 class Dino
 {
 protected:
-    const int DINO_FPS = 15;
-    const int DINO_SPRITES = 6;
     
     int id_frame = 0;
     class ImpTimer Dino_Timer;
