@@ -1,4 +1,4 @@
-# Dino Travel
+# Dino Journey
 
 My first SDL2 game project in university.
 
