@@ -8,7 +8,7 @@
 
 #ifndef CommonFunction_h
 #define CommonFunction_h
-
+#define ii pair<int, double>
 #include <bits/stdc++.h>
 using namespace std;
 #include <SDL.h>
@@ -41,9 +41,7 @@ const double BACK_GROUND_SPEED = 4;
 const double GROUND_SPEED = 4; /*8.64*/
 const double GRASS_GROUND_SPEED = 5;
 const double ENEMY_SPEED = 4 ; /*8.64*/
-const int IN_AIR_ENEMY = 1;
-const int ON_GROUND_ENEMY = 2;
-const int ENEMY_RANGE = 240;
+
 const int MIN_HEIGHT = 360;
 const int MAX_HEIGHT = 330;
 const int GRASS_HEIGHT = 8; /*57*/
@@ -58,18 +56,7 @@ const double LAYER_SPEED[11] =
 {
     0.15, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5
 };
-//const double LAYER_1_SPEED = 0;
-//const double LAYER_2_SPEED = 0.25;
-//const double LAYER_3_SPEED = 0.5;
-//const double LAYER_4_SPEED = 0.75;
-//const double LAYER_5_SPEED = 1.0;
-//const double LAYER_6_SPEED = 1.25;
-//const double LAYER_7_SPEED = 1.5;
-//const double LAYER_8_SPEED = 1.75;
-//const double LAYER_9_SPEED = 2.0;
 
-const int RUNNING_FRAMES = 6;
-static SDL_Rect dino_frame[RUNNING_FRAMES];
-
+//static vector<ii> enemy_pos;
 
 #endif /* CommonFunction_h */

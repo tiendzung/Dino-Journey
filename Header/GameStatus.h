@@ -9,7 +9,9 @@
 #ifndef GameStatus_h
 #define GameStatus_h
 #include "CommonFunction.h"
+#include "Dino.h"
+#include "Enemy.h"
 
-
+bool checkCollision (class Dino& dino, class Enemy& enemy);
 
 #endif /* GameStatus_h */

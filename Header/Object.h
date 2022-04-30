@@ -34,6 +34,8 @@ public:
     
     int getWidth() { return d_object.w; }
     int getHeight() { return d_object.h; }
+    int getPosX() { return d_object.x; }
+    int getPosY() { return d_object.y; }
     
     bool loadIMG(string, SDL_Renderer* renderer);
     void Render(SDL_Renderer* renderer);

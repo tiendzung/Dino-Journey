@@ -13,7 +13,7 @@ Dino::Dino()
 {
     d_object.x = SCREEN_WIDTH - 700;
     d_object.y = GROUND;
-    d_object.w = d_object.h = 57;
+//    d_object.w = d_object.h = 57;
     
 //    status = 0;
 }
@@ -50,6 +50,7 @@ void Dino::move()
 //    {
         vJump -= GRAVITY_FALL;
         d_object.y += -vJump;
+        if(d_object.y >= GROUND) vJump = GRAVITY_FALL;
         d_object.y = min(GROUND, d_object.y);
 //    }
 //    if (d_object.y <= MAX_HEIGHT)
@@ -67,27 +68,29 @@ void Dino::move()
 
 bool Dino::loadIMG(int type_dino, SDL_Renderer* renderer)
 {
-    Dino_Timer.start();
+    dino_timer.start();
     string path = dino_type[type_dino];
     SDL_Texture* new_texture = NULL;
     SDL_Surface* load_surface = IMG_Load( path.c_str() );
     
     if(load_surface != NULL)
     {
-        SDL_SetColorKey(load_surface, SDL_TRUE, SDL_MapRGB( load_surface ->  format, COLOR_KEY_R, COLOR_KEY_G, COLOR_KEY_B) );
+//        SDL_SetColorKey(load_surface, SDL_TRUE, SDL_MapRGB( load_surface ->  format, COLOR_KEY_R, COLOR_KEY_G, COLOR_KEY_B) );
         new_texture = SDL_CreateTextureFromSurface(renderer, load_surface);
         if(new_texture != NULL)
         {
             r_object.w = load_surface -> w;
             r_object.h = load_surface -> h;
+            d_object.h = r_object.h;
+            d_object.w = r_object.w/TOTAL_FRAMES_OF_DINO;
             p_object = new_texture;
-            
-            for(int i = 0; i < TOTAL_TYPE_OF_DINO; i++)
+        
+            for(int i = 0; i < TOTAL_FRAMES_OF_DINO; i++)
             {
-                frame_clip[i].x = r_object.w/TOTAL_TYPE_OF_DINO * i;
+                frame_clip[i].x = d_object.w * i;
                 frame_clip[i].y = 0;
-                frame_clip[i].w = r_object.w/TOTAL_TYPE_OF_DINO;
-                frame_clip[i].h = r_object.w/TOTAL_TYPE_OF_DINO;
+                frame_clip[i].w = d_object.w;
+                frame_clip[i].h = d_object.w;
             }
             
             SDL_FreeSurface(load_surface);
@@ -107,12 +110,12 @@ void Dino::Render(SDL_Renderer *renderer)
     
     SDL_RenderCopy(renderer, p_object, &frame_clip[id_frame], &d_object);
     
-    int real_dino_time = Dino_Timer.get_Ticks();
+    int real_dino_time = dino_timer.get_Ticks();
     if(real_dino_time >= 1000/DINO_FPS && this->onGround())
     {
         id_frame++;
-        if(id_frame == 6) id_frame = 0;
-        Dino_Timer.start();
+        if(id_frame == TOTAL_FRAMES_OF_DINO) id_frame = 0;
+        dino_timer.start();
     }
 }
 
@@ -124,6 +127,15 @@ int Dino::getPosX()
 int Dino::getPosY()
 {
     return d_object.y;
+}
+
+int Dino::getWidth()
+{
+    return d_object.w;
+}
+int Dino::getHeight()
+{
+    return d_object.h;
 }
 
 void Dino::Free()
