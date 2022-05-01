@@ -36,13 +36,13 @@ void Map::renderScrollingBackground(SDL_Renderer *renderer, int TOTAL, vector <d
 {
 //    speed = speed - (BACK_GROUND_SPEED + acceleration);
 //    if(speed + backGround[0].getWidth() < 0) speed = 0;
-    double k = 1;
-    if(type_id == 1) k = 2;
+//    double k = 1;
+//    if(type_id == 1) k = 2;
     for(int i = 0; i < TOTAL; i++)
     {
 //        backGround[i].setDesRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 //        backGround[i].Render(renderer);
-        bg_speed[i] = bg_speed[i] - LAYER_SPEED[i]*k;
+        bg_speed[i] = bg_speed[i] - LAYER_SPEED[i];
         if(bg_speed[i] + backGround[0].getWidth() < 0) bg_speed[i] = 0;
         
         backGround[i].RenderXY(bg_speed[i], SCREEN_HEIGHT - backGround[i].getHeight(), renderer);

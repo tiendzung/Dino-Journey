@@ -39,6 +39,7 @@ public:
     ~Enemy(){};
     
 //    void Rebuild(int type);
+    void generateEnemy();
     
     bool loadImg(SDL_Renderer* renderer);
     

@@ -32,6 +32,26 @@ Enemy::Enemy(int type)
     cnt_num++;
 }
 
+void Enemy::generateEnemy()
+{
+    d_object.x = rand() % ENEMY_RANGE + SCREEN_WIDTH;
+    
+    if(e_type == IN_AIR_ENEMY)
+    {
+        id_frame = 0;
+        d_object.y = rand() % (MAX_HEIGHT - MIN_HEIGHT + 1) + MIN_HEIGHT;
+    }
+    else if(e_type == ON_GROUND_ENEMY)
+    {
+        d_object.y = GROUND - GRASS_HEIGHT;
+    }
+    
+    if(id_enemy != 0)
+        d_object.x = (d_object.x - enemy_pos[id_enemy-1].second >= ENEMY_RANGE) ? d_object.x : enemy_pos[id_enemy-1].second + ENEMY_RANGE;
+    
+    enemy_pos[id_enemy] = ii(e_type, d_object.x);
+}
+
 bool Enemy::loadImg(SDL_Renderer *renderer)
 {
     bool success = false;
@@ -121,7 +141,7 @@ void Enemy::Render(SDL_Renderer* renderer)
 void Enemy::Free()
 {
     BaseObject::Free();
-    
+    cnt_num = 0;
     if(e_type == IN_AIR_ENEMY) inAirEnemy.Free();
     else onGroundEnemy.Free();
 }

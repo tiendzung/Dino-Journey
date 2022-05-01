@@ -16,6 +16,8 @@ BaseObject::BaseObject()
     r_object.y = 0;
     r_object.w = 0;
     r_object.h = 0;
+    d_object.x = 0;
+    d_object.y = 0;
 }
 
 BaseObject::~BaseObject()
@@ -64,8 +66,12 @@ void BaseObject::Free()
     {
         SDL_DestroyTexture(p_object);
         p_object = NULL;
+        r_object.x = 0;
+        r_object.y = 0;
         r_object.w = 0;
         r_object.h = 0;
+        d_object.x = 0;
+        d_object.y = 0;
         d_object.w = 0;
         d_object.h = 0;
     }

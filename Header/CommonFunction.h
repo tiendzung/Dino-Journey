@@ -27,7 +27,8 @@ const string WINDOW_TITLE = "DINO JOURNEY";
 const int step = 16;
 
 const int MIX_CHANNEL = -1;
-
+const int REPEATIVE = -1;
+const int NOT_REPEATIVE = 0;
 const int FRAME_PER_SECOND = 60;
 const int SCREEN_WIDTH = 928;
 const int SCREEN_HEIGHT = 522;

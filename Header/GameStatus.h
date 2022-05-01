@@ -11,7 +11,9 @@
 #include "CommonFunction.h"
 #include "Dino.h"
 #include "Enemy.h"
-
+#include "Map.h"
 bool checkCollision (class Dino& dino, class Enemy& enemy);
+
+void drawEndGame(SDL_Renderer* renderer, bool& play_again, bool &quit_menu, int type_map);
 
 #endif /* GameStatus_h */

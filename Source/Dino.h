@@ -45,7 +45,7 @@ public:
     Dino();
     ~Dino() {};
     bool onGround();
-    void HandleEvent(SDL_Event& e, Mix_Chunk* gJumpMusic);
+    void HandleEvent(SDL_Event &e, Mix_Chunk* gJumpMusic);
     void move();
     
     bool loadIMG(int type_dino, SDL_Renderer* renderer);
