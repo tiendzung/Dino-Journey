@@ -5,6 +5,9 @@ My first SDL2 game project in university.
 I focus mainly on the game's graphics, so I hope you like it.
 
 # Credit:
+Thank for the Dino Image:
+
+- [ARKs](https://arks.itch.io/)
 
 Special thanks to:
 
