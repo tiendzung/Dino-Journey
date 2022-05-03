@@ -43,6 +43,8 @@ void drawEndGame(SDL_Renderer* renderer, bool& play_again, bool& quit_game, int 
     SDL_RenderCopy(renderer, lose_texture, NULL, NULL);
     SDL_RenderPresent(renderer);
     
+    SDL_DestroyTexture(lose_texture);
+    SDL_FreeSurface(load_surface);
     bool end_game = false;
     while(!end_game)
     {

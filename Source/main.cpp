@@ -99,6 +99,7 @@ int main()
             {
                 play_again = true;
                 quit_menu = true;
+                g_menu.Free();
                 break;
             }
         }
