@@ -15,7 +15,7 @@ bool checkCollision (class Dino& dino, class Enemy& enemy)
     SDL_Rect d_rect = {dino.getPosX() + TRASH_PIXEL_X, dino.getPosY() + TRASH_PIXEL_Y, dino.getWidth() - TRASH_PIXEL_W, dino.getHeight() - TRASH_PIXEL_H};
     if(enemy.getType() == ON_GROUND_ENEMY)
     {
-        TRASH_PIXEL_X = 15, TRASH_PIXEL_Y = 5, TRASH_PIXEL_W = 30, TRASH_PIXEL_H = 0;
+        TRASH_PIXEL_X = 15, TRASH_PIXEL_Y = 10, TRASH_PIXEL_W = 30, TRASH_PIXEL_H = 0;
     }
     else
     {

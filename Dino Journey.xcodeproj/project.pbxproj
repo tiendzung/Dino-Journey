@@ -44,17 +44,17 @@
 		CB3AC05928131CFA004A674E /* Display.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Display.cpp; sourceTree = "<group>"; };
 		CB3AC05E28132F4F004A674E /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Object.h; path = Header/Object.h; sourceTree = SOURCE_ROOT; };
 		CB3AC05F28132F5B004A674E /* Object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Object.cpp; sourceTree = "<group>"; };
-		CB3AC0612814537C004A674E /* Map.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Map.h; path = Source/Map.h; sourceTree = SOURCE_ROOT; };
 		CB3AC0622814538E004A674E /* Map.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
-		CB3AC06428148313004A674E /* Dino.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Dino.h; path = Source/Dino.h; sourceTree = SOURCE_ROOT; };
 		CB3AC06528148324004A674E /* Dino.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Dino.cpp; sourceTree = "<group>"; };
-		CB3AC06728156614004A674E /* Timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Timer.h; path = Source/Timer.h; sourceTree = SOURCE_ROOT; };
 		CB3AC06828156624004A674E /* Timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
-		CB3AC06A2815B6A4004A674E /* Enemy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Enemy.h; path = Source/Enemy.h; sourceTree = SOURCE_ROOT; };
 		CB3AC06B2815B6B3004A674E /* Enemy.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Enemy.cpp; sourceTree = "<group>"; };
 		CB6C6D95280DC11100AADFBA /* Dino Journey */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Dino Journey"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB6C6DA0280DC2DB00AADFBA /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2/2.0.20/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		CB6D567F280EE68C0025197E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; usesTabs = 0; };
+		CBE46EE228213AF700BEE97B /* Dino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dino.h; path = Header/Dino.h; sourceTree = SOURCE_ROOT; };
+		CBE46EE328213AF700BEE97B /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Map.h; path = Header/Map.h; sourceTree = SOURCE_ROOT; };
+		CBE46EE428213AF700BEE97B /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Timer.h; path = Header/Timer.h; sourceTree = SOURCE_ROOT; };
+		CBE46EE528213AF700BEE97B /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Enemy.h; path = Header/Enemy.h; sourceTree = SOURCE_ROOT; };
 		CBF06CAE280DCC92003DAD7D /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_image-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_image/2.0.5/lib/libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
 		CBF06CC0280DD365003DAD7D /* libSDL2_mixer-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_mixer-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_mixer/2.0.4_3/lib/libSDL2_mixer-2.0.0.dylib"; sourceTree = "<group>"; };
 		CBF06CC2280DD37A003DAD7D /* libSDL2_ttf-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_ttf-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_ttf/2.0.18_1/lib/libSDL2_ttf-2.0.0.dylib"; sourceTree = "<group>"; };
@@ -83,15 +83,15 @@
 		CB2D32F0281135720058FB3B /* Header */ = {
 			isa = PBXGroup;
 			children = (
+				CBE46EE228213AF700BEE97B /* Dino.h */,
+				CBE46EE528213AF700BEE97B /* Enemy.h */,
+				CBE46EE328213AF700BEE97B /* Map.h */,
+				CBE46EE428213AF700BEE97B /* Timer.h */,
 				CB3AC05E28132F4F004A674E /* Object.h */,
 				CB3AC05828131CB9004A674E /* CommonFunction.h */,
 				CBF415952811DC820069A86E /* GameStatus.h */,
 				CBF415942811DC820069A86E /* SDL_InitWindow.h */,
 				CB2D331228113ABE0058FB3B /* Display.h */,
-				CB3AC0612814537C004A674E /* Map.h */,
-				CB3AC06428148313004A674E /* Dino.h */,
-				CB3AC06728156614004A674E /* Timer.h */,
-				CB3AC06A2815B6A4004A674E /* Enemy.h */,
 			);
 			name = Header;
 			path = ../Header;
