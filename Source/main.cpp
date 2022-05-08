@@ -65,18 +65,20 @@ int main()
         Mix_PlayMusic(gMenuMusic, REPEATIVE);
         while(!quit_menu)
         {
-            Menu_timer.start();
-            
             SDL_SetRenderDrawColor(g_renderer, 255, 255, 255, 255);
             SDL_RenderClear(g_renderer);
             
+            Menu_timer.start();
+            Play_button.inSide();
+            Help_button.inSide();
             play_again = false;
             SDL_Event event;
             while(SDL_PollEvent(&event))
             {
                 if (event.type == SDL_QUIT)
                 {
-                    quit_menu = true; quit_game = true; play_again = false;
+                    quit_menu = true; quit_game = true;
+                    play_again = false;
                 }
                 HandlePlayButton(event, g_menu, Play_button, quit_menu, play_again, g_renderer, gClickMusic);
 //                HandleHelpButton();
@@ -148,6 +150,7 @@ int main()
                             {
                                 quit_menu = false;
                                 is_running = false;
+                                play_again = false;
                                 break;
                             }
                         }

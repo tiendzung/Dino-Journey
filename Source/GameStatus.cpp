@@ -64,10 +64,11 @@ void HandlePlayButton(SDL_Event e, BaseObject& gMenu,
                       bool& play_again, SDL_Renderer* &renderer,
                       Mix_Chunk *gClickMusic)
 {
-    if(Play_button.inSide(e) == true)
+    if(Play_button.inSide() == true)
     {
         if(e.type == SDL_MOUSEBUTTONDOWN)
         {
+            Play_button.status = BUTTON_MOUSE_UP;
             play_again = true; quit_menu = true;
             Mix_PlayChannel(MIX_CHANNEL, gClickMusic, 0);
         }
@@ -81,10 +82,11 @@ void HandleExitButton(SDL_Event e, BaseObject& gMenu,
                       SDL_Renderer* &renderer,
                       Mix_Chunk *gClickMusic)
 {
-    if(Exit_button.inSide(e) == true)
+    if(Exit_button.inSide() == true)
     {
         if(e.type == SDL_MOUSEBUTTONDOWN)
         {
+            Exit_button.status = BUTTON_MOUSE_UP;
             play_again = false; quit_game = true; quit_menu = true;
             Mix_PlayChannel(MIX_CHANNEL, gClickMusic, 0);
         }

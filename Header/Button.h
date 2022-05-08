@@ -18,14 +18,14 @@ class Button: public BaseObject
 {
 protected:
     int curX, curY;
-    int status = BUTTON_MOUSE_UP;
     SDL_Rect frame_clip[2];
 public:
+    int status = BUTTON_MOUSE_UP;
     Button(){};
     Button(int x,int y);
     ~Button(){};
     bool loadImg(string path, SDL_Renderer* &renderer);
-    bool inSide(SDL_Event event);
+    bool inSide();
     void setXY(int x,int y);
     void renderButton(SDL_Renderer* &renderer);
 };

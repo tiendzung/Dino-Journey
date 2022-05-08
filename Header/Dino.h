@@ -25,14 +25,10 @@ static const int FRAMES_OF_HURT = 6;
 static const int SKIP_FRAME = 7;
 const string dino_type[TOTAL_TYPE_OF_DINO] =
 {
-//    "Resource/MainDino/DinoBlue.png",
-//    "Resource/MainDino/DinoRed.png",
-//    "Resource/MainDino/DinoGreen.png",
-//    "Resource/MainDino/DinoGold.png",
-    "BlueTest.png",
-    "RedTest.png",
-    "GreenTest.png",
-    "GoldTest.png",
+    "Resource/MainDino/BlueTest.png",
+    "Resource/MainDino/RedTest.png",
+    "Resource/MainDino/GreenTest.png",
+    "Resource/MainDino/GoldTest.png",
 };
 
 class Dino

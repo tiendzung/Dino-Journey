@@ -31,7 +31,7 @@ bool Button:: loadImg(string path, SDL_Renderer* &renderer)
     }
     return success;
 }
-bool Button:: inSide(SDL_Event event)
+bool Button:: inSide()
 {
     bool inside = false;
     SDL_GetMouseState(&curX, &curY);
@@ -41,9 +41,7 @@ bool Button:: inSide(SDL_Event event)
     
     if(inside == false) status = BUTTON_MOUSE_UP;
     else status = BUTTON_MOUSE_DOWN;
-    
-    if(event.type == SDL_MOUSEBUTTONDOWN) status = BUTTON_MOUSE_UP;
-    
+        
     return inside;
 }
 
