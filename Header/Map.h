@@ -1,6 +1,6 @@
 //
 //  Map.h
-//  Project Game
+//  Dino Journey
 //
 //  Created by Nguyễn Tiến Dũng on 4/23/22.
 //  Copyright © 2022 Nguyễn Tiến Dũng. All rights reserved.
@@ -23,6 +23,12 @@ enum KIND_OF_MAP
 };
 const static int BACKGROUND_TOTAL_LAYERS = 11;
 
+const int TOTAL_BACKGROUND_LAYER[TOTAL_TYPE_OF_BACKGOUND] = { 9, 6, 7, 3, 11, 6 };
+
+const double LAYER_SPEED[BACKGROUND_TOTAL_LAYERS] =
+{
+    0.15, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5
+};
 class Map
 {
 private:
@@ -92,7 +98,7 @@ public:
         bg_layer[DESERT][10] = "Resource/BackGround5/ground.png";
         
         grass_ground[FAR_CITY] = "Resource/BackGround6/grass_ground.png";
-        bg_ground[5] = "Resource/BackGround6/ground.png";
+        bg_ground[FAR_CITY] = "Resource/BackGround6/ground.png";
         bg_layer[FAR_CITY][0] = "Resource/BackGround6/-6.png";
         bg_layer[FAR_CITY][1] = "Resource/BackGround6/-5.png";
         bg_layer[FAR_CITY][2] = "Resource/BackGround6/-4.png";
@@ -102,13 +108,13 @@ public:
     };
     ~Map(){};
     
-    bool loadBackGround(SDL_Renderer* renderer, int TOTAL, int type);
-    bool loadGround(SDL_Renderer* renderer, int type);
-    bool loadGrassGround(SDL_Renderer* renderer, int type);
+    bool loadBackGround(SDL_Renderer* &renderer, int TOTAL, int type);
+    bool loadGround(SDL_Renderer* &renderer, int type);
+    bool loadGrassGround(SDL_Renderer* &renderer, int type);
     
-    void renderScrollingBackground(/*vector <double> &offSetSpeed,*/ SDL_Renderer* renderer, int TOTAL, vector <double> & bg_speed);
-    void renderScrollingGround(int &speed, int& acceleration, SDL_Renderer* renderer);
-    void renderScrollingGrass(int &speed, int& acceleration, SDL_Renderer* renderer);
+    void renderScrollingBackground(/*vector <double> &offSetSpeed,*/ SDL_Renderer* &renderer, int TOTAL, vector <double> & bg_speed, bool move);
+    void renderScrollingGround(int &speed, int& acceleration, SDL_Renderer* &renderer, bool move);
+    void renderScrollingGrass(int &speed, int& acceleration, SDL_Renderer* &renderer, bool move);
     void Free(int type);
 };
 

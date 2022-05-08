@@ -1,6 +1,6 @@
 //
 //  CommonFunction.h
-//  Project Game
+//  Dino Journey
 //
 //  Created by Nguyễn Tiến Dũng on 4/23/22.
 //  Copyright © 2022 Nguyễn Tiến Dũng. All rights reserved.
@@ -24,11 +24,7 @@ static SDL_Renderer* g_renderer = NULL;
 static SDL_Event g_event;
 
 const string WINDOW_TITLE = "DINO JOURNEY";
-const int step = 16;
 
-const int MIX_CHANNEL = -1;
-const int REPEATIVE = -1;
-const int NOT_REPEATIVE = 0;
 const int FRAME_PER_SECOND = 60;
 const int SCREEN_WIDTH = 928;
 const int SCREEN_HEIGHT = 522;
@@ -49,15 +45,10 @@ const int GRASS_HEIGHT = 8; /*57*/
 
 const int BASE_OFFSET_SPEED = 0;
 //const int JUMP_POW = 18;
-const double GRAVITY_FALL = 0.41;
 const int MAX_ACCELERATION = 9;
 
-const int TOTAL_BACKGROUND_LAYER[6] = { 9, 6, 7, 3, 11, 6};
-const double LAYER_SPEED[11] =
-{
-    0.15, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5
-};
-
-//static vector<ii> enemy_pos;
+const int MIX_CHANNEL = -1;
+const int REPEATIVE = -1;
+const int NOT_REPEATIVE = 0;
 
 #endif /* CommonFunction_h */

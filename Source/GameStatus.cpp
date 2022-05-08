@@ -1,13 +1,22 @@
 //
 //  GameStatus.cpp
-//  Project Game
+//  Dino Journey
 //
 //  Created by Nguyễn Tiến Dũng on 4/22/22.
 //  Copyright © 2022 Nguyễn Tiến Dũng. All rights reserved.
 //
 
 #include "GameStatus.h"
-
+void controlFPS(class ImpTimer& Timer, int FPS)
+{
+    int real_imp_time = Timer.get_Ticks();
+    int time_one_frame = 1000/FPS;
+    if (real_imp_time < time_one_frame)
+    {
+        int delay_time = time_one_frame - real_imp_time;
+        SDL_Delay(delay_time);
+    }
+}
 bool checkCollision (class Dino& dino, class Enemy& enemy)
 {
     int TRASH_PIXEL_X = 10, TRASH_PIXEL_Y = 10, TRASH_PIXEL_W = 25, TRASH_PIXEL_H = 20;
@@ -21,13 +30,14 @@ bool checkCollision (class Dino& dino, class Enemy& enemy)
     {
         TRASH_PIXEL_X = 15, TRASH_PIXEL_Y = 4, TRASH_PIXEL_W = 15, TRASH_PIXEL_H = 15;
     }
-    SDL_Rect e_rect = {enemy.getX() + TRASH_PIXEL_X, enemy.getY() + TRASH_PIXEL_Y, enemy.getW() - TRASH_PIXEL_W, enemy.getH() - TRASH_PIXEL_H};
+    SDL_Rect e_rect = {enemy.getPosX() + TRASH_PIXEL_X, enemy.getPosY() + TRASH_PIXEL_Y, enemy.getWidth() - TRASH_PIXEL_W, enemy.getHeight() - TRASH_PIXEL_H};
 
     return SDL_HasIntersection(&d_rect, &e_rect);
 }
 
-void drawEndGame(SDL_Renderer* renderer, bool& play_again, bool& quit_game, int type_map)
+void drawEndGame(SDL_Renderer* &renderer, bool& play_again, bool& quit_menu, bool& quit_game, int type_map, bool &lose_game)
 {
+    lose_game = true;
     string path;
     switch(type_map)
     {
@@ -40,38 +50,43 @@ void drawEndGame(SDL_Renderer* renderer, bool& play_again, bool& quit_game, int 
     }
     SDL_Surface* load_surface = IMG_Load(path.c_str());
     SDL_Texture* lose_texture = SDL_CreateTextureFromSurface(renderer, load_surface);
-    SDL_RenderCopy(renderer, lose_texture, NULL, NULL);
-    SDL_RenderPresent(renderer);
     
+    SDL_RenderCopy(renderer, lose_texture, NULL, NULL);
+
     SDL_DestroyTexture(lose_texture);
-    SDL_FreeSurface(load_surface);
-    bool end_game = false;
-    while(!end_game)
+    SDL_FreeSurface(load_surface);    
+    return;
+}
+
+void HandlePlayButton(SDL_Event e, BaseObject& gMenu,
+                      Button& Play_button,
+                      bool& quit_menu,
+                      bool& play_again, SDL_Renderer* &renderer,
+                      Mix_Chunk *gClickMusic)
+{
+    if(Play_button.inSide(e) == true)
     {
-        SDL_Event event;
-        while(SDL_PollEvent(&event))
+        if(e.type == SDL_MOUSEBUTTONDOWN)
         {
-            if(event.type == SDL_QUIT)
-            {
-                play_again = false;
-                return;
-            }
-            else if (event.type == SDL_KEYDOWN)
-            {
-                switch (event.key.keysym.sym)
-                {
-                    case SDLK_SPACE:
-                        end_game = true;
-                        return;
-                        
-                    case SDLK_ESCAPE:
-                        end_game = true;
-                        play_again = false;
-                        quit_game = false;
-                        return;
-                }
-            }
+            play_again = true; quit_menu = true;
+            Mix_PlayChannel(MIX_CHANNEL, gClickMusic, 0);
         }
     }
-    return;
+}
+
+void HandleExitButton(SDL_Event e, BaseObject& gMenu,
+                      Button& Exit_button,
+                      bool& quit_game, bool& quit_menu,
+                      bool& play_again,
+                      SDL_Renderer* &renderer,
+                      Mix_Chunk *gClickMusic)
+{
+    if(Exit_button.inSide(e) == true)
+    {
+        if(e.type == SDL_MOUSEBUTTONDOWN)
+        {
+            play_again = false; quit_game = true; quit_menu = true;
+            Mix_PlayChannel(MIX_CHANNEL, gClickMusic, 0);
+        }
+    }
 }

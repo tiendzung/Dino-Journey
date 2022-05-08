@@ -1,6 +1,6 @@
 //
 //  Dino.cpp
-//  Project Game
+//  Dino Journey
 //
 //  Created by Nguyễn Tiến Dũng on 4/24/22.
 //  Copyright © 2022 Nguyễn Tiến Dũng. All rights reserved.
@@ -35,9 +35,7 @@ void Dino::HandleEvent(SDL_Event &e, Mix_Chunk* gJumpMusic)
                 if (onGround() == true/*&&e.key.repeat == 0*/)
                 {
                     Mix_PlayChannel(-1, gJumpMusic, NOT_REPEATIVE);
-//                    status = JUMP;
                     vJump = 8.5;
-//                    vFail = 0;
                 }
             }
         }
@@ -46,27 +44,13 @@ void Dino::HandleEvent(SDL_Event &e, Mix_Chunk* gJumpMusic)
 
 void Dino::move()
 {
-//    if (status == JUMP && d_object.y >= MAX_HEIGHT)
-//    {
-        vJump -= GRAVITY_FALL;
-        d_object.y += -vJump;
-        if(d_object.y >= GROUND) vJump = GRAVITY_FALL;
-        d_object.y = min(GROUND, d_object.y);
-//    }
-//    if (d_object.y <= MAX_HEIGHT)
-//    {
-//        status = FALL;
-//        vJump = 8;
-//    }
-//    if (status == FALL && d_object.y < GROUND)
-//    {
-//        vFail += GRAVITY_FALL;
-//        d_object.y += vFail;
-//        d_object.y = min(GROUND, d_object.y);
-//    }
+    vJump -= GRAVITY_FALL;
+    d_object.y += -vJump;
+    if(d_object.y >= GROUND) vJump = GRAVITY_FALL;
+    d_object.y = min(GROUND, d_object.y);
 }
 
-bool Dino::loadIMG(int type_dino, SDL_Renderer* renderer)
+bool Dino::loadIMG(int type_dino, SDL_Renderer* &renderer)
 {
     dino_timer.start();
     string path = dino_type[type_dino];
@@ -103,7 +87,7 @@ bool Dino::loadIMG(int type_dino, SDL_Renderer* renderer)
     return false;
 }
 
-void Dino::Render(SDL_Renderer *renderer)
+void Dino::Render(SDL_Renderer* &renderer)
 {
     d_object.w = frame_clip[id_frame].w;
     d_object.h = frame_clip[id_frame].h;
@@ -111,15 +95,31 @@ void Dino::Render(SDL_Renderer *renderer)
     SDL_RenderCopy(renderer, p_object, &frame_clip[id_frame], &d_object);
     
     int real_dino_time = dino_timer.get_Ticks();
+    if(id_frame >= FRAMES_OF_HURT) id_frame = 0;
     if(real_dino_time >= 1000/DINO_FPS && this->onGround())
     {
         id_frame++;
-        if(id_frame == TOTAL_FRAMES_OF_DINO) id_frame = 0;
+        if(id_frame >= FRAMES_OF_HURT) id_frame = 0;
         dino_timer.start();
     }
 }
 
-
+void Dino::RenderLose(SDL_Renderer* &renderer)
+{
+    d_object.w = frame_clip[id_frame].w;
+    d_object.h = frame_clip[id_frame].h;
+    
+    SDL_RenderCopy(renderer, p_object, &frame_clip[id_frame], &d_object);
+    
+    int real_dino_time = dino_timer.get_Ticks();
+    if(real_dino_time >= 1000/DINO_HURT_FPS)
+    {
+        id_frame++;
+        if(id_frame == TOTAL_FRAMES_OF_DINO || id_frame < FRAMES_OF_HURT) id_frame = FRAMES_OF_HURT;
+        if(id_frame == SKIP_FRAME) id_frame++;
+        dino_timer.start();
+    }
+}
 int Dino::getPosX()
 {
     return d_object.x;

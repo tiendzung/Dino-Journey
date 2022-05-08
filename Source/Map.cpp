@@ -1,6 +1,6 @@
 //
 //  Map.cpp
-//  Project Game
+//  Dino Journey
 //
 //  Created by Nguyễn Tiến Dũng on 4/23/22.
 //  Copyright © 2022 Nguyễn Tiến Dũng. All rights reserved.
@@ -10,7 +10,7 @@
 #include "CommonFunction.h"
 
 
-bool Map::loadBackGround(SDL_Renderer* renderer, int TOTAL, int type)
+bool Map::loadBackGround(SDL_Renderer* &renderer, int TOTAL, int type)
 {
     bool success = true;
     for(int i = 0; i < TOTAL; i++)
@@ -24,15 +24,15 @@ bool Map::loadBackGround(SDL_Renderer* renderer, int TOTAL, int type)
     return true;
 }
 
-bool Map::loadGround(SDL_Renderer* renderer, int type)
+bool Map::loadGround(SDL_Renderer* &renderer, int type)
 {
     return Ground.loadIMG(bg_ground[type], renderer);
 }
-bool Map::loadGrassGround(SDL_Renderer *renderer, int type)
+bool Map::loadGrassGround(SDL_Renderer* &renderer, int type)
 {
     return GrassGround.loadIMG(grass_ground[type], renderer);
 }
-void Map::renderScrollingBackground(SDL_Renderer *renderer, int TOTAL, vector <double> &bg_speed)
+void Map::renderScrollingBackground(SDL_Renderer* &renderer, int TOTAL, vector <double> &bg_speed, bool move)
 {
 //    speed = speed - (BACK_GROUND_SPEED + acceleration);
 //    if(speed + backGround[0].getWidth() < 0) speed = 0;
@@ -42,7 +42,7 @@ void Map::renderScrollingBackground(SDL_Renderer *renderer, int TOTAL, vector <d
     {
 //        backGround[i].setDesRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 //        backGround[i].Render(renderer);
-        bg_speed[i] = bg_speed[i] - LAYER_SPEED[i];
+        if(move == true) bg_speed[i] = bg_speed[i] - LAYER_SPEED[i];
         if(bg_speed[i] + backGround[0].getWidth() < 0) bg_speed[i] = 0;
         
         backGround[i].RenderXY(bg_speed[i], SCREEN_HEIGHT - backGround[i].getHeight(), renderer);
@@ -50,22 +50,22 @@ void Map::renderScrollingBackground(SDL_Renderer *renderer, int TOTAL, vector <d
     }
 }
 
-void Map::renderScrollingGround(int &speed, int& acceleration, SDL_Renderer* renderer)
+void Map::renderScrollingGround(int &speed, int& acceleration, SDL_Renderer* &renderer, bool move)
 {
 //    Ground.setDesRect(0, SCREEN_HEIGHT - Ground.getHeight(), Ground.getWidth(), Ground.getHeight());
 //
 //    Ground.Render(renderer);
     int GROUND_SPEED = 4; /* 4 -> 15*/
-    speed = speed - (GROUND_SPEED + acceleration);
+    if(move == true) speed = speed - (GROUND_SPEED + acceleration);
     if(speed + Ground.getWidth() < 0) speed = 0;
 
     Ground.RenderXY(speed, SCREEN_HEIGHT - Ground.getHeight(), renderer);
     Ground.RenderXY(speed + Ground.getWidth(), SCREEN_HEIGHT - Ground.getHeight(), renderer);
 }
 
-void Map::renderScrollingGrass(int &speed, int& acceleration, SDL_Renderer* renderer)
+void Map::renderScrollingGrass(int &speed, int& acceleration, SDL_Renderer* &renderer, bool move)
 {
-    speed = speed - (GRASS_GROUND_SPEED + acceleration);
+    if(move == true) speed = speed - (GRASS_GROUND_SPEED + acceleration);
     if(speed + GrassGround.getWidth() < 0) speed = 0;
     
     GrassGround.RenderXY(speed, SCREEN_HEIGHT - GrassGround.getHeight(), renderer);

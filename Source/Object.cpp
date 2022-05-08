@@ -1,6 +1,6 @@
 //
 //  Object.cpp
-//  Project Game
+//  Dino Journey
 //
 //  Created by Nguyễn Tiến Dũng on 4/23/22.
 //  Copyright © 2022 Nguyễn Tiến Dũng. All rights reserved.
@@ -25,14 +25,14 @@ BaseObject::~BaseObject()
     
 }
 
-bool BaseObject::loadIMG(string path, SDL_Renderer* renderer)
+bool BaseObject::loadIMG(string path, SDL_Renderer* &renderer)
 {
     SDL_Texture* new_texture = NULL;
     SDL_Surface* load_surface = IMG_Load( path.c_str() );
     
     if(load_surface != NULL)
     {
-        SDL_SetColorKey(load_surface, SDL_TRUE, SDL_MapRGB( load_surface ->  format, COLOR_KEY_R, COLOR_KEY_G, COLOR_KEY_B) );
+//        SDL_SetColorKey(load_surface, SDL_TRUE, SDL_MapRGB( load_surface ->  format, COLOR_KEY_R, COLOR_KEY_G, COLOR_KEY_B) );
         new_texture = SDL_CreateTextureFromSurface(renderer, load_surface);
         if(new_texture != NULL)
         {
@@ -49,13 +49,13 @@ bool BaseObject::loadIMG(string path, SDL_Renderer* renderer)
     return false;
 }
 
-void BaseObject::Render(SDL_Renderer* renderer)
+void BaseObject::Render(SDL_Renderer* &renderer)
 {
 //    SDL_Rect dest_rect = {d_object.x, d_object.y, d_object.w, d_object.h};
     SDL_RenderCopy(renderer, p_object, &r_object, &d_object);
 }
 
-void BaseObject::RenderXY(int x, int y, SDL_Renderer* renderer)
+void BaseObject::RenderXY(int x, int y, SDL_Renderer* &renderer)
 {
     SDL_Rect desR = {x, y, d_object.w, d_object.h};
     SDL_RenderCopy(renderer, p_object, &r_object, &desR);

@@ -1,6 +1,6 @@
 //
 //  Object.h
-//  Project Game
+//  Dino Journey
 //
 //  Created by Nguyễn Tiến Dũng on 4/23/22.
 //  Copyright © 2022 Nguyễn Tiến Dũng. All rights reserved.
@@ -37,10 +37,10 @@ public:
     int getPosX() { return d_object.x; }
     int getPosY() { return d_object.y; }
     
-    bool loadIMG(string, SDL_Renderer* renderer);
-    void Render(SDL_Renderer* renderer);
+    bool loadIMG(string, SDL_Renderer* &renderer);
+    void Render(SDL_Renderer* &renderer);
     
-    void RenderXY(int x,int y, SDL_Renderer* renderer);
+    void RenderXY(int x,int y, SDL_Renderer* &renderer);
     
     void Free();
 };
