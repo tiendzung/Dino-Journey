@@ -13,23 +13,52 @@
 #include "Enemy.h"
 #include "Map.h"
 #include "Button.h"
+#include "Timer.h"
+#include "SDL_InitWindow.h"
 void controlFPS(class ImpTimer &Timer, int FPS);
 
 bool checkCollision (class Dino& dino, class Enemy& enemy);
 
+void drawScore (class BaseObject &g_score, TTF_Font* g_font, SDL_Color text_color, SDL_Renderer* &renderer, class ImpTimer &game_timer, int &score, int &time, int &speed);
+
+void drawHighScore(class BaseObject &g_highscore,TTF_Font* g_font, SDL_Color text_color, SDL_Renderer* &renderer,string path, int &score, int &time);
+
 void drawEndGame(SDL_Renderer* &renderer, bool& play_again, bool& quit_menu, bool& quit_game, int type_map, bool &lose_game);
 
-void HandlePlayButton(SDL_Event e, BaseObject& gMenu,
+bool HandleBackButton(SDL_Event e, Button& Back_button, Mix_Chunk *gClickMusic);
+
+void HandlePlayButton(SDL_Event e, BaseObject& g_menu,
                       Button& Play_button,
+                      bool& quit_game,
                       bool& quit_menu,
-                      bool& play_again, SDL_Renderer* &renderer,
+                      bool& play_again,
+                      int& type_dino,
+                      int& type_map,
+                      SDL_Renderer* &renderer,
                       Mix_Chunk *gClickMusic);
 
-void HandleExitButton(SDL_Event e, BaseObject& gMenu,
+void HandleHelpButton(SDL_Event e, BaseObject& g_menu,
+                      BaseObject& g_help_menu,
+                      Button& Help_button,
+                      Button& Back_button,
+                      bool& quit_game, bool& quit_menu,
+                      bool& play_again,
+                      SDL_Renderer* &renderer,
+                      Mix_Chunk *gClickMusic);
+
+void HandleExitButton(SDL_Event e, BaseObject& g_menu,
                       Button& Play_button,
                       bool& quit_game, bool& quit_menu,
                       bool& play_again,
                       SDL_Renderer* &renderer,
                       Mix_Chunk *gClickMusic);
+
+bool HandleCharacter(SDL_Event e, Button &Dino_button, Mix_Chunk* gClickMusic);
+
+bool HandleMap(SDL_Event e, Button &Map_button, Mix_Chunk* gClickMusic);
+
+void drawLoadDino(BaseObject g_menu, Button &DinoGreen, Button &DinoRed, Button &DinoBLue, Button &DinoGold,int &type_dino, int &type_map, SDL_Renderer* &renderer, Mix_Chunk* gClickMusic);
+
+void drawLoadMap(BaseObject g_menu, Button* Map_butto,int &type_dino, int &type_map, SDL_Renderer* &renderer, Mix_Chunk* gClickMusic);
 
 #endif /* GameStatus_h */

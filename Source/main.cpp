@@ -18,7 +18,6 @@
 
 bool play_again = false, lose_game = false;
 int type_map = rand()%TOTAL_TYPE_OF_BACKGOUND, type_dino = rand()%TOTAL_TYPE_OF_DINO;
-int acceleration = 1, speedG = GROUND_SPEED, speedGG = GRASS_GROUND_SPEED;
 
 Mix_Music* gBackgroundMusic = NULL;
 Mix_Music* gMenuMusic = NULL;
@@ -26,13 +25,25 @@ Mix_Chunk* gClickMusic = NULL;
 Mix_Chunk* gJumpMusic = NULL;
 Mix_Chunk* gLoseMusic = NULL;
 
-class BaseObject g_menu;
+class BaseObject g_menu, g_score, g_highscore, g_help_menu;
 class Map Map_data;
 class Dino dino;
 class Enemy Air1(IN_AIR_ENEMY), Ground1(ON_GROUND_ENEMY), Air2(IN_AIR_ENEMY), Ground2(ON_GROUND_ENEMY);
 
 class ImpTimer Event_Timer, program_timer, Menu_timer;
-class Button Play_button(464 - 230/4,200), Exit_button(464 - 230/4,360), Back_button, Hscroce_button, Help_button(464 - 230/4,280);
+
+class Button Play_button(464 - 350/4, 220, TWO_SPRITES),
+             Help_button(464 - 350/4, 305, TWO_SPRITES),
+             Exit_button(464 - 350/4, 390, TWO_SPRITES),
+             Back_button(75, 65, TWO_SPRITES),
+Hscroce_button;
+
+class Button DinoGreen(GREEN_DINO_POSX, GREEN_DINO_POSY, ONE_SPRITE),
+             DinoRed(RED_DINO_POSX,RED_DINO_POSY, ONE_SPRITE),
+             DinoBlue(BLUE_DINO_POSX, BLUE_DINO_POSY, ONE_SPRITE),
+             DinoGold(GOLD_DINO_POSX, GOLD_DINO_POSY, ONE_SPRITE);
+
+class Button Map_button[TOTAL_TYPE_OF_BACKGOUND];
 
 bool loadBackGround (int type);
 bool loadMedia();
@@ -40,8 +51,7 @@ bool loadMedia();
 bool loadBackGround(int type)
 {
 
-    return (Map_data.loadGround(g_renderer, type)
-            &&Map_data.loadBackGround(g_renderer, TOTAL_BACKGROUND_LAYER[type], type)&&(Map_data.loadGrassGround(g_renderer, type))
+    return (Map_data.loadGround(g_renderer, type) && Map_data.loadBackGround(g_renderer, TOTAL_BACKGROUND_LAYER[type], type)&&(Map_data.loadGrassGround(g_renderer, type))
             );
 }
 
@@ -58,8 +68,7 @@ int main()
     initSDL(g_window, g_renderer, WINDOW_TITLE, SCREEN_WIDTH, SCREEN_HEIGHT);
     
     if(loadMedia() == false) { cout<<"Can't not load Media!!!"; return 0;}
-    type_map = -1;
-    
+
     while(!quit_game)
     {
         Mix_PlayMusic(gMenuMusic, REPEATIVE);
@@ -80,8 +89,8 @@ int main()
                     quit_menu = true; quit_game = true;
                     play_again = false;
                 }
-                HandlePlayButton(event, g_menu, Play_button, quit_menu, play_again, g_renderer, gClickMusic);
-//                HandleHelpButton();
+                HandlePlayButton(event, g_menu, Play_button, quit_game, quit_menu, play_again, type_dino, type_map, g_renderer, gClickMusic);
+                HandleHelpButton(event, g_menu, g_help_menu, Help_button, Back_button, quit_game, quit_menu, play_again, g_renderer, gClickMusic);
                 HandleExitButton(event, g_menu, Exit_button, quit_game, quit_menu, play_again, g_renderer, gClickMusic);
             }
             
@@ -92,18 +101,29 @@ int main()
             SDL_RenderPresent(g_renderer);
             controlFPS(Menu_timer, FRAME_PER_SECOND);
         }
+        
+        if(play_again == true)
+        {
+            drawLoadDino(g_menu, DinoGreen, DinoRed, DinoBlue, DinoGold, type_dino, type_map, g_renderer, gClickMusic);
+            
+            drawLoadMap(g_menu, Map_button, type_dino, type_map, g_renderer, gClickMusic);
+        }
+        
         while(play_again)
         {
-            lose_game = false;
+            
             SDL_SetRenderDrawColor(g_renderer, 255, 255, 255, 255);
             SDL_RenderClear(g_renderer);
             
-            Mix_PlayMusic(gBackgroundMusic, REPEATIVE);
-            type_map++;
-            type_map%=6;
+            class ImpTimer game_timer;
+            game_timer.start();
+            int score = 0, time = 0;
+            int speed = 0, ground_pos = GROUND_SPEED, grass_ground_pos = GRASS_GROUND_SPEED;
+            vector <double> bg_pos(BACKGROUND_TOTAL_LAYERS , BASE_POS);
             
-            type_dino = rand()%TOTAL_TYPE_OF_DINO;
-//            type_dino = 3;
+            bool is_running = true; lose_game = false;
+        
+            Mix_PlayMusic(gBackgroundMusic, REPEATIVE);
            
             if(loadBackGround(type_map) == false) { cout<<"Can't not load Background!!!"; return 0; }
             
@@ -117,11 +137,6 @@ int main()
             Ground1.loadImg(g_renderer);
             Air2.loadImg(g_renderer);
             Ground2.loadImg(g_renderer);
-            
-            program_timer.start();
-            bool is_running = true;
-            vector <double> bg_speed(BACKGROUND_TOTAL_LAYERS , BASE_OFFSET_SPEED);
-            acceleration = 0; speedG = GROUND_SPEED; speedGG = GRASS_GROUND_SPEED;
             
             while (is_running)
             {
@@ -158,15 +173,15 @@ int main()
                     dino.HandleEvent(event, gJumpMusic);
                 }
                 if(is_running == false) break;
-                Map_data.renderScrollingBackground(g_renderer, TOTAL_BACKGROUND_LAYER[type_map], bg_speed, !lose_game);
-                Map_data.renderScrollingGround(speedG, acceleration, g_renderer, !lose_game);
+                Map_data.renderScrollingBackground(g_renderer, TOTAL_BACKGROUND_LAYER[type_map], bg_pos, speed, !lose_game);
+                Map_data.renderScrollingGround(ground_pos, speed, g_renderer, !lose_game);
                 if(!lose_game)
                 {
                     dino.move();
-                    Air1.move(acceleration);
-                    Ground1.move(acceleration);
-                    Air2.move(acceleration);
-                    Ground2.move(acceleration);
+                    Air1.move(speed);
+                    Ground1.move(speed);
+                    Air2.move(speed);
+                    Ground2.move(speed);
                     
                     Air1.Render(g_renderer);
                     Ground1.Render(g_renderer);
@@ -182,6 +197,7 @@ int main()
                 }
                 if(checkCollision(dino, Air1)||checkCollision(dino, Air2)||checkCollision(dino, Ground1)||checkCollision(dino, Ground2))
                 {
+                    game_timer.pause();
                     if(!lose_game)
                     {
                         Mix_PauseMusic();
@@ -190,10 +206,13 @@ int main()
                     drawEndGame(g_renderer, play_again,quit_menu, quit_game, type_map, lose_game);
                 }
                 
+                drawScore(g_score, g_font, text_color, g_renderer, game_timer, score, time, speed);
+                drawHighScore(g_highscore, g_font, text_color, g_renderer, "Resource/database.txt", score, time);
+                
                 if(!lose_game) dino.Render(g_renderer);
                 else dino.RenderLose(g_renderer);
                 
-                Map_data.renderScrollingGrass(speedGG, acceleration, g_renderer, !lose_game);
+                Map_data.renderScrollingGrass(grass_ground_pos, speed, g_renderer, !lose_game);
                 SDL_RenderPresent(g_renderer);
                 
                 controlFPS(Event_Timer, FRAME_PER_SECOND);
@@ -210,13 +229,13 @@ int main()
     gBackgroundMusic = NULL;
 
     Mix_FreeMusic(gMenuMusic);
-    gMenuMusic = NULL ;
+    gMenuMusic = NULL;
     
     Mix_FreeChunk(gClickMusic);
-    gClickMusic = NULL ;
+    gClickMusic = NULL;
     
     Mix_FreeChunk(gJumpMusic);
-    gJumpMusic = NULL ;
+    gJumpMusic = NULL;
     
     Mix_FreeChunk(gLoseMusic);
     gLoseMusic = NULL;
@@ -230,13 +249,20 @@ int main()
 bool loadMedia()
 {
     bool success = true;
-    if(g_menu.loadIMG("Resource/Menu/Menu1.png", g_renderer) == false) return false;
-
+    TTF_Init();
+    //Load Menu
+    if(g_menu.loadIMG("Resource/Menu/Menu1.png", g_renderer) == false) { cout<<"Fail to load Menu!"; return false; }
+    
+    if(g_help_menu.loadIMG("Resource/Menu/Help-menu.png", g_renderer) == false)
+        { cout<<"Fail to load Help-menu!"; return false; }
+    //--------------------------
+    
+    //Load Music
     gJumpMusic = Mix_LoadWAV("Resource/Sound/jump_sound.wav");
     
     if(gJumpMusic == NULL) {cout<<Mix_GetError<<1; success = false;}
     
-    gMenuMusic = Mix_LoadMUS("Resource/Sound/menu_audio_sound.wav");
+    gMenuMusic = Mix_LoadMUS("Resource/Sound/background_sound.wav");
     
     if(gMenuMusic == NULL) {cout<<Mix_GetError<<2; success = false;}
 
@@ -251,14 +277,47 @@ bool loadMedia()
     gClickMusic = Mix_LoadWAV("Resource/Sound/mouse_click_sound.wav");
     
     if(gClickMusic == NULL) {cout<<Mix_GetError<<4; success = false;}
+    //--------------------------
     
-    if(Play_button.loadImg("Resource/Menu/play_button.png", g_renderer) == false) return false;
+    //Load Button
+    if(Play_button.loadImg("Resource/Menu/Play-button.png", g_renderer) == false) return false;
     
-    if(Exit_button.loadImg("Resource/Menu/exit_button.png", g_renderer) == false) return false;
+    if(Exit_button.loadImg("Resource/Menu/Exit-button.png", g_renderer) == false) return false;
     
     if(Back_button.loadImg("Resource/Menu/back_button.png", g_renderer) == false) return false;
     
-    if(Help_button.loadImg("Resource/Menu/help_button.png", g_renderer) == false) return false;
+    if(Help_button.loadImg("Resource/Menu/Help-button.png", g_renderer) == false) return false;
+    
+    if(DinoGreen.loadImg("Resource/Menu/Button/Green1.png", g_renderer) == false) return false;
+    
+    if(DinoRed.loadImg("Resource/Menu/Button/Red1.png", g_renderer) == false) return false;
+    
+    if(DinoBlue.loadImg("Resource/Menu/Button/Blue1.png", g_renderer) == false) return false;
+    
+    if(DinoGold.loadImg("Resource/Menu/Button/Gold1.png", g_renderer) == false) return false;
+    //--------------------------
+    
+    //Load Font, Text
+    g_font = TTF_OpenFont("Resource/Font/mspc.ttf", 25);
+    
+    if(g_font == NULL) {  cout<<"Can't load Font!"<<Mix_GetError(); return false; }
+    //--------------------------
+    
+    //Load Map Button
+    Map_button[FOREST].loadImg("Resource/LoadMap/FOREST.png", g_renderer);
+    Map_button[HILLS].loadImg("Resource/LoadMap/HILLS.png", g_renderer);
+    Map_button[CLOUD_MOUTAIN].loadImg("Resource/LoadMap/CLOUD_MOUTAIN.png", g_renderer);
+    Map_button[NIGHT_CITY].loadImg("Resource/LoadMap/NIGHT_CITY.png", g_renderer);
+    Map_button[DESERT].loadImg("Resource/LoadMap/DESERT.png", g_renderer);
+    Map_button[FAR_CITY].loadImg("Resource/LoadMap/FAR_CITY.png", g_renderer);
+    
+    Map_button[FOREST].setDes       (MAP_BUTTON_X_1, MAP_BUTTON_Y_1, MAP_BUTTON_W, MAP_BUTTON_H);
+    Map_button[HILLS].setDes        (MAP_BUTTON_X_2, MAP_BUTTON_Y_1, MAP_BUTTON_W, MAP_BUTTON_H);
+    Map_button[CLOUD_MOUTAIN].setDes(MAP_BUTTON_X_3, MAP_BUTTON_Y_1, MAP_BUTTON_W, MAP_BUTTON_H);
+    Map_button[NIGHT_CITY].setDes   (MAP_BUTTON_X_1, MAP_BUTTON_Y_2, MAP_BUTTON_W, MAP_BUTTON_H);
+    Map_button[DESERT].setDes       (MAP_BUTTON_X_2, MAP_BUTTON_Y_2, MAP_BUTTON_W, MAP_BUTTON_H);
+    Map_button[FAR_CITY].setDes     (MAP_BUTTON_X_3, MAP_BUTTON_Y_2, MAP_BUTTON_W, MAP_BUTTON_H);
+    //--------------------------
     
     return true;
 }

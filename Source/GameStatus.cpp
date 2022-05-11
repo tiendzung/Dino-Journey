@@ -34,6 +34,43 @@ bool checkCollision (class Dino& dino, class Enemy& enemy)
 
     return SDL_HasIntersection(&d_rect, &e_rect);
 }
+void drawScore(class BaseObject &g_score,TTF_Font* g_font, SDL_Color text_color, SDL_Renderer* &renderer,  class ImpTimer &game_timer, int &score, int &time, int &speed)
+{
+    if(time%7 == 0&&!game_timer.is_Paused()) score++;
+    time++;
+    if(time >= MAX_TIME) { speed += INCREASE_SPEED; time =0; }
+    if(speed > MAX_SPEED) speed = 0;
+    string new_score = to_string(score);
+    new_score = "YOUR SCORE: " + new_score;
+    g_score.loadText(new_score, g_font, text_color, renderer);
+    g_score.RenderXY(SCREEN_WIDTH - 300, 12, renderer);
+    g_score.Free();
+}
+
+void drawHighScore(class BaseObject &g_highscore,TTF_Font* g_font, SDL_Color text_color, SDL_Renderer* &renderer, string path, int &score, int &time)
+{
+    bool update = false;
+    fstream HighScoreFile;
+    int old_highscore;
+    int new_highscore;
+
+    HighScoreFile.open(path, ios::in);
+    HighScoreFile >> old_highscore;
+
+    if(score >= old_highscore)
+    {
+        update = true;
+        new_highscore = score;
+    } else new_highscore = old_highscore;
+    fstream highScoreFile;
+    highScoreFile.open(path, ios::out);
+    highScoreFile << new_highscore;
+    
+    g_highscore.loadText("HIGH SCORE: "+to_string(new_highscore), g_font, text_color, renderer);
+    if(update == false)
+        g_highscore.RenderXY(SCREEN_WIDTH - 300, 12 + 30, renderer);
+    g_highscore.Free();
+}
 
 void drawEndGame(SDL_Renderer* &renderer, bool& play_again, bool& quit_menu, bool& quit_game, int type_map, bool &lose_game)
 {
@@ -58,10 +95,28 @@ void drawEndGame(SDL_Renderer* &renderer, bool& play_again, bool& quit_menu, boo
     return;
 }
 
-void HandlePlayButton(SDL_Event e, BaseObject& gMenu,
+bool HandleBackButton(SDL_Event e, Button& Back_button, Mix_Chunk *gClickMusic)
+{
+    if(Back_button.inSide() == true)
+    {
+        if(e.type == SDL_MOUSEBUTTONDOWN)
+        {
+            Back_button.status = BUTTON_MOUSE_UP;
+            Mix_PlayChannel(MIX_CHANNEL, gClickMusic, 0);
+            return true;
+        }
+    }
+    return false;
+}
+
+void HandlePlayButton(SDL_Event e, BaseObject& g_menu,
                       Button& Play_button,
+                      bool& quit_game,
                       bool& quit_menu,
-                      bool& play_again, SDL_Renderer* &renderer,
+                      bool& play_again,
+                      int& type_dino,
+                      int& type_map,
+                      SDL_Renderer* &renderer,
                       Mix_Chunk *gClickMusic)
 {
     if(Play_button.inSide() == true)
@@ -75,7 +130,48 @@ void HandlePlayButton(SDL_Event e, BaseObject& gMenu,
     }
 }
 
-void HandleExitButton(SDL_Event e, BaseObject& gMenu,
+void HandleHelpButton(SDL_Event e, BaseObject& g_menu,
+                      BaseObject& g_help_menu,
+                      Button& Help_button,
+                      Button& Back_button,
+                      bool& quit_game, bool& quit_menu,
+                      bool& play_again,
+                      SDL_Renderer* &renderer,
+                      Mix_Chunk *gClickMusic)
+{
+    bool quit_help = false;
+    if(Help_button.inSide() == true)
+    {
+        if(e.type == SDL_MOUSEBUTTONDOWN)
+        {
+            Help_button.status = BUTTON_MOUSE_UP;
+            Mix_PlayChannel(MIX_CHANNEL, gClickMusic, 0);
+            while(!quit_help)
+            {
+                ImpTimer Help_timer;
+                Help_timer.start();
+                while(SDL_PollEvent(&e))
+                {
+                    if(e.type == SDL_QUIT)
+                    {
+                        play_again = false; quit_game = true; quit_menu = true;
+                        return;
+                    }
+                    if(HandleBackButton(e, Back_button, gClickMusic))
+                        return;
+                }
+                g_menu.Render(renderer);
+                g_help_menu.Render(renderer);
+                Back_button.renderButton(renderer);
+                controlFPS(Help_timer, FRAME_PER_SECOND);
+                SDL_RenderPresent(renderer);
+            }
+        }
+    }
+    
+}
+
+void HandleExitButton(SDL_Event e, BaseObject& g_menu,
                       Button& Exit_button,
                       bool& quit_game, bool& quit_menu,
                       bool& play_again,
@@ -89,6 +185,94 @@ void HandleExitButton(SDL_Event e, BaseObject& gMenu,
             Exit_button.status = BUTTON_MOUSE_UP;
             play_again = false; quit_game = true; quit_menu = true;
             Mix_PlayChannel(MIX_CHANNEL, gClickMusic, 0);
+            SDL_Delay(200); //Wait 0.2sec
         }
     }
+}
+bool HandleCharacter(SDL_Event e, bool &running, Button &Dino_button, Mix_Chunk* gClickMusic)
+{
+    if(Dino_button.inSide() == true)
+    {
+        if(e.type == SDL_MOUSEBUTTONDOWN)
+        {
+            Dino_button.status = BUTTON_MOUSE_UP;
+            running = false;
+            Mix_PlayChannel(MIX_CHANNEL, gClickMusic, 0);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool HandleMap(SDL_Event e, bool &running, Button &Map_button, Mix_Chunk* gClickMusic)
+{
+    if(Map_button.inSide() == true)
+    {
+        if(e.type == SDL_MOUSEBUTTONDOWN)
+        {
+            Map_button.status = BUTTON_MOUSE_UP;
+            running = false;
+            Mix_PlayChannel(MIX_CHANNEL, gClickMusic, 0);
+            return true;
+        }
+    }
+    return false;
+}
+
+void drawLoadDino(BaseObject g_menu, Button &DinoGreen, Button &DinoRed, Button &DinoBlue, Button &DinoGold,int &type_dino, int &type_map, SDL_Renderer* &renderer, Mix_Chunk* gClickMusic)
+{
+    SDL_Event event;
+    bool running = true;
+    ImpTimer Timer;
+    g_menu.loadIMG("Resource/Menu/LoadDino-menu.png", renderer);
+    while(running)
+    {
+        Timer.start();
+        while(SDL_PollEvent(&event))
+        {
+            if(HandleCharacter(event, running, DinoGreen, gClickMusic)) type_dino = DINO_GREEN;
+            
+            if(HandleCharacter(event, running, DinoRed, gClickMusic)) type_dino = DINO_RED;
+
+            if(HandleCharacter(event, running, DinoBlue, gClickMusic)) type_dino = DINO_BLUE;
+
+            if(HandleCharacter(event, running, DinoGold, gClickMusic)) type_dino = DINO_GOLD;
+        }
+        g_menu.Render(renderer);
+        DinoGreen.renderButton(renderer);
+        DinoRed.renderButton(renderer);
+        DinoBlue.renderButton(renderer);
+        DinoGold.renderButton(renderer);
+        SDL_RenderPresent(renderer);
+        
+        controlFPS(Timer, FRAME_PER_SECOND);
+    }
+    g_menu.Free();
+}
+
+void drawLoadMap(BaseObject g_menu, Button* Map_button, int &type_dino, int &type_map, SDL_Renderer* &renderer, Mix_Chunk* gClickMusic)
+{
+    SDL_Event event;
+    bool running = true;
+    ImpTimer Timer;
+    g_menu.loadIMG("Resource/LoadMap/menu.png", renderer);
+    while(running)
+    {
+        Timer.start();
+        while(SDL_PollEvent(&event))
+        {
+            for(int i = 0; i < TOTAL_TYPE_OF_BACKGOUND; i++)
+            {
+                if(HandleMap(event, running, Map_button[i], gClickMusic)) type_map = i;
+            }
+        }
+        g_menu.Render(renderer);
+        for(int i = 0; i < TOTAL_TYPE_OF_BACKGOUND; i++)
+        Map_button[i].renderButton(renderer);
+
+        SDL_RenderPresent(renderer);
+        
+        controlFPS(Timer, FRAME_PER_SECOND);
+    }
+    g_menu.Free();
 }

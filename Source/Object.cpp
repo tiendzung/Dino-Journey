@@ -48,7 +48,25 @@ bool BaseObject::loadIMG(string path, SDL_Renderer* &renderer)
 
     return false;
 }
-
+bool BaseObject::loadText(string text, TTF_Font *g_font, SDL_Color text_color, SDL_Renderer *renderer)
+{
+    SDL_Texture* new_texture = NULL;
+    SDL_Surface* load_surface = TTF_RenderText_Solid(g_font, text.c_str(), text_color);
+    if (load_surface == NULL) return 0;
+    
+    new_texture = SDL_CreateTextureFromSurface(renderer, load_surface);
+    
+    if (new_texture != NULL)
+    {
+        r_object.w = d_object.w = load_surface->w;
+        r_object.h = d_object.h = load_surface->h;
+    }
+    
+    SDL_FreeSurface(load_surface);
+    p_object = new_texture ;
+    
+    return (p_object != NULL) ;
+}
 void BaseObject::Render(SDL_Renderer* &renderer)
 {
 //    SDL_Rect dest_rect = {d_object.x, d_object.y, d_object.w, d_object.h};

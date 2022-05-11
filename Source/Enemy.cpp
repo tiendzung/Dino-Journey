@@ -11,21 +11,6 @@
 Enemy::Enemy(int type)
 {
     e_type = type; id_enemy = cnt_num;
-//    d_object.x = rand() % ENEMY_RANGE + SCREEN_WIDTH;
-//
-//    if(type == IN_AIR_ENEMY)
-//    {
-//        id_frame = 0;
-//        d_object.y = rand() % (MAX_HEIGHT - MIN_HEIGHT + 1) + MIN_HEIGHT;
-//    }
-//    else if(type == ON_GROUND_ENEMY)
-//    {
-//        d_object.y = GROUND - GRASS_HEIGHT;
-//    }
-//
-//    if(id_enemy != 0)
-//    d_object.x = (d_object.x - enemy_pos[id_enemy-1].second >= ENEMY_RANGE) ? d_object.x : enemy_pos[id_enemy-1].second + ENEMY_RANGE;
-//    enemy_pos[id_enemy] = ii(type, d_object.x);
     cnt_num++;
 }
 
@@ -62,7 +47,7 @@ bool Enemy::loadImg(SDL_Renderer* &renderer)
             frame_clip[i].x = d_object.w * i;
             frame_clip[i].y = 0;
             frame_clip[i].w = d_object.w;
-            frame_clip[i].h = d_object.w;
+            frame_clip[i].h = d_object.h;
         }
     }
     else if(e_type == ON_GROUND_ENEMY)
@@ -75,11 +60,11 @@ bool Enemy::loadImg(SDL_Renderer* &renderer)
     return success;
 }
 
-void Enemy::move(int &acceleration)
+void Enemy::move(int &speed)
 {
-    double max_pos = 0;
+    int max_pos = 0;
     d_object.x = enemy_pos[id_enemy].second;
-    d_object.x = d_object.x - (ENEMY_SPEED + acceleration);
+    d_object.x = d_object.x - (ENEMY_SPEED + speed);
     enemy_pos[id_enemy] = ii(e_type, d_object.x);
     
     if(d_object.x + d_object.w <= 0)
@@ -90,7 +75,7 @@ void Enemy::move(int &acceleration)
             if(i == id_enemy) continue;
             max_pos = max(s.second, max_pos);
         }
-        d_object.x = rand() % ENEMY_RANGE + max(double(SCREEN_WIDTH + rand()%GOOD_RANGE), max_pos + ENEMY_RANGE);
+        d_object.x = rand() % ENEMY_RANGE + max(SCREEN_WIDTH + rand()%GOOD_RANGE , max_pos + ENEMY_RANGE);
         enemy_pos[id_enemy] = ii(e_type, d_object.x);
         
         for(int i = 0; i < TOTAL_ENEMY; i++)

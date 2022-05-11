@@ -12,13 +12,13 @@
 #include "SDL_InitWindow.h"
 #include "Object.h"
 #include "Timer.h"
-#define ii pair<int, double>
+#define ii pair<int, int>
 
 static const int TOTAL_ENEMY = 4;
 static const int TOTAL_FRAMES_OF_ENEMY = 5;
 static const int IN_AIR_ENEMY = 1;
 static const int ON_GROUND_ENEMY = 2;
-static const int ENEMY_RANGE = 150; /*240*/
+static const int ENEMY_RANGE = 240; /*240*/
 static const int GOOD_RANGE = 350;
 static const int ENEMY_FPS = 15;
 //static const double ENEMY_GROUND_WIDTH = 37;
@@ -43,7 +43,7 @@ public:
     
     bool loadImg(SDL_Renderer* &renderer);
     
-    void move(int& acceleration);
+    void move(int& speed);
     
     void Render(SDL_Renderer* &renderer);
     void RenderLose (SDL_Renderer* &renderer);

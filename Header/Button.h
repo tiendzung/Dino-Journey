@@ -9,24 +9,28 @@
 #ifndef Button_h
 #define Button_h
 #include "Object.h"
-const int TOTAL_FRAMES_BUTTON = 2;
 
 #define BUTTON_MOUSE_UP  0
 #define BUTTON_MOUSE_DOWN  1
-
+#define ONE_SPRITE 1
+#define TWO_SPRITES 2
+#define MAX_FRAMES 2
 class Button: public BaseObject
 {
 protected:
+    int TOTAL_FRAMES_BUTTON = ONE_SPRITE;
     int curX, curY;
-    SDL_Rect frame_clip[2];
+    bool is_map = false;
+    SDL_Rect frame_clip[MAX_FRAMES];
+    
 public:
     int status = BUTTON_MOUSE_UP;
     Button(){};
-    Button(int x,int y);
+    Button(int x,int y, int sprite);
     ~Button(){};
     bool loadImg(string path, SDL_Renderer* &renderer);
     bool inSide();
-    void setXY(int x,int y);
+    void setDes(int x,int y, int w, int h);
     void renderButton(SDL_Renderer* &renderer);
 };
 

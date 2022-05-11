@@ -38,6 +38,9 @@ public:
     int getPosY() { return d_object.y; }
     
     bool loadIMG(string, SDL_Renderer* &renderer);
+    
+    bool loadText(string text,TTF_Font *g_font, SDL_Color text_color, SDL_Renderer *renderer);
+    
     void Render(SDL_Renderer* &renderer);
     
     void RenderXY(int x,int y, SDL_Renderer* &renderer);

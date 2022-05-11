@@ -16,7 +16,7 @@
 #define JUMP 1
 #define FALL 2
 
-const double GRAVITY_FALL = 0.41;
+const double GRAVITY_FALL = 0.5 /*0.41*/;
 static const int DINO_FPS = 15;
 static const int DINO_HURT_FPS = 2;
 static const int TOTAL_FRAMES_OF_DINO = 9;
@@ -25,10 +25,10 @@ static const int FRAMES_OF_HURT = 6;
 static const int SKIP_FRAME = 7;
 const string dino_type[TOTAL_TYPE_OF_DINO] =
 {
-    "Resource/MainDino/BlueTest.png",
-    "Resource/MainDino/RedTest.png",
     "Resource/MainDino/GreenTest.png",
+    "Resource/MainDino/RedTest.png",
     "Resource/MainDino/GoldTest.png",
+    "Resource/MainDino/BlueTest.png",
 };
 
 class Dino

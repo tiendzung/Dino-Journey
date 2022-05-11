@@ -28,6 +28,7 @@ const int TOTAL_BACKGROUND_LAYER[TOTAL_TYPE_OF_BACKGOUND] = { 9, 6, 7, 3, 11, 6 
 const double LAYER_SPEED[BACKGROUND_TOTAL_LAYERS] =
 {
     0.15, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5
+//    0.25, 0.75, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 3, 3.25, 3.5
 };
 class Map
 {
@@ -68,7 +69,7 @@ public:
         bg_layer[HILLS][5] = "Resource/BackGround2/Hills Layer 06.png";
     
         grass_ground[CLOUD_MOUTAIN] = "Resource/BackGround3/grass_ground.png";
-        bg_ground[CLOUD_MOUTAIN] = "Resource/BackGround3/ground_test.png";
+        bg_ground[CLOUD_MOUTAIN] = "Resource/BackGround3/ground.png";
         bg_layer[CLOUD_MOUTAIN][0] = "Resource/BackGround3/layer1.png";
         bg_layer[CLOUD_MOUTAIN][1] = "Resource/BackGround3/layer2.png";
         bg_layer[CLOUD_MOUTAIN][2] = "Resource/BackGround3/layer3.png";
@@ -112,9 +113,9 @@ public:
     bool loadGround(SDL_Renderer* &renderer, int type);
     bool loadGrassGround(SDL_Renderer* &renderer, int type);
     
-    void renderScrollingBackground(/*vector <double> &offSetSpeed,*/ SDL_Renderer* &renderer, int TOTAL, vector <double> & bg_speed, bool move);
-    void renderScrollingGround(int &speed, int& acceleration, SDL_Renderer* &renderer, bool move);
-    void renderScrollingGrass(int &speed, int& acceleration, SDL_Renderer* &renderer, bool move);
+    void renderScrollingBackground(/*vector <double> &offSetSpeed,*/ SDL_Renderer* &renderer, int TOTAL, vector <double> & bg_pos, int speed, bool move);
+    void renderScrollingGround(int &pos, int& speed, SDL_Renderer* &renderer, bool move);
+    void renderScrollingGrass(int &pos, int& speed, SDL_Renderer* &renderer, bool move);
     void Free(int type);
 };
 

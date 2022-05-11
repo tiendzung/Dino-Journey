@@ -32,44 +32,34 @@ bool Map::loadGrassGround(SDL_Renderer* &renderer, int type)
 {
     return GrassGround.loadIMG(grass_ground[type], renderer);
 }
-void Map::renderScrollingBackground(SDL_Renderer* &renderer, int TOTAL, vector <double> &bg_speed, bool move)
+void Map::renderScrollingBackground(SDL_Renderer* &renderer, int TOTAL, vector <double> &bg_pos, int speed, bool move)
 {
-//    speed = speed - (BACK_GROUND_SPEED + acceleration);
-//    if(speed + backGround[0].getWidth() < 0) speed = 0;
-//    double k = 1;
-//    if(type_id == 1) k = 2;
     for(int i = 0; i < TOTAL; i++)
     {
-//        backGround[i].setDesRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-//        backGround[i].Render(renderer);
-        if(move == true) bg_speed[i] = bg_speed[i] - LAYER_SPEED[i];
-        if(bg_speed[i] + backGround[0].getWidth() < 0) bg_speed[i] = 0;
+        if(move == true) bg_pos[i] = bg_pos[i] - (LAYER_SPEED[i] + double((double)speed/(double)2 + 0.5 ));
+        if(bg_pos[i] + backGround[0].getWidth() < 0) bg_pos[i] = 0;
         
-        backGround[i].RenderXY(bg_speed[i], SCREEN_HEIGHT - backGround[i].getHeight(), renderer);
-        backGround[i].RenderXY(bg_speed[i] + backGround[i].getWidth(), SCREEN_HEIGHT - backGround[i].getHeight(), renderer);
+        backGround[i].RenderXY(int(bg_pos[i]), SCREEN_HEIGHT - backGround[i].getHeight(), renderer);
+        backGround[i].RenderXY(int(bg_pos[i]) + backGround[i].getWidth(), SCREEN_HEIGHT - backGround[i].getHeight(), renderer);
     }
 }
 
-void Map::renderScrollingGround(int &speed, int& acceleration, SDL_Renderer* &renderer, bool move)
+void Map::renderScrollingGround(int &pos, int& speed, SDL_Renderer* &renderer, bool move)
 {
-//    Ground.setDesRect(0, SCREEN_HEIGHT - Ground.getHeight(), Ground.getWidth(), Ground.getHeight());
-//
-//    Ground.Render(renderer);
-    int GROUND_SPEED = 4; /* 4 -> 15*/
-    if(move == true) speed = speed - (GROUND_SPEED + acceleration);
-    if(speed + Ground.getWidth() < 0) speed = 0;
+    if(move == true) pos = pos - (GROUND_SPEED + speed);
+    if(pos + Ground.getWidth() < 0) pos = 0;
 
-    Ground.RenderXY(speed, SCREEN_HEIGHT - Ground.getHeight(), renderer);
-    Ground.RenderXY(speed + Ground.getWidth(), SCREEN_HEIGHT - Ground.getHeight(), renderer);
+    Ground.RenderXY(pos, SCREEN_HEIGHT - Ground.getHeight(), renderer);
+    Ground.RenderXY(pos + Ground.getWidth(), SCREEN_HEIGHT - Ground.getHeight(), renderer);
 }
 
-void Map::renderScrollingGrass(int &speed, int& acceleration, SDL_Renderer* &renderer, bool move)
+void Map::renderScrollingGrass(int &pos, int& speed, SDL_Renderer* &renderer, bool move)
 {
-    if(move == true) speed = speed - (GRASS_GROUND_SPEED + acceleration);
-    if(speed + GrassGround.getWidth() < 0) speed = 0;
+    if(move == true) pos = pos - (GRASS_GROUND_SPEED + speed);
+    if(pos + GrassGround.getWidth() < 0) pos = 0;
     
-    GrassGround.RenderXY(speed, SCREEN_HEIGHT - GrassGround.getHeight(), renderer);
-    GrassGround.RenderXY(speed + GrassGround.getWidth(), SCREEN_HEIGHT - GrassGround.getHeight(), renderer);
+    GrassGround.RenderXY(pos, SCREEN_HEIGHT - GrassGround.getHeight(), renderer);
+    GrassGround.RenderXY(pos + GrassGround.getWidth(), SCREEN_HEIGHT - GrassGround.getHeight(), renderer);
 }
 void Map::Free(int type)
 {

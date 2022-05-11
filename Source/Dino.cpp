@@ -35,7 +35,7 @@ void Dino::HandleEvent(SDL_Event &e, Mix_Chunk* gJumpMusic)
                 if (onGround() == true/*&&e.key.repeat == 0*/)
                 {
                     Mix_PlayChannel(-1, gJumpMusic, NOT_REPEATIVE);
-                    vJump = 8.5;
+                    vJump = JUMP_POW;
                 }
             }
         }
