@@ -13,13 +13,7 @@ Button::Button(int x, int y, int sprite)
     d_object.y = y;
     TOTAL_FRAMES_BUTTON = sprite;
 }
-void Button:: setDes(int x,int y, int w, int h)
-{
-    d_object.x = x;
-    d_object.y = y;
-    d_object.w = w;
-    d_object.h = h;
-}
+
 bool Button:: loadImg(string path, SDL_Renderer* &renderer)
 {
     bool success = false;
@@ -34,8 +28,6 @@ bool Button:: loadImg(string path, SDL_Renderer* &renderer)
         frame_clip[i].h = d_object.h;
     }
     
-//    if(is_map == true) d_object = { d_object.x, d_object.y, 200, 113 };
-
     return success;
 }
 bool Button:: inSide()
@@ -58,7 +50,7 @@ void Button::renderButton(SDL_Renderer* &renderer)
     int id = status;
     
     if(status == BUTTON_MOUSE_UP) squad = d_object;
-    else squad = {d_object.x - 4, d_object.y -4, d_object.w + 8, d_object.h + 8};
+    else squad = {d_object.x - INCREASE_PIXEL/DIVIDE_BY_TWO, d_object.y - INCREASE_PIXEL/DIVIDE_BY_TWO, d_object.w + INCREASE_PIXEL, d_object.h + INCREASE_PIXEL};
     
     if(TOTAL_FRAMES_BUTTON == ONE_SPRITE) id = BUTTON_MOUSE_UP;
     SDL_RenderCopy(renderer, p_object, &frame_clip[id], &squad);

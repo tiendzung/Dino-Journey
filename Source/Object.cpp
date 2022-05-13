@@ -29,7 +29,8 @@ bool BaseObject::loadIMG(string path, SDL_Renderer* &renderer)
 {
     SDL_Texture* new_texture = NULL;
     SDL_Surface* load_surface = IMG_Load( path.c_str() );
-    
+//    SDL_DestroyTexture(p_object);
+
     if(load_surface != NULL)
     {
 //        SDL_SetColorKey(load_surface, SDL_TRUE, SDL_MapRGB( load_surface ->  format, COLOR_KEY_R, COLOR_KEY_G, COLOR_KEY_B) );

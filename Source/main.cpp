@@ -15,7 +15,7 @@
 #include "Dino.h"
 #include "Enemy.h"
 #include "Button.h"
-
+#include "Mouse.h"
 bool play_again = false, lose_game = false;
 int type_map = rand()%TOTAL_TYPE_OF_BACKGOUND, type_dino = rand()%TOTAL_TYPE_OF_DINO;
 
@@ -24,6 +24,8 @@ Mix_Music* gMenuMusic = NULL;
 Mix_Chunk* gClickMusic = NULL;
 Mix_Chunk* gJumpMusic = NULL;
 Mix_Chunk* gLoseMusic = NULL;
+
+class Mouse mouse;
 
 class BaseObject g_menu, g_score, g_highscore, g_help_menu;
 class Map Map_data;
@@ -36,7 +38,8 @@ class Button Play_button(464 - 350/4, 220, TWO_SPRITES),
              Help_button(464 - 350/4, 305, TWO_SPRITES),
              Exit_button(464 - 350/4, 390, TWO_SPRITES),
              Back_button(75, 65, TWO_SPRITES),
-Hscroce_button;
+             Pause_button(PAUSE_BUTTON_POSX, PAUSE_BUTTON_POSY, TWO_SPRITES),
+             Continue_button(CONTINUE_BUTTON_POSX, CONTINUE_BUTTON_POSY, TWO_SPRITES);
 
 class Button DinoGreen(GREEN_DINO_POSX, GREEN_DINO_POSY, ONE_SPRITE),
              DinoRed(RED_DINO_POSX,RED_DINO_POSY, ONE_SPRITE),
@@ -74,6 +77,7 @@ int main()
         Mix_PlayMusic(gMenuMusic, REPEATIVE);
         while(!quit_menu)
         {
+            mouse.update();
             SDL_SetRenderDrawColor(g_renderer, 255, 255, 255, 255);
             SDL_RenderClear(g_renderer);
             
@@ -90,7 +94,7 @@ int main()
                     play_again = false;
                 }
                 HandlePlayButton(event, g_menu, Play_button, quit_game, quit_menu, play_again, type_dino, type_map, g_renderer, gClickMusic);
-                HandleHelpButton(event, g_menu, g_help_menu, Help_button, Back_button, quit_game, quit_menu, play_again, g_renderer, gClickMusic);
+                HandleHelpButton(event, g_menu, mouse, g_help_menu, Help_button, Back_button, quit_game, quit_menu, play_again, g_renderer, gClickMusic);
                 HandleExitButton(event, g_menu, Exit_button, quit_game, quit_menu, play_again, g_renderer, gClickMusic);
             }
             
@@ -98,15 +102,16 @@ int main()
             Play_button.renderButton(g_renderer);
             Help_button.renderButton(g_renderer);
             Exit_button.renderButton(g_renderer);
+            mouse.Render(g_renderer);
             SDL_RenderPresent(g_renderer);
-            controlFPS(Menu_timer, FRAME_PER_SECOND);
+            controlFPS(Menu_timer, MENU_FPS);
         }
         
         if(play_again == true)
         {
-            drawLoadDino(g_menu, DinoGreen, DinoRed, DinoBlue, DinoGold, type_dino, type_map, g_renderer, gClickMusic);
+            drawLoadDino(g_menu, mouse, DinoGreen, DinoRed, DinoBlue, DinoGold, type_dino, type_map, g_renderer, gClickMusic);
             
-            drawLoadMap(g_menu, Map_button, type_dino, type_map, g_renderer, gClickMusic);
+            drawLoadMap(g_menu, mouse, Map_button, type_dino, type_map, g_renderer, gClickMusic);
         }
         
         while(play_again)
@@ -137,9 +142,10 @@ int main()
             Ground1.loadImg(g_renderer);
             Air2.loadImg(g_renderer);
             Ground2.loadImg(g_renderer);
-            
+            bool paused = false;
             while (is_running)
             {
+                mouse.update();
                 Event_Timer.start();
                 while (SDL_PollEvent(&event) != 0)
                 {
@@ -170,31 +176,36 @@ int main()
                             }
                         }
                     }
-                    dino.HandleEvent(event, gJumpMusic);
+                    if(!lose_game&&!paused)
+                    {
+                        HandlePauseButton(event, paused, Pause_button, g_renderer, gClickMusic);
+                        dino.HandleEvent(event, gJumpMusic);
+                    }
+                    else if(paused)
+                    {
+                        game_timer.pause();
+                        if(HandleContinueButton(event, paused, Continue_button, g_renderer, gClickMusic))
+                            game_timer.start();
+                    }
                 }
                 if(is_running == false) break;
-                Map_data.renderScrollingBackground(g_renderer, TOTAL_BACKGROUND_LAYER[type_map], bg_pos, speed, !lose_game);
-                Map_data.renderScrollingGround(ground_pos, speed, g_renderer, !lose_game);
-                if(!lose_game)
+                Map_data.renderScrollingBackground(g_renderer, TOTAL_BACKGROUND_LAYER[type_map], bg_pos, speed, !lose_game&&!paused);
+                Map_data.renderScrollingGround(ground_pos, speed, g_renderer, !lose_game&&!paused);
+                
+                if(!lose_game&&!paused)
                 {
                     dino.move();
-                    Air1.move(speed);
-                    Ground1.move(speed);
-                    Air2.move(speed);
-                    Ground2.move(speed);
-                    
-                    Air1.Render(g_renderer);
-                    Ground1.Render(g_renderer);
-                    Air2.Render(g_renderer);
-                    Ground2.Render(g_renderer);
+                    Air1.move(speed, g_renderer);
+                    Ground1.move(speed, g_renderer);
+                    Air2.move(speed, g_renderer);
+                    Ground2.move(speed, g_renderer);
                 }
-                if(lose_game)
-                {
-                    Air1.RenderLose(g_renderer);
-                    Ground1.RenderLose(g_renderer);
-                    Air2.RenderLose(g_renderer);
-                    Ground2.RenderLose(g_renderer);
-                }
+                
+                Air1.Render(g_renderer, !lose_game&&!paused);
+                Ground1.Render(g_renderer, !lose_game&&!paused);
+                Air2.Render(g_renderer, !lose_game&&!paused);
+                Ground2.Render(g_renderer, !lose_game&&!paused);
+                
                 if(checkCollision(dino, Air1)||checkCollision(dino, Air2)||checkCollision(dino, Ground1)||checkCollision(dino, Ground2))
                 {
                     game_timer.pause();
@@ -209,10 +220,16 @@ int main()
                 drawScore(g_score, g_font, text_color, g_renderer, game_timer, score, time, speed);
                 drawHighScore(g_highscore, g_font, text_color, g_renderer, "Resource/database.txt", score, time);
                 
-                if(!lose_game) dino.Render(g_renderer);
+                if(!lose_game) dino.Render(g_renderer, !lose_game&&!paused);
+                
                 else dino.RenderLose(g_renderer);
                 
-                Map_data.renderScrollingGrass(grass_ground_pos, speed, g_renderer, !lose_game);
+                Map_data.renderScrollingGrass(grass_ground_pos, speed, g_renderer, !lose_game&&!paused);
+                
+                if(!lose_game&&!paused) Pause_button.renderButton(g_renderer);
+                
+                if(paused) Continue_button.renderButton(g_renderer);
+                mouse.Render(g_renderer);
                 SDL_RenderPresent(g_renderer);
                 
                 controlFPS(Event_Timer, FRAME_PER_SECOND);
@@ -241,6 +258,20 @@ int main()
     gLoseMusic = NULL;
     
     g_menu.Free();
+    Play_button.Free();
+    Help_button.Free();
+    Exit_button.Free();
+    Back_button.Free();
+    
+    Pause_button.Free();
+    Continue_button.Free();
+    
+    DinoGreen.Free();
+    DinoRed.Free();
+    DinoGold.Free();
+    DinoBlue.Free();
+    
+    for(int i = 0; i < TOTAL_TYPE_OF_BACKGOUND; i++) Map_button[i].Free();
     
     quitSDL(g_window, g_renderer);
     return 0;
@@ -250,6 +281,9 @@ bool loadMedia()
 {
     bool success = true;
     TTF_Init();
+    //Load Mouse
+    if(mouse.loadIMG("kira.png", g_renderer)==false) return 0;
+    //
     //Load Menu
     if(g_menu.loadIMG("Resource/Menu/Menu1.png", g_renderer) == false) { cout<<"Fail to load Menu!"; return false; }
     
@@ -311,12 +345,15 @@ bool loadMedia()
     Map_button[DESERT].loadImg("Resource/LoadMap/DESERT.png", g_renderer);
     Map_button[FAR_CITY].loadImg("Resource/LoadMap/FAR_CITY.png", g_renderer);
     
-    Map_button[FOREST].setDes       (MAP_BUTTON_X_1, MAP_BUTTON_Y_1, MAP_BUTTON_W, MAP_BUTTON_H);
-    Map_button[HILLS].setDes        (MAP_BUTTON_X_2, MAP_BUTTON_Y_1, MAP_BUTTON_W, MAP_BUTTON_H);
-    Map_button[CLOUD_MOUTAIN].setDes(MAP_BUTTON_X_3, MAP_BUTTON_Y_1, MAP_BUTTON_W, MAP_BUTTON_H);
-    Map_button[NIGHT_CITY].setDes   (MAP_BUTTON_X_1, MAP_BUTTON_Y_2, MAP_BUTTON_W, MAP_BUTTON_H);
-    Map_button[DESERT].setDes       (MAP_BUTTON_X_2, MAP_BUTTON_Y_2, MAP_BUTTON_W, MAP_BUTTON_H);
-    Map_button[FAR_CITY].setDes     (MAP_BUTTON_X_3, MAP_BUTTON_Y_2, MAP_BUTTON_W, MAP_BUTTON_H);
+    Map_button[FOREST].setDesRect       (MAP_BUTTON_X_1, MAP_BUTTON_Y_1, MAP_BUTTON_W, MAP_BUTTON_H);
+    Map_button[HILLS].setDesRect        (MAP_BUTTON_X_2, MAP_BUTTON_Y_1, MAP_BUTTON_W, MAP_BUTTON_H);
+    Map_button[CLOUD_MOUTAIN].setDesRect(MAP_BUTTON_X_3, MAP_BUTTON_Y_1, MAP_BUTTON_W, MAP_BUTTON_H);
+    Map_button[NIGHT_CITY].setDesRect   (MAP_BUTTON_X_1, MAP_BUTTON_Y_2, MAP_BUTTON_W, MAP_BUTTON_H);
+    Map_button[DESERT].setDesRect       (MAP_BUTTON_X_2, MAP_BUTTON_Y_2, MAP_BUTTON_W, MAP_BUTTON_H);
+    Map_button[FAR_CITY].setDesRect     (MAP_BUTTON_X_3, MAP_BUTTON_Y_2, MAP_BUTTON_W, MAP_BUTTON_H);
+    
+    Pause_button.loadImg("Resource/Menu/Button/pause_button.png", g_renderer);
+    Continue_button.loadImg("Resource/Menu/Button/continue_button.png", g_renderer);
     //--------------------------
     
     return true;

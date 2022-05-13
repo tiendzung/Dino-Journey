@@ -25,7 +25,7 @@ void Enemy::generateEnemy()
     }
     else if(e_type == ON_GROUND_ENEMY)
     {
-        d_object.y = GROUND - GRASS_HEIGHT;
+        d_object.y = GROUND;
     }
     
     if(id_enemy != 0)
@@ -36,13 +36,16 @@ void Enemy::generateEnemy()
 
 bool Enemy::loadImg(SDL_Renderer* &renderer)
 {
+    string path;
     bool success = false;
     if(e_type == IN_AIR_ENEMY)
     {
         e_timer.start();
-        success = BaseObject::loadIMG("Resource/Enemy/Bat.png", renderer);
-        d_object = {d_object.x, d_object.y, d_object.w/TOTAL_FRAMES_OF_ENEMY, d_object.h };
-        for(int i = 0; i < TOTAL_FRAMES_OF_ENEMY; i++)
+        air_id = rand()%TOTAL_RAND_AG;
+        path = air_path[air_id];
+        success = BaseObject::loadIMG(path, renderer);
+        d_object = {d_object.x, d_object.y, d_object.w/TOTAL_FRAMES_OF_AIR[air_id], d_object.h };
+        for(int i = 0; i < TOTAL_FRAMES_OF_AIR[air_id]; i++)
         {
             frame_clip[i].x = d_object.w * i;
             frame_clip[i].y = 0;
@@ -52,15 +55,25 @@ bool Enemy::loadImg(SDL_Renderer* &renderer)
     }
     else if(e_type == ON_GROUND_ENEMY)
     {
-        string path = ground_path[rand()%2];
+        e_timer.start();
+        ground_id = rand()%TOTAL_RAND_EG;
+        path = ground_path[ground_id];
         success = BaseObject::loadIMG(path, renderer);
-        d_object = {d_object.x, d_object.y, d_object.w, d_object.h };
+        d_object = {d_object.x, d_object.y, d_object.w/TOTAL_FRAMES_OF_GROUND[ground_id], d_object.h };
+        for(int i = 0; i < TOTAL_FRAMES_OF_GROUND[ground_id]; i++)
+        {
+            frame_clip[i].x = d_object.w * i;
+            frame_clip[i].y = 0;
+            frame_clip[i].w = d_object.w;
+            frame_clip[i].h = d_object.h;
+        }
         
     }
+//    cout<<path<<"\n";
     return success;
 }
 
-void Enemy::move(int &speed)
+void Enemy::move(int &speed, SDL_Renderer* &renderer)
 {
     int max_pos = 0;
     d_object.x = enemy_pos[id_enemy].second;
@@ -69,6 +82,8 @@ void Enemy::move(int &speed)
     
     if(d_object.x + d_object.w <= 0)
     {
+        Enemy::loadImg(renderer);
+        
         for(int i = 0; i < TOTAL_ENEMY; i++)
         {
             ii s = enemy_pos[i];
@@ -96,62 +111,39 @@ void Enemy::move(int &speed)
         }
         else if(e_type == ON_GROUND_ENEMY)
         {
+            id_frame = 0;
             d_object.y = GROUND - GRASS_HEIGHT;
-        }
-        if(e_type == ON_GROUND_ENEMY)
-        {
-            rand_a_new_cactus = true;
         }
     }
 }
 
-void Enemy::Render(SDL_Renderer* &renderer)
+void Enemy::Render(SDL_Renderer* &renderer, bool move)
 {
     if(e_type == IN_AIR_ENEMY)
     {
         SDL_RenderCopy(renderer, p_object, &frame_clip[id_frame], &d_object);
         int real_enemy_time = e_timer.get_Ticks();
         
-        if(real_enemy_time >= 1000/ENEMY_FPS)
+        if(real_enemy_time >= 1000/AIR_ENEMY_FPS[air_id] && move == true)
         {
             id_frame++;
-            if(id_frame == TOTAL_FRAMES_OF_ENEMY) id_frame = 0;
+            if(id_frame >= TOTAL_FRAMES_OF_AIR[air_id]) id_frame = 0;
             e_timer.start();
         }
     }
     else if(e_type == ON_GROUND_ENEMY)
     {
-        if(rand_a_new_cactus == true)
-        {
-            rand_a_new_cactus = false;
-            SDL_DestroyTexture(p_object);
-            string path = ground_path[rand()%2];
-            BaseObject::loadIMG(path, renderer);
-        }
-        SDL_RenderCopy(renderer, p_object, &r_object, &d_object);
-    }
-}
-
-void Enemy::RenderLose(SDL_Renderer* &renderer)
-{
-    if(e_type == IN_AIR_ENEMY)
-    {
         SDL_RenderCopy(renderer, p_object, &frame_clip[id_frame], &d_object);
         int real_enemy_time = e_timer.get_Ticks();
-    }
-    else if(e_type == ON_GROUND_ENEMY)
-    {
-        if(rand_a_new_cactus == true)
+        
+        if(real_enemy_time >= 1000/GROUND_ENEMY_FPS[ground_id] && move == true)
         {
-            rand_a_new_cactus = false;
-            SDL_DestroyTexture(p_object);
-            string path = ground_path[rand()%2];
-            BaseObject::loadIMG(path, renderer);
+            id_frame++;
+            if(id_frame >= TOTAL_FRAMES_OF_GROUND[ground_id]) id_frame = 0;
+            e_timer.start();
         }
-        SDL_RenderCopy(renderer, p_object, &r_object, &d_object);
     }
 }
-
 void Enemy::Free()
 {
     BaseObject::Free();

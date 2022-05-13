@@ -28,7 +28,6 @@ const int TOTAL_BACKGROUND_LAYER[TOTAL_TYPE_OF_BACKGOUND] = { 9, 6, 7, 3, 11, 6 
 const double LAYER_SPEED[BACKGROUND_TOTAL_LAYERS] =
 {
     0.15, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5
-//    0.25, 0.75, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 3, 3.25, 3.5
 };
 class Map
 {

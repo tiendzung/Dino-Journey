@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB111EFA282D9D7E007B035A /* Mouse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB111EF9282D9D7E007B035A /* Mouse.cpp */; };
 		CB3AC04E281314EA004A674E /* GameStatus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CBF415902811DB7B0069A86E /* GameStatus.cpp */; };
 		CB3AC050281316EB004A674E /* SDL_InitWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CBF415892811B5D10069A86E /* SDL_InitWindow.cpp */; };
 		CB3AC06028132F5B004A674E /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB3AC05F28132F5B004A674E /* Object.cpp */; };
@@ -38,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		CB111EF62827C5C6007B035A /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Button.h; path = Header/Button.h; sourceTree = SOURCE_ROOT; };
+		CB111EF9282D9D7E007B035A /* Mouse.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Mouse.cpp; sourceTree = "<group>"; };
+		CB111EFB282DA305007B035A /* Mouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mouse.h; path = Header/Mouse.h; sourceTree = SOURCE_ROOT; };
 		CB3AC05828131CB9004A674E /* CommonFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommonFunction.h; path = Header/CommonFunction.h; sourceTree = SOURCE_ROOT; };
 		CB3AC05E28132F4F004A674E /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Object.h; path = Header/Object.h; sourceTree = SOURCE_ROOT; };
 		CB3AC05F28132F5B004A674E /* Object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Object.cpp; sourceTree = "<group>"; };
@@ -81,6 +84,7 @@
 		CB2D32F0281135720058FB3B /* Header */ = {
 			isa = PBXGroup;
 			children = (
+				CB111EFB282DA305007B035A /* Mouse.h */,
 				CB111EF62827C5C6007B035A /* Button.h */,
 				CBE46EE228213AF700BEE97B /* Dino.h */,
 				CBE46EE528213AF700BEE97B /* Enemy.h */,
@@ -137,6 +141,7 @@
 				CB3AC06828156624004A674E /* Timer.cpp */,
 				CB3AC06B2815B6B3004A674E /* Enemy.cpp */,
 				CBE46EEF28260E4C00BEE97B /* Button.cpp */,
+				CB111EF9282D9D7E007B035A /* Mouse.cpp */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBE46EF128260E4C00BEE97B /* Button.cpp in Sources */,
+				CB111EFA282D9D7E007B035A /* Mouse.cpp in Sources */,
 				CB6D5687280EE68C0025197E /* main.cpp in Sources */,
 				CB3AC06028132F5B004A674E /* Object.cpp in Sources */,
 				CB3AC06628148324004A674E /* Dino.cpp in Sources */,

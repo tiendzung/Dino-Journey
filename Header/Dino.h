@@ -23,6 +23,7 @@ static const int TOTAL_FRAMES_OF_DINO = 9;
 static const int TOTAL_TYPE_OF_DINO = 4;
 static const int FRAMES_OF_HURT = 6;
 static const int SKIP_FRAME = 7;
+const int DINO_POS_X = SCREEN_WIDTH - 700;
 const string dino_type[TOTAL_TYPE_OF_DINO] =
 {
     "Resource/MainDino/GreenTest.png",
@@ -39,7 +40,6 @@ protected:
     class ImpTimer dino_timer;
     
     double vJump = 0;
-//    double vFail = 0;
     SDL_Texture* p_object;
     SDL_Rect r_object, d_object;
     SDL_Rect frame_clip[TOTAL_FRAMES_OF_DINO];
@@ -54,7 +54,7 @@ public:
     
     bool loadIMG(int type_dino, SDL_Renderer* &renderer);
 
-    void Render(SDL_Renderer* &renderer);
+    void Render(SDL_Renderer* &renderer, bool move);
     void RenderLose(SDL_Renderer* &renderer);
     int getPosX();
     int getPosY();

@@ -15,12 +15,14 @@
 #define ONE_SPRITE 1
 #define TWO_SPRITES 2
 #define MAX_FRAMES 2
+
+const int INCREASE_PIXEL = 8;
+const int DIVIDE_BY_TWO = 2;
 class Button: public BaseObject
 {
 protected:
     int TOTAL_FRAMES_BUTTON = ONE_SPRITE;
     int curX, curY;
-    bool is_map = false;
     SDL_Rect frame_clip[MAX_FRAMES];
     
 public:
@@ -30,7 +32,6 @@ public:
     ~Button(){};
     bool loadImg(string path, SDL_Renderer* &renderer);
     bool inSide();
-    void setDes(int x,int y, int w, int h);
     void renderButton(SDL_Renderer* &renderer);
 };
 
