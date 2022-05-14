@@ -78,6 +78,7 @@ int main()
 
     while(!quit_game)
     {
+        if(mute_volume == false)
         Mix_PlayMusic(gMenuMusic, REPEATIVE);
         while(!quit_menu)
         {
@@ -97,6 +98,11 @@ int main()
                     quit_menu = true; quit_game = true;
                     play_again = false;
                 }
+                if(mute_volume == false)
+                    HandleMuteButton(event, Mute_button, g_renderer, mute_volume, gClickMusic);
+                
+                else HandleUnmuteButton(event, Unmute_button, g_renderer, mute_volume, gClickMusic);
+                
                 HandlePlayButton(event, g_menu, Play_button, quit_game, quit_menu, play_again, type_dino, type_map, g_renderer, gClickMusic);
                 HandleHelpButton(event, g_menu, mouse, g_help_menu, Help_button, Back_button, quit_game, quit_menu, play_again, g_renderer, gClickMusic);
                 HandleExitButton(event, g_menu, Exit_button, quit_game, quit_menu, play_again, g_renderer, gClickMusic);
@@ -106,6 +112,11 @@ int main()
             Play_button.renderButton(g_renderer);
             Help_button.renderButton(g_renderer);
             Exit_button.renderButton(g_renderer);
+            
+            if(mute_volume == true)
+                Unmute_button.renderButton(g_renderer);
+            else Mute_button.renderButton(g_renderer);
+            
             mouse.Render(g_renderer);
             SDL_RenderPresent(g_renderer);
             controlFPS(Menu_timer, MENU_FPS);
@@ -131,7 +142,8 @@ int main()
             vector <double> bg_pos(BACKGROUND_TOTAL_LAYERS , BASE_POS);
             
             bool is_running = true; lose_game = false;
-        
+            
+            if(mute_volume == false)
             Mix_PlayMusic(gBackgroundMusic, REPEATIVE);
            
             if(loadBackGround(type_map) == false) { cout<<"Can't not load Background!!!"; return 0; }

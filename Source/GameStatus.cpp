@@ -109,6 +109,7 @@ void HandleMuteButton(SDL_Event e, Button &Mute_button, SDL_Renderer* &renderer,
         {
             Mute_button.status = BUTTON_MOUSE_UP;
             Mix_PlayChannel(MIX_CHANNEL, gClickMusic, NOT_REPEATITIVE);
+            Mix_PauseMusic();
             mute_volume = true;
         }
     }
@@ -122,6 +123,7 @@ void HandleUnmuteButton(SDL_Event e, Button &Unmute_button, SDL_Renderer* &rende
         {
             Unmute_button.status = BUTTON_MOUSE_UP;
             Mix_PlayChannel(MIX_CHANNEL, gClickMusic, NOT_REPEATITIVE);
+            Mix_ResumeMusic();
             mute_volume = false;
         }
     }
