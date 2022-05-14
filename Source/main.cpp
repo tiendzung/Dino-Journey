@@ -322,7 +322,7 @@ bool loadMedia()
     bool success = true;
     TTF_Init();
     //Load Mouse
-    if(mouse.loadIMG("kira.png", g_renderer)==false) return 0;
+    if(mouse.loadIMG("Mouse.png", g_renderer)==false) return 0;
     //
     //Load Menu
     if(g_menu.loadIMG("Resource/Menu/Menu1.png", g_renderer) == false) { cout<<"Fail to load Menu!"; return false; }
