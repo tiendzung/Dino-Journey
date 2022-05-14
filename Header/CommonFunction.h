@@ -29,7 +29,7 @@ const int FRAME_PER_SECOND = 60;
 const int MENU_FPS = 240;
 const int SCREEN_WIDTH = 928;
 const int SCREEN_HEIGHT = 522;
-const int MAX_TIME = FRAME_PER_SECOND*60;
+const int MAX_TIME = FRAME_PER_SECOND*10;
 
 static SDL_Color text_color = { 0, 0, 0 };
 const int COLOR_KEY_R = 167;

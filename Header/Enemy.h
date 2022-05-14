@@ -21,7 +21,7 @@ enum KIND_GROUND
     DOG
 };
 
-const int MIN_HEIGHT = 355;
+const int MIN_HEIGHT = 350;
 const int MAX_HEIGHT = 330;
 
 static const int MAX_FRAMES = 5;
