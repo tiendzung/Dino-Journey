@@ -35,7 +35,14 @@ bool checkCollision (class Dino& dino, class Enemy& enemy)
     }
     else
     {
-        TRASH_PIXEL_X = 15, TRASH_PIXEL_Y = 4, TRASH_PIXEL_W = 15, TRASH_PIXEL_H = 15;
+        if(enemy.getAir_id() == HELICORPTER)
+        {
+             TRASH_PIXEL_X = 15, TRASH_PIXEL_Y = 4, TRASH_PIXEL_W = 55, TRASH_PIXEL_H = 15;
+        }
+        else
+        {
+            TRASH_PIXEL_X = 15, TRASH_PIXEL_Y = 4, TRASH_PIXEL_W = 15, TRASH_PIXEL_H = 15;
+        }
     }
     SDL_Rect e_rect = {enemy.getPosX() + TRASH_PIXEL_X, enemy.getPosY() + TRASH_PIXEL_Y, enemy.getWidth() - TRASH_PIXEL_W, enemy.getHeight() - TRASH_PIXEL_H};
 

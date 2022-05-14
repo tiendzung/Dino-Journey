@@ -20,7 +20,11 @@ enum KIND_GROUND
     DOUBLE_CACTUS,
     DOG
 };
-
+enum KIND_AIR
+{
+    BAT,
+    HELICORPTER
+};
 const int MIN_HEIGHT = 350;
 const int MAX_HEIGHT = 330;
 
@@ -78,6 +82,7 @@ public:
     void RenderLose (SDL_Renderer* &renderer);
     int getType() {return e_type; }
     int getGround_id() { return ground_id; }
+    int getAir_id() { return air_id; }
     void Free();
 };
 
