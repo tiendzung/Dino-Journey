@@ -101,15 +101,44 @@ void drawEndGame(SDL_Renderer* &renderer, bool& play_again, bool& quit_menu, boo
     SDL_FreeSurface(load_surface);    
     return;
 }
-bool HandleContinueButton(SDL_Event e, bool &paused, Button &Continue_button, SDL_Renderer* &renderer, Mix_Chunk *gClickMusic)
+void HandleMuteButton(SDL_Event e, Button &Mute_button, SDL_Renderer* &renderer, bool &mute_volume, Mix_Chunk *gClickMusic)
+{
+    if(Mute_button.inSide() == true)
+    {
+        if(e.type == SDL_MOUSEBUTTONDOWN)
+        {
+            Mute_button.status = BUTTON_MOUSE_UP;
+            Mix_PlayChannel(MIX_CHANNEL, gClickMusic, NOT_REPEATITIVE);
+            mute_volume = true;
+        }
+    }
+}
+
+void HandleUnmuteButton(SDL_Event e, Button &Unmute_button, SDL_Renderer* &renderer, bool &mute_volume, Mix_Chunk *gClickMusic)
+{
+    if(Unmute_button.inSide() == true)
+    {
+        if(e.type == SDL_MOUSEBUTTONDOWN)
+        {
+            Unmute_button.status = BUTTON_MOUSE_UP;
+            Mix_PlayChannel(MIX_CHANNEL, gClickMusic, NOT_REPEATITIVE);
+            mute_volume = false;
+        }
+    }
+}
+
+bool HandleContinueButton(SDL_Event e, bool &paused, Button &Continue_button, SDL_Renderer* &renderer, bool &mute_volume, Mix_Chunk *gClickMusic)
 {
     if(Continue_button.inSide() == true)
     {
         if(e.type == SDL_MOUSEBUTTONDOWN)
         {
             Continue_button.status = BUTTON_MOUSE_UP;
-            Mix_ResumeMusic();
-            Mix_PlayChannel(MIX_CHANNEL, gClickMusic, NOT_REPEATITIVE);
+            if(mute_volume == false)
+            {
+                Mix_ResumeMusic();
+                Mix_PlayChannel(MIX_CHANNEL, gClickMusic, NOT_REPEATITIVE);
+            }
             paused = false;
             return true;
         }

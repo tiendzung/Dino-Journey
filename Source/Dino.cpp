@@ -20,7 +20,7 @@ bool Dino::onGround()
     return d_object.y == GROUND;
 }
 
-void Dino::HandleEvent(SDL_Event &e, Mix_Chunk* gJumpMusic)
+void Dino::HandleEvent(SDL_Event &e, bool &mute_volume, Mix_Chunk* gJumpMusic)
 {
     if (e.type == SDL_KEYDOWN)
     {
@@ -31,6 +31,7 @@ void Dino::HandleEvent(SDL_Event &e, Mix_Chunk* gJumpMusic)
             {
                 if (onGround() == true/*&&e.key.repeat == 0*/)
                 {
+                    if(mute_volume == false)
                     Mix_PlayChannel(-1, gJumpMusic, NOT_REPEATITIVE);
                     vJump = JUMP_POW;
                 }

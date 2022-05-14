@@ -39,7 +39,10 @@ class Button Play_button(464 - 350/4, 220, TWO_SPRITES),
              Exit_button(464 - 350/4, 390, TWO_SPRITES),
              Back_button(75, 65, TWO_SPRITES),
              Pause_button(PAUSE_BUTTON_POSX, PAUSE_BUTTON_POSY, TWO_SPRITES),
-             Continue_button(CONTINUE_BUTTON_POSX, CONTINUE_BUTTON_POSY, TWO_SPRITES);
+             Continue_button(CONTINUE_BUTTON_POSX, CONTINUE_BUTTON_POSY, TWO_SPRITES),
+             Mute_button(VOLUME_BUTTON_POSX, VOLUME_BUTTON_POSY, TWO_SPRITES),
+             Unmute_button(VOLUME_BUTTON_POSX, VOLUME_BUTTON_POSY, TWO_SPRITES);
+
 
 class Button DinoGreen(GREEN_DINO_POSX, GREEN_DINO_POSY, ONE_SPRITE),
              DinoRed(RED_DINO_POSX,RED_DINO_POSY, ONE_SPRITE),
@@ -60,6 +63,7 @@ bool loadBackGround(int type)
 
 int main()
 {
+    bool mute_volume = false;
     SDL_Event event;
     bool quit_menu = false;
     bool quit_game = false;
@@ -156,6 +160,19 @@ int main()
                         quit_game = true;
                         quit_menu = true;
                     }
+                    else if(event.type == SDL_KEYDOWN&&event.key.keysym.sym == SDLK_m)
+                    {
+                        if(mute_volume == false)
+                        {
+                            Mix_PauseMusic();
+                            mute_volume = true;
+                        }
+                        else if(mute_volume == true)
+                        {
+                            Mix_ResumeMusic();
+                            mute_volume = false;
+                        }
+                    }
                     else if (event.type == SDL_KEYDOWN && lose_game)
                     {
                         switch (event.key.keysym.sym)
@@ -179,13 +196,18 @@ int main()
                     if(!lose_game&&!paused)
                     {
                         HandlePauseButton(event, paused, Pause_button, g_renderer, gClickMusic);
-                        dino.HandleEvent(event, gJumpMusic);
+                        dino.HandleEvent(event, mute_volume, gJumpMusic);
                     }
                     else if(paused)
                     {
                         game_timer.pause();
-                        if(HandleContinueButton(event, paused, Continue_button, g_renderer, gClickMusic))
+                        if(HandleContinueButton(event, paused, Continue_button, g_renderer, mute_volume, gClickMusic))
                             game_timer.start();
+                        
+                        if(mute_volume == false)
+                        HandleMuteButton(event, Mute_button, g_renderer, mute_volume, gClickMusic);
+                        
+                        else HandleUnmuteButton(event, Unmute_button, g_renderer, mute_volume, gClickMusic);
                     }
                 }
                 if(is_running == false) break;
@@ -228,7 +250,13 @@ int main()
                 
                 if(!lose_game&&!paused) Pause_button.renderButton(g_renderer);
                 
-                if(paused) Continue_button.renderButton(g_renderer);
+                if(paused)
+                {
+                    Continue_button.renderButton(g_renderer);
+                    if(mute_volume == true)
+                    Unmute_button.renderButton(g_renderer);
+                    else Mute_button.renderButton(g_renderer);
+                }
                 mouse.Render(g_renderer);
                 SDL_RenderPresent(g_renderer);
                 
@@ -352,6 +380,9 @@ bool loadMedia()
     Map_button[DESERT].setDesRect       (MAP_BUTTON_X_2, MAP_BUTTON_Y_2, MAP_BUTTON_W, MAP_BUTTON_H);
     Map_button[FAR_CITY].setDesRect     (MAP_BUTTON_X_3, MAP_BUTTON_Y_2, MAP_BUTTON_W, MAP_BUTTON_H);
     
+    Mute_button.loadImg("Resource/Menu/Button/Mute.png", g_renderer);
+    Unmute_button.loadImg("Resource/Menu/Button/Unmute.png", g_renderer);
+
     Pause_button.loadImg("Resource/Menu/Button/pause_button.png", g_renderer);
     Continue_button.loadImg("Resource/Menu/Button/continue_button.png", g_renderer);
     //--------------------------

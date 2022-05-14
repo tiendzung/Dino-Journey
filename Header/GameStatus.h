@@ -26,7 +26,11 @@ void drawHighScore(class BaseObject &g_highscore,TTF_Font* g_font, SDL_Color tex
 
 void drawEndGame(SDL_Renderer* &renderer, bool& play_again, bool& quit_menu, bool& quit_game, int type_map, bool &lose_game);
 
-bool HandleContinueButton(SDL_Event e, bool &paused, Button &Continue_button, SDL_Renderer* &renderer, Mix_Chunk *gClickMusic);
+void HandleMuteButton(SDL_Event e, Button &Mute_button, SDL_Renderer* &renderer, bool &mute_volume, Mix_Chunk *gClickMusic);
+
+void HandleUnmuteButton(SDL_Event e, Button &Unmute_button, SDL_Renderer* &renderer, bool &mute_volume, Mix_Chunk *gClickMusic);
+
+bool HandleContinueButton(SDL_Event e, bool &paused, Button &Continue_button, SDL_Renderer* &renderer, bool &mute_volume, Mix_Chunk *gClickMusic);
 
 void HandlePauseButton(SDL_Event e, bool &paused, Button &Pause_button, SDL_Renderer* &renderer, Mix_Chunk *gClickMusic);
 

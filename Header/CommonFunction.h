@@ -77,6 +77,8 @@ const int PAUSE_BUTTON_POSX = 20;
 const int PAUSE_BUTTON_POSY = 15;
 const int CONTINUE_BUTTON_POSX = 20;
 const int CONTINUE_BUTTON_POSY = 15;
+const int VOLUME_BUTTON_POSX = 50;
+const int VOLUME_BUTTON_POSY = 15;
 enum TYPE_DINO
 {
     DINO_GREEN,

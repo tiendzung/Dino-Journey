@@ -35,14 +35,15 @@ static const int GOOD_RANGE = 350;
 static const int TOTAL_RAND_AG = 2;
 static const int TOTAL_RAND_EG = 3;
 
-static const int TOTAL_FRAMES_OF_AIR[TOTAL_RAND_AG] = {5};
+static const int TOTAL_FRAMES_OF_AIR[TOTAL_RAND_AG] = {5, 4};
 static const int TOTAL_FRAMES_OF_GROUND[TOTAL_RAND_EG] = {1, 1, 4};
 
-static const int AIR_ENEMY_FPS[TOTAL_RAND_AG] = {15};
+static const int AIR_ENEMY_FPS[TOTAL_RAND_AG] = {15, 5};
 static const int GROUND_ENEMY_FPS[TOTAL_RAND_EG] = {1, 1, 5};
 
 static const string air_path[TOTAL_RAND_AG] = {
-    "Resource/Enemy/Air1.png"
+    "Resource/Enemy/Air1.png",
+    "Resource/Enemy/Air2.png"
 };
 
 static const string ground_path[TOTAL_RAND_EG] = {
