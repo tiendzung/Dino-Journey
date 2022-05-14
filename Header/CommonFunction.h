@@ -73,12 +73,27 @@ const int SCORE_BUTTON_POSY = 12;
 const int HIGH_SCORE_BUTTON_POSX = SCREEN_WIDTH - 300;
 const int HIGH_SCORE_BUTTON_POSY = 12 + 30;
 
+const int PLAY_BUTTON_POSX = 464 - 350/4;
+const int PLAY_BUTTON_POSY = 220;
+
+const int HELP_BUTTON_POSX = 464 - 350/4;
+const int HELP_BUTTON_POSY = 305;
+
+const int EXIT_BUTTON_POSX = 464 - 350/4;
+const int EXIT_BUTTON_POSY = 390;
+
+const int BACK_BUTTON_POSX = 75;
+const int BACK_BUTTON_POSY = 65;
+
 const int PAUSE_BUTTON_POSX = 20;
 const int PAUSE_BUTTON_POSY = 15;
+
 const int CONTINUE_BUTTON_POSX = 20;
 const int CONTINUE_BUTTON_POSY = 15;
+
 const int VOLUME_BUTTON_POSX = 50;
 const int VOLUME_BUTTON_POSY = 15;
+
 enum TYPE_DINO
 {
     DINO_GREEN,

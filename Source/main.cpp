@@ -16,6 +16,7 @@
 #include "Enemy.h"
 #include "Button.h"
 #include "Mouse.h"
+
 bool play_again = false, lose_game = false;
 int type_map = rand()%TOTAL_TYPE_OF_BACKGOUND, type_dino = rand()%TOTAL_TYPE_OF_DINO;
 
@@ -34,10 +35,10 @@ class Enemy Air1(IN_AIR_ENEMY), Ground1(ON_GROUND_ENEMY), Air2(IN_AIR_ENEMY), Gr
 
 class ImpTimer Event_Timer, program_timer, Menu_timer;
 
-class Button Play_button(464 - 350/4, 220, TWO_SPRITES),
-             Help_button(464 - 350/4, 305, TWO_SPRITES),
-             Exit_button(464 - 350/4, 390, TWO_SPRITES),
-             Back_button(75, 65, TWO_SPRITES),
+class Button Play_button(PLAY_BUTTON_POSX, PLAY_BUTTON_POSY, TWO_SPRITES),
+             Help_button(HELP_BUTTON_POSX, HELP_BUTTON_POSY, TWO_SPRITES),
+             Exit_button(EXIT_BUTTON_POSX, EXIT_BUTTON_POSY, TWO_SPRITES),
+             Back_button(BACK_BUTTON_POSX, BACK_BUTTON_POSY, TWO_SPRITES),
              Pause_button(PAUSE_BUTTON_POSX, PAUSE_BUTTON_POSY, TWO_SPRITES),
              Continue_button(CONTINUE_BUTTON_POSX, CONTINUE_BUTTON_POSY, TWO_SPRITES),
              Mute_button(VOLUME_BUTTON_POSX, VOLUME_BUTTON_POSY, TWO_SPRITES),
@@ -118,6 +119,7 @@ int main()
             else Mute_button.renderButton(g_renderer);
             
             mouse.Render(g_renderer);
+            
             SDL_RenderPresent(g_renderer);
             controlFPS(Menu_timer, MENU_FPS);
         }
@@ -297,11 +299,16 @@ int main()
     Mix_FreeChunk(gLoseMusic);
     gLoseMusic = NULL;
     
+    mouse.Free();
+    
     g_menu.Free();
     Play_button.Free();
     Help_button.Free();
     Exit_button.Free();
     Back_button.Free();
+    
+    Mute_button.Free();
+    Unmute_button.Free();
     
     Pause_button.Free();
     Continue_button.Free();
@@ -342,15 +349,15 @@ bool loadMedia()
 
     gBackgroundMusic =  Mix_LoadMUS("Resource/Sound/background_sound.wav");
     
-    if(gBackgroundMusic == NULL) {cout<<Mix_GetError<<2; success = false;}
+    if(gBackgroundMusic == NULL) {cout<<Mix_GetError<<3; success = false;}
     
     gLoseMusic = Mix_LoadWAV("Resource/Sound/lose_sound.wav");
     
-    if(gLoseMusic == NULL) {cout<<Mix_GetError<<3; success = false;}
+    if(gLoseMusic == NULL) {cout<<Mix_GetError<<4; success = false;}
     
     gClickMusic = Mix_LoadWAV("Resource/Sound/mouse_click_sound.wav");
     
-    if(gClickMusic == NULL) {cout<<Mix_GetError<<4; success = false;}
+    if(gClickMusic == NULL) {cout<<Mix_GetError<<5; success = false;}
     //--------------------------
     
     //Load Button
@@ -361,6 +368,12 @@ bool loadMedia()
     if(Back_button.loadImg("Resource/Menu/back_button.png", g_renderer) == false) return false;
     
     if(Help_button.loadImg("Resource/Menu/Help-button.png", g_renderer) == false) return false;
+    
+    Mute_button.loadImg("Resource/Menu/Button/Mute.png", g_renderer);
+    Unmute_button.loadImg("Resource/Menu/Button/Unmute.png", g_renderer);
+    
+    Pause_button.loadImg("Resource/Menu/Button/pause_button.png", g_renderer);
+    Continue_button.loadImg("Resource/Menu/Button/continue_button.png", g_renderer);
     
     if(DinoGreen.loadImg("Resource/Menu/Button/Green1.png", g_renderer) == false) return false;
     
@@ -391,12 +404,6 @@ bool loadMedia()
     Map_button[NIGHT_CITY].setDesRect   (MAP_BUTTON_X_1, MAP_BUTTON_Y_2, MAP_BUTTON_W, MAP_BUTTON_H);
     Map_button[DESERT].setDesRect       (MAP_BUTTON_X_2, MAP_BUTTON_Y_2, MAP_BUTTON_W, MAP_BUTTON_H);
     Map_button[FAR_CITY].setDesRect     (MAP_BUTTON_X_3, MAP_BUTTON_Y_2, MAP_BUTTON_W, MAP_BUTTON_H);
-    
-    Mute_button.loadImg("Resource/Menu/Button/Mute.png", g_renderer);
-    Unmute_button.loadImg("Resource/Menu/Button/Unmute.png", g_renderer);
-
-    Pause_button.loadImg("Resource/Menu/Button/pause_button.png", g_renderer);
-    Continue_button.loadImg("Resource/Menu/Button/continue_button.png", g_renderer);
     //--------------------------
     
     return true;
