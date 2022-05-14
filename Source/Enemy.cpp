@@ -69,7 +69,6 @@ bool Enemy::loadImg(SDL_Renderer* &renderer)
         }
         
     }
-//    cout<<path<<"\n";
     return success;
 }
 

@@ -75,7 +75,7 @@ int main()
     Map_data.update_id(type_map);
     initSDL(g_window, g_renderer, WINDOW_TITLE, SCREEN_WIDTH, SCREEN_HEIGHT);
     
-    if(loadMedia() == false) { cout<<"Can't not load Media!!!"; return 0;}
+    if(loadMedia() == false) { cout<<"Can't not load Media!!!"; return 0; }
 
     while(!quit_game)
     {
@@ -114,8 +114,7 @@ int main()
             Help_button.renderButton(g_renderer);
             Exit_button.renderButton(g_renderer);
             
-            if(mute_volume == true)
-                Unmute_button.renderButton(g_renderer);
+            if(mute_volume == true) Unmute_button.renderButton(g_renderer);
             else Mute_button.renderButton(g_renderer);
             
             mouse.Render(g_renderer);
@@ -160,6 +159,7 @@ int main()
             Ground1.loadImg(g_renderer);
             Air2.loadImg(g_renderer);
             Ground2.loadImg(g_renderer);
+            
             bool paused = false;
             while (is_running)
             {
@@ -219,12 +219,14 @@ int main()
                             game_timer.start();
                         
                         if(mute_volume == false)
-                        HandleMuteButton(event, Mute_button, g_renderer, mute_volume, gClickMusic);
+                            HandleMuteButton(event, Mute_button, g_renderer, mute_volume, gClickMusic);
                         
                         else HandleUnmuteButton(event, Unmute_button, g_renderer, mute_volume, gClickMusic);
                     }
                 }
+                
                 if(is_running == false) break;
+                
                 Map_data.renderScrollingBackground(g_renderer, TOTAL_BACKGROUND_LAYER[type_map], bg_pos, speed, !lose_game&&!paused);
                 Map_data.renderScrollingGround(ground_pos, speed, g_renderer, !lose_game&&!paused);
                 
