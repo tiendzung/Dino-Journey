@@ -28,15 +28,18 @@ bool Map::loadGround(SDL_Renderer* &renderer, int type)
 {
     return Ground.loadIMG(bg_ground[type], renderer);
 }
+
 bool Map::loadGrassGround(SDL_Renderer* &renderer, int type)
 {
     return GrassGround.loadIMG(grass_ground[type], renderer);
 }
+
 void Map::renderScrollingBackground(SDL_Renderer* &renderer, int TOTAL, vector <double> &bg_pos, int speed, bool move)
 {
     for(int i = 0; i < TOTAL; i++)
     {
-        if(move == true) bg_pos[i] = bg_pos[i] - (LAYER_SPEED[i] + double((double)speed/(double)2 + 0.5 ));
+        if(move == true) bg_pos[i] = bg_pos[i] - (LAYER_SPEED[i] + double((double)speed/(double)2 + 0.5 )); // mấy số magic number đằng sau chỉ là áng chừng, cũng không biết nên đặt tên như nào.
+        
         if(bg_pos[i] + backGround[0].getWidth() < 0) bg_pos[i] = 0;
         
         backGround[i].RenderXY(int(bg_pos[i]), SCREEN_HEIGHT - backGround[i].getHeight(), renderer);
@@ -61,6 +64,7 @@ void Map::renderScrollingGrass(int &pos, int& speed, SDL_Renderer* &renderer, bo
     GrassGround.RenderXY(pos, SCREEN_HEIGHT - GrassGround.getHeight(), renderer);
     GrassGround.RenderXY(pos + GrassGround.getWidth(), SCREEN_HEIGHT - GrassGround.getHeight(), renderer);
 }
+
 void Map::Free(int type)
 {
     Ground.Free();

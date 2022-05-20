@@ -7,6 +7,7 @@
 //
 
 #include "GameStatus.h"
+
 void controlFPS(class ImpTimer& Timer, int FPS)
 {
     int real_imp_time = Timer.get_Ticks();
@@ -17,6 +18,7 @@ void controlFPS(class ImpTimer& Timer, int FPS)
         SDL_Delay(delay_time);
     }
 }
+
 bool checkCollision (class Dino& dino, class Enemy& enemy)
 {
     int TRASH_PIXEL_X = 10, TRASH_PIXEL_Y = 10, TRASH_PIXEL_W = 25, TRASH_PIXEL_H = 20;
@@ -48,14 +50,17 @@ bool checkCollision (class Dino& dino, class Enemy& enemy)
 
     return SDL_HasIntersection(&d_rect, &e_rect);
 }
+
 void drawScore(class BaseObject &g_score,TTF_Font* g_font, SDL_Color text_color, SDL_Renderer* &renderer,  class ImpTimer &game_timer, int &score, int &time, int &speed)
 {
-    if(time%7 == 0&&!game_timer.is_Paused()) score++;
+    if(time % 7 == 0 && !game_timer.is_Paused()) score++;
     time++;
     if(time >= MAX_TIME) { speed += INCREASE_SPEED; time =0; }
     if(speed > MAX_SPEED) speed = 0;
+    
     string new_score = to_string(score);
     new_score = "YOUR SCORE: " + new_score;
+    
     g_score.loadText(new_score, g_font, text_color, renderer);
     g_score.RenderXY(SCORE_BUTTON_POSX, SCORE_BUTTON_POSY, renderer);
     g_score.Free();
@@ -75,7 +80,9 @@ void drawHighScore(class BaseObject &g_highscore,TTF_Font* g_font, SDL_Color tex
     {
         update = true;
         new_highscore = score;
-    } else new_highscore = old_highscore;
+    }
+    else new_highscore = old_highscore;
+    
     fstream highScoreFile;
     highScoreFile.open(path, ios::out);
     highScoreFile << new_highscore;
@@ -83,6 +90,7 @@ void drawHighScore(class BaseObject &g_highscore,TTF_Font* g_font, SDL_Color tex
     g_highscore.loadText("HIGH SCORE: "+to_string(new_highscore), g_font, text_color, renderer);
     if(update == false)
         g_highscore.RenderXY(HIGH_SCORE_BUTTON_POSX, HIGH_SCORE_BUTTON_POSY, renderer);
+    
     g_highscore.Free();
 }
 
@@ -108,6 +116,7 @@ void drawEndGame(SDL_Renderer* &renderer, bool& play_again, bool& quit_menu, boo
     SDL_FreeSurface(load_surface);    
     return;
 }
+
 void HandleMuteButton(SDL_Event e, Button &Mute_button, SDL_Renderer* &renderer, bool &mute_volume, Mix_Chunk *gClickMusic)
 {
     if(Mute_button.inSide() == true)
@@ -155,6 +164,7 @@ bool HandleContinueButton(SDL_Event e, bool &paused, Button &Continue_button, SD
     Continue_button.renderButton(renderer);
     return false;
 }
+
 void HandlePauseButton(SDL_Event e, bool &paused, Button &Pause_button, SDL_Renderer* &renderer, Mix_Chunk *gClickMusic)
 {
     if(Pause_button.inSide() == true)
