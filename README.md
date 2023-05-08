@@ -1,6 +1,6 @@
 # Dino Journey
 
-My first SDL2 game project in university.
+My first SDL2 game project in UET.
 
 I focus mainly on the game's graphics, so I hope you like it.
 
