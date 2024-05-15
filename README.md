@@ -4,12 +4,12 @@ My first SDL2 game project in UET.
 
 I focus mainly on the game's graphics, so I hope you like it.
 
-# Video Demo:
+# Video Demo
 
 [![Alt text](https://img.youtube.com/vi/qZn8tSsSHX0/0.jpg)](https://www.youtube.com/watch?v=qZn8tSsSHX0)
 
 
-# Credit:
+# Credit
 Thank for the Dino Image:
 
 - [ARKs](https://arks.itch.io/)
